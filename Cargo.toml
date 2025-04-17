@@ -1,0 +1,9 @@
+[workspace]
+members = [ "sequential", "parallel" ]
+resolver = "2"
+
+[workspace.dependencies]
+lesson2 = { git = "https://github.com/gabizon103/cs6120.git" }
+lesson4 = { git = "https://github.com/gabizon103/cs6120.git" }
+utils = { git = "https://github.com/gabizon103/cs6120" }
+argh = "0.1.13"

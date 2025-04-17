@@ -1,0 +1,8 @@
+[package]
+name = "sequential"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lesson4.workspace = true
+argh.workspace = true
