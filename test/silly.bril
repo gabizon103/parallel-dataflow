@@ -1,0 +1,25 @@
+@main: int {
+  one: int = const 1;
+  two: int = const 2;
+  a: int = call @f one;
+  b: int = call @g two;
+  c: int = add a b;
+  print c;
+  ret c;
+}
+
+@f(x: int):int {
+  a: int = call @inc x;
+  ret a;
+}
+
+@g(x: int):int {
+  b: int = call @inc x;
+  ret b;
+}
+
+@inc(x:int):int {
+  one:int = const 1;
+  incr:int = add x one;
+  ret incr;
+}

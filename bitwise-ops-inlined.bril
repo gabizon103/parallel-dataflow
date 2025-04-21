@@ -1,0 +1,575 @@
+@mod2(a: int): bool {
+.mod2:
+  two: int = const 2;
+  tmp: int = div a two;
+  tmp2: int = mul tmp two;
+  tmp3: int = sub a tmp2;
+  one: int = const 1;
+  ans: bool = eq one tmp3;
+  ret ans;
+}
+@loop_subroutine(a: int, b: int, c: bool): int {
+.loop_subroutine:
+  i: int = const 0;
+  n: int = const 63;
+  one: int = const 1;
+  two: int = const 2;
+  ans: int = const 0;
+  to_add: int = const 1;
+.loop:
+  cond: bool = le i n;
+  br cond .here .end;
+.here:
+  jmp .prelog_mod2_3;
+.doOr:
+  cond_add: bool = or mod2a mod2b;
+.stay:
+  br cond_add .add .end_loop;
+.add:
+  ans: int = add ans to_add;
+.end_loop:
+  a: int = div a two;
+  b: int = div b two;
+  to_add: int = mul to_add two;
+  i: int = add i one;
+  jmp .loop;
+.end:
+  ret ans;
+.prelog_mod2_0:
+  a_inlined_0: int = id b;
+.mod2_inlined_0:
+  two_inlined_0: int = const 2;
+  tmp_inlined_0: int = div a_inlined_0 two_inlined_0;
+  tmp2_inlined_0: int = mul tmp_inlined_0 two_inlined_0;
+  tmp3_inlined_0: int = sub a_inlined_0 tmp2_inlined_0;
+  one_inlined_0: int = const 1;
+  ans_inlined_0: bool = eq one_inlined_0 tmp3_inlined_0;
+  mod2b: int = id ans_inlined_0;
+  jmp .inline_ret_mod2_0;
+.inline_ret_mod2_0:
+  cond_add: bool = and mod2a mod2b;
+  br c .doOr .stay;
+.prelog_mod2_3:
+  a_inlined_3: int = id a;
+.mod2_inlined_3:
+  two_inlined_3: int = const 2;
+  tmp_inlined_3: int = div a_inlined_3 two_inlined_3;
+  tmp2_inlined_3: int = mul tmp_inlined_3 two_inlined_3;
+  tmp3_inlined_3: int = sub a_inlined_3 tmp2_inlined_3;
+  one_inlined_3: int = const 1;
+  ans_inlined_3: bool = eq one_inlined_3 tmp3_inlined_3;
+  mod2a: int = id ans_inlined_3;
+  jmp .inline_ret_mod2_3;
+.inline_ret_mod2_3:
+  jmp .prelog_mod2_0;
+}
+@OR(a: int, b: int): int {
+.OR:
+  oper: bool = const true;
+  jmp .prelog_loop_subroutine_4;
+.prelog_loop_subroutine_4:
+  a_inlined_4: int = id a;
+  b_inlined_4: int = id b;
+  c_inlined_4: bool = id oper;
+.loop_subroutine_inlined_4:
+  i_inlined_4: int = const 0;
+  n_inlined_4: int = const 63;
+  one_inlined_4: int = const 1;
+  two_inlined_4: int = const 2;
+  ans_inlined_4: int = const 0;
+  to_add_inlined_4: int = const 1;
+.loop_inlined_4:
+  cond_inlined_4: bool = le i_inlined_4 n_inlined_4;
+  br cond_inlined_4 .here_inlined_4 .end_inlined_4;
+.here_inlined_4:
+  jmp .prelog_mod2_3_inlined_4;
+.doOr_inlined_4:
+  cond_add_inlined_4: bool = or mod2a_inlined_4 mod2b_inlined_4;
+.stay_inlined_4:
+  br cond_add_inlined_4 .add_inlined_4 .end_loop_inlined_4;
+.add_inlined_4:
+  ans_inlined_4: int = add ans_inlined_4 to_add_inlined_4;
+.end_loop_inlined_4:
+  a_inlined_4: int = div a_inlined_4 two_inlined_4;
+  b_inlined_4: int = div b_inlined_4 two_inlined_4;
+  to_add_inlined_4: int = mul to_add_inlined_4 two_inlined_4;
+  i_inlined_4: int = add i_inlined_4 one_inlined_4;
+  jmp .loop_inlined_4;
+.end_inlined_4:
+  v1: int = id ans_inlined_4;
+  jmp .inline_ret_loop_subroutine_4;
+.prelog_mod2_0_inlined_4:
+  a_inlined_0_inlined_4: int = id b_inlined_4;
+.mod2_inlined_0_inlined_4:
+  two_inlined_0_inlined_4: int = const 2;
+  tmp_inlined_0_inlined_4: int = div a_inlined_0_inlined_4 two_inlined_0_inlined_4;
+  tmp2_inlined_0_inlined_4: int = mul tmp_inlined_0_inlined_4 two_inlined_0_inlined_4;
+  tmp3_inlined_0_inlined_4: int = sub a_inlined_0_inlined_4 tmp2_inlined_0_inlined_4;
+  one_inlined_0_inlined_4: int = const 1;
+  ans_inlined_0_inlined_4: bool = eq one_inlined_0_inlined_4 tmp3_inlined_0_inlined_4;
+  mod2b_inlined_4: int = id ans_inlined_0_inlined_4;
+  jmp .inline_ret_mod2_0_inlined_4;
+.inline_ret_mod2_0_inlined_4:
+  cond_add_inlined_4: bool = and mod2a_inlined_4 mod2b_inlined_4;
+  br c_inlined_4 .doOr_inlined_4 .stay_inlined_4;
+.prelog_mod2_3_inlined_4:
+  a_inlined_3_inlined_4: int = id a_inlined_4;
+.mod2_inlined_3_inlined_4:
+  two_inlined_3_inlined_4: int = const 2;
+  tmp_inlined_3_inlined_4: int = div a_inlined_3_inlined_4 two_inlined_3_inlined_4;
+  tmp2_inlined_3_inlined_4: int = mul tmp_inlined_3_inlined_4 two_inlined_3_inlined_4;
+  tmp3_inlined_3_inlined_4: int = sub a_inlined_3_inlined_4 tmp2_inlined_3_inlined_4;
+  one_inlined_3_inlined_4: int = const 1;
+  ans_inlined_3_inlined_4: bool = eq one_inlined_3_inlined_4 tmp3_inlined_3_inlined_4;
+  mod2a_inlined_4: int = id ans_inlined_3_inlined_4;
+  jmp .inline_ret_mod2_3_inlined_4;
+.inline_ret_mod2_3_inlined_4:
+  jmp .prelog_mod2_0_inlined_4;
+.inline_ret_loop_subroutine_4:
+  ret v1;
+}
+@AND(a: int, b: int): int {
+.AND:
+  oper: bool = const false;
+  jmp .prelog_loop_subroutine_1;
+.prelog_loop_subroutine_1:
+  a_inlined_1: int = id a;
+  b_inlined_1: int = id b;
+  c_inlined_1: bool = id oper;
+.loop_subroutine_inlined_1:
+  i_inlined_1: int = const 0;
+  n_inlined_1: int = const 63;
+  one_inlined_1: int = const 1;
+  two_inlined_1: int = const 2;
+  ans_inlined_1: int = const 0;
+  to_add_inlined_1: int = const 1;
+.loop_inlined_1:
+  cond_inlined_1: bool = le i_inlined_1 n_inlined_1;
+  br cond_inlined_1 .here_inlined_1 .end_inlined_1;
+.here_inlined_1:
+  jmp .prelog_mod2_9;
+.doOr_inlined_1:
+  cond_add_inlined_1: bool = or mod2a_inlined_1 mod2b_inlined_1;
+.stay_inlined_1:
+  br cond_add_inlined_1 .add_inlined_1 .end_loop_inlined_1;
+.add_inlined_1:
+  ans_inlined_1: int = add ans_inlined_1 to_add_inlined_1;
+.end_loop_inlined_1:
+  a_inlined_1: int = div a_inlined_1 two_inlined_1;
+  b_inlined_1: int = div b_inlined_1 two_inlined_1;
+  to_add_inlined_1: int = mul to_add_inlined_1 two_inlined_1;
+  i_inlined_1: int = add i_inlined_1 one_inlined_1;
+  jmp .loop_inlined_1;
+.end_inlined_1:
+  v1: int = id ans_inlined_1;
+  jmp .inline_ret_loop_subroutine_1;
+.prelog_mod2_0_inlined_1:
+  a_inlined_0_inlined_1: int = id b_inlined_1;
+.mod2_inlined_0_inlined_1:
+  two_inlined_0_inlined_1: int = const 2;
+  tmp_inlined_0_inlined_1: int = div a_inlined_0_inlined_1 two_inlined_0_inlined_1;
+  tmp2_inlined_0_inlined_1: int = mul tmp_inlined_0_inlined_1 two_inlined_0_inlined_1;
+  tmp3_inlined_0_inlined_1: int = sub a_inlined_0_inlined_1 tmp2_inlined_0_inlined_1;
+  one_inlined_0_inlined_1: int = const 1;
+  ans_inlined_0_inlined_1: bool = eq one_inlined_0_inlined_1 tmp3_inlined_0_inlined_1;
+  mod2b_inlined_1: int = id ans_inlined_0_inlined_1;
+  jmp .inline_ret_mod2_0_inlined_1;
+.inline_ret_mod2_0_inlined_1:
+  cond_add_inlined_1: bool = and mod2a_inlined_1 mod2b_inlined_1;
+  br c_inlined_1 .doOr_inlined_1 .stay_inlined_1;
+.inline_ret_loop_subroutine_1:
+  ret v1;
+.prelog_mod2_9:
+  a_inlined_9: int = id a_inlined_1;
+.mod2_inlined_9:
+  two_inlined_9: int = const 2;
+  tmp_inlined_9: int = div a_inlined_9 two_inlined_9;
+  tmp2_inlined_9: int = mul tmp_inlined_9 two_inlined_9;
+  tmp3_inlined_9: int = sub a_inlined_9 tmp2_inlined_9;
+  one_inlined_9: int = const 1;
+  ans_inlined_9: bool = eq one_inlined_9 tmp3_inlined_9;
+  mod2a_inlined_1: int = id ans_inlined_9;
+  jmp .inline_ret_mod2_9;
+.inline_ret_mod2_9:
+  jmp .prelog_mod2_0_inlined_1;
+}
+@XOR(a: int, b: int): int {
+.XOR:
+  and_val: int = call @AND a b;
+  jmp .prelog_OR_6;
+.prelog_OR_6:
+  a_inlined_6: int = id a;
+  b_inlined_6: int = id b;
+.OR_inlined_6:
+  oper_inlined_6: bool = const true;
+  jmp .prelog_loop_subroutine_4_inlined_6;
+.prelog_loop_subroutine_4_inlined_6:
+  a_inlined_4_inlined_6: int = id a_inlined_6;
+  b_inlined_4_inlined_6: int = id b_inlined_6;
+  c_inlined_4_inlined_6: bool = id oper_inlined_6;
+.loop_subroutine_inlined_4_inlined_6:
+  i_inlined_4_inlined_6: int = const 0;
+  n_inlined_4_inlined_6: int = const 63;
+  one_inlined_4_inlined_6: int = const 1;
+  two_inlined_4_inlined_6: int = const 2;
+  ans_inlined_4_inlined_6: int = const 0;
+  to_add_inlined_4_inlined_6: int = const 1;
+.loop_inlined_4_inlined_6:
+  cond_inlined_4_inlined_6: bool = le i_inlined_4_inlined_6 n_inlined_4_inlined_6;
+  br cond_inlined_4_inlined_6 .here_inlined_4_inlined_6 .end_inlined_4_inlined_6;
+.here_inlined_4_inlined_6:
+  jmp .prelog_mod2_3_inlined_4_inlined_6;
+.doOr_inlined_4_inlined_6:
+  cond_add_inlined_4_inlined_6: bool = or mod2a_inlined_4_inlined_6 mod2b_inlined_4_inlined_6;
+.stay_inlined_4_inlined_6:
+  br cond_add_inlined_4_inlined_6 .add_inlined_4_inlined_6 .end_loop_inlined_4_inlined_6;
+.add_inlined_4_inlined_6:
+  ans_inlined_4_inlined_6: int = add ans_inlined_4_inlined_6 to_add_inlined_4_inlined_6;
+.end_loop_inlined_4_inlined_6:
+  a_inlined_4_inlined_6: int = div a_inlined_4_inlined_6 two_inlined_4_inlined_6;
+  b_inlined_4_inlined_6: int = div b_inlined_4_inlined_6 two_inlined_4_inlined_6;
+  to_add_inlined_4_inlined_6: int = mul to_add_inlined_4_inlined_6 two_inlined_4_inlined_6;
+  i_inlined_4_inlined_6: int = add i_inlined_4_inlined_6 one_inlined_4_inlined_6;
+  jmp .loop_inlined_4_inlined_6;
+.end_inlined_4_inlined_6:
+  v1_inlined_6: int = id ans_inlined_4_inlined_6;
+  jmp .inline_ret_loop_subroutine_4_inlined_6;
+.prelog_mod2_0_inlined_4_inlined_6:
+  a_inlined_0_inlined_4_inlined_6: int = id b_inlined_4_inlined_6;
+.mod2_inlined_0_inlined_4_inlined_6:
+  two_inlined_0_inlined_4_inlined_6: int = const 2;
+  tmp_inlined_0_inlined_4_inlined_6: int = div a_inlined_0_inlined_4_inlined_6 two_inlined_0_inlined_4_inlined_6;
+  tmp2_inlined_0_inlined_4_inlined_6: int = mul tmp_inlined_0_inlined_4_inlined_6 two_inlined_0_inlined_4_inlined_6;
+  tmp3_inlined_0_inlined_4_inlined_6: int = sub a_inlined_0_inlined_4_inlined_6 tmp2_inlined_0_inlined_4_inlined_6;
+  one_inlined_0_inlined_4_inlined_6: int = const 1;
+  ans_inlined_0_inlined_4_inlined_6: bool = eq one_inlined_0_inlined_4_inlined_6 tmp3_inlined_0_inlined_4_inlined_6;
+  mod2b_inlined_4_inlined_6: int = id ans_inlined_0_inlined_4_inlined_6;
+  jmp .inline_ret_mod2_0_inlined_4_inlined_6;
+.inline_ret_mod2_0_inlined_4_inlined_6:
+  cond_add_inlined_4_inlined_6: bool = and mod2a_inlined_4_inlined_6 mod2b_inlined_4_inlined_6;
+  br c_inlined_4_inlined_6 .doOr_inlined_4_inlined_6 .stay_inlined_4_inlined_6;
+.prelog_mod2_3_inlined_4_inlined_6:
+  a_inlined_3_inlined_4_inlined_6: int = id a_inlined_4_inlined_6;
+.mod2_inlined_3_inlined_4_inlined_6:
+  two_inlined_3_inlined_4_inlined_6: int = const 2;
+  tmp_inlined_3_inlined_4_inlined_6: int = div a_inlined_3_inlined_4_inlined_6 two_inlined_3_inlined_4_inlined_6;
+  tmp2_inlined_3_inlined_4_inlined_6: int = mul tmp_inlined_3_inlined_4_inlined_6 two_inlined_3_inlined_4_inlined_6;
+  tmp3_inlined_3_inlined_4_inlined_6: int = sub a_inlined_3_inlined_4_inlined_6 tmp2_inlined_3_inlined_4_inlined_6;
+  one_inlined_3_inlined_4_inlined_6: int = const 1;
+  ans_inlined_3_inlined_4_inlined_6: bool = eq one_inlined_3_inlined_4_inlined_6 tmp3_inlined_3_inlined_4_inlined_6;
+  mod2a_inlined_4_inlined_6: int = id ans_inlined_3_inlined_4_inlined_6;
+  jmp .inline_ret_mod2_3_inlined_4_inlined_6;
+.inline_ret_mod2_3_inlined_4_inlined_6:
+  jmp .prelog_mod2_0_inlined_4_inlined_6;
+.inline_ret_loop_subroutine_4_inlined_6:
+  or_val: int = id v1_inlined_6;
+  jmp .inline_ret_OR_6;
+.inline_ret_OR_6:
+  ans: int = sub or_val and_val;
+  ret ans;
+}
+@main(a: int, b: int, c: int) {
+.main:
+  one: int = const 1;
+  zero: int = const 0;
+  sel: int = sub c one;
+  ans: int = id zero;
+  less: bool = lt sel zero;
+  equal: bool = eq sel zero;
+  greater: bool = gt sel zero;
+  br less .and_op .useless_lbl;
+.useless_lbl:
+  br equal .or_op .xor_op;
+.and_op:
+  jmp .prelog_AND_2;
+.or_op:
+  jmp .prelog_OR_5;
+.xor_op:
+  jmp .prelog_XOR_7;
+.end:
+  print ans;
+.prelog_AND_2:
+  a_inlined_2: int = id a;
+  b_inlined_2: int = id b;
+.AND_inlined_2:
+  oper_inlined_2: bool = const false;
+  jmp .prelog_loop_subroutine_1_inlined_2;
+.prelog_loop_subroutine_1_inlined_2:
+  a_inlined_1_inlined_2: int = id a_inlined_2;
+  b_inlined_1_inlined_2: int = id b_inlined_2;
+  c_inlined_1_inlined_2: bool = id oper_inlined_2;
+.loop_subroutine_inlined_1_inlined_2:
+  i_inlined_1_inlined_2: int = const 0;
+  n_inlined_1_inlined_2: int = const 63;
+  one_inlined_1_inlined_2: int = const 1;
+  two_inlined_1_inlined_2: int = const 2;
+  ans_inlined_1_inlined_2: int = const 0;
+  to_add_inlined_1_inlined_2: int = const 1;
+.loop_inlined_1_inlined_2:
+  cond_inlined_1_inlined_2: bool = le i_inlined_1_inlined_2 n_inlined_1_inlined_2;
+  br cond_inlined_1_inlined_2 .here_inlined_1_inlined_2 .end_inlined_1_inlined_2;
+.here_inlined_1_inlined_2:
+  jmp .prelog_mod2_8;
+.doOr_inlined_1_inlined_2:
+  cond_add_inlined_1_inlined_2: bool = or mod2a_inlined_1_inlined_2 mod2b_inlined_1_inlined_2;
+.stay_inlined_1_inlined_2:
+  br cond_add_inlined_1_inlined_2 .add_inlined_1_inlined_2 .end_loop_inlined_1_inlined_2;
+.add_inlined_1_inlined_2:
+  ans_inlined_1_inlined_2: int = add ans_inlined_1_inlined_2 to_add_inlined_1_inlined_2;
+.end_loop_inlined_1_inlined_2:
+  a_inlined_1_inlined_2: int = div a_inlined_1_inlined_2 two_inlined_1_inlined_2;
+  b_inlined_1_inlined_2: int = div b_inlined_1_inlined_2 two_inlined_1_inlined_2;
+  to_add_inlined_1_inlined_2: int = mul to_add_inlined_1_inlined_2 two_inlined_1_inlined_2;
+  i_inlined_1_inlined_2: int = add i_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  jmp .loop_inlined_1_inlined_2;
+.end_inlined_1_inlined_2:
+  v1_inlined_2: int = id ans_inlined_1_inlined_2;
+  jmp .inline_ret_loop_subroutine_1_inlined_2;
+.prelog_mod2_0_inlined_1_inlined_2:
+  a_inlined_0_inlined_1_inlined_2: int = id b_inlined_1_inlined_2;
+.mod2_inlined_0_inlined_1_inlined_2:
+  two_inlined_0_inlined_1_inlined_2: int = const 2;
+  tmp_inlined_0_inlined_1_inlined_2: int = div a_inlined_0_inlined_1_inlined_2 two_inlined_0_inlined_1_inlined_2;
+  tmp2_inlined_0_inlined_1_inlined_2: int = mul tmp_inlined_0_inlined_1_inlined_2 two_inlined_0_inlined_1_inlined_2;
+  tmp3_inlined_0_inlined_1_inlined_2: int = sub a_inlined_0_inlined_1_inlined_2 tmp2_inlined_0_inlined_1_inlined_2;
+  one_inlined_0_inlined_1_inlined_2: int = const 1;
+  ans_inlined_0_inlined_1_inlined_2: bool = eq one_inlined_0_inlined_1_inlined_2 tmp3_inlined_0_inlined_1_inlined_2;
+  mod2b_inlined_1_inlined_2: int = id ans_inlined_0_inlined_1_inlined_2;
+  jmp .inline_ret_mod2_0_inlined_1_inlined_2;
+.inline_ret_mod2_0_inlined_1_inlined_2:
+  cond_add_inlined_1_inlined_2: bool = and mod2a_inlined_1_inlined_2 mod2b_inlined_1_inlined_2;
+  br c_inlined_1_inlined_2 .doOr_inlined_1_inlined_2 .stay_inlined_1_inlined_2;
+.inline_ret_loop_subroutine_1_inlined_2:
+  ans: int = id v1_inlined_2;
+  jmp .inline_ret_AND_2;
+.inline_ret_AND_2:
+  jmp .end;
+.prelog_OR_5:
+  a_inlined_5: int = id a;
+  b_inlined_5: int = id b;
+.OR_inlined_5:
+  oper_inlined_5: bool = const true;
+  jmp .prelog_loop_subroutine_4_inlined_5;
+.prelog_loop_subroutine_4_inlined_5:
+  a_inlined_4_inlined_5: int = id a_inlined_5;
+  b_inlined_4_inlined_5: int = id b_inlined_5;
+  c_inlined_4_inlined_5: bool = id oper_inlined_5;
+.loop_subroutine_inlined_4_inlined_5:
+  i_inlined_4_inlined_5: int = const 0;
+  n_inlined_4_inlined_5: int = const 63;
+  one_inlined_4_inlined_5: int = const 1;
+  two_inlined_4_inlined_5: int = const 2;
+  ans_inlined_4_inlined_5: int = const 0;
+  to_add_inlined_4_inlined_5: int = const 1;
+.loop_inlined_4_inlined_5:
+  cond_inlined_4_inlined_5: bool = le i_inlined_4_inlined_5 n_inlined_4_inlined_5;
+  br cond_inlined_4_inlined_5 .here_inlined_4_inlined_5 .end_inlined_4_inlined_5;
+.here_inlined_4_inlined_5:
+  jmp .prelog_mod2_3_inlined_4_inlined_5;
+.doOr_inlined_4_inlined_5:
+  cond_add_inlined_4_inlined_5: bool = or mod2a_inlined_4_inlined_5 mod2b_inlined_4_inlined_5;
+.stay_inlined_4_inlined_5:
+  br cond_add_inlined_4_inlined_5 .add_inlined_4_inlined_5 .end_loop_inlined_4_inlined_5;
+.add_inlined_4_inlined_5:
+  ans_inlined_4_inlined_5: int = add ans_inlined_4_inlined_5 to_add_inlined_4_inlined_5;
+.end_loop_inlined_4_inlined_5:
+  a_inlined_4_inlined_5: int = div a_inlined_4_inlined_5 two_inlined_4_inlined_5;
+  b_inlined_4_inlined_5: int = div b_inlined_4_inlined_5 two_inlined_4_inlined_5;
+  to_add_inlined_4_inlined_5: int = mul to_add_inlined_4_inlined_5 two_inlined_4_inlined_5;
+  i_inlined_4_inlined_5: int = add i_inlined_4_inlined_5 one_inlined_4_inlined_5;
+  jmp .loop_inlined_4_inlined_5;
+.end_inlined_4_inlined_5:
+  v1_inlined_5: int = id ans_inlined_4_inlined_5;
+  jmp .inline_ret_loop_subroutine_4_inlined_5;
+.prelog_mod2_0_inlined_4_inlined_5:
+  a_inlined_0_inlined_4_inlined_5: int = id b_inlined_4_inlined_5;
+.mod2_inlined_0_inlined_4_inlined_5:
+  two_inlined_0_inlined_4_inlined_5: int = const 2;
+  tmp_inlined_0_inlined_4_inlined_5: int = div a_inlined_0_inlined_4_inlined_5 two_inlined_0_inlined_4_inlined_5;
+  tmp2_inlined_0_inlined_4_inlined_5: int = mul tmp_inlined_0_inlined_4_inlined_5 two_inlined_0_inlined_4_inlined_5;
+  tmp3_inlined_0_inlined_4_inlined_5: int = sub a_inlined_0_inlined_4_inlined_5 tmp2_inlined_0_inlined_4_inlined_5;
+  one_inlined_0_inlined_4_inlined_5: int = const 1;
+  ans_inlined_0_inlined_4_inlined_5: bool = eq one_inlined_0_inlined_4_inlined_5 tmp3_inlined_0_inlined_4_inlined_5;
+  mod2b_inlined_4_inlined_5: int = id ans_inlined_0_inlined_4_inlined_5;
+  jmp .inline_ret_mod2_0_inlined_4_inlined_5;
+.inline_ret_mod2_0_inlined_4_inlined_5:
+  cond_add_inlined_4_inlined_5: bool = and mod2a_inlined_4_inlined_5 mod2b_inlined_4_inlined_5;
+  br c_inlined_4_inlined_5 .doOr_inlined_4_inlined_5 .stay_inlined_4_inlined_5;
+.prelog_mod2_3_inlined_4_inlined_5:
+  a_inlined_3_inlined_4_inlined_5: int = id a_inlined_4_inlined_5;
+.mod2_inlined_3_inlined_4_inlined_5:
+  two_inlined_3_inlined_4_inlined_5: int = const 2;
+  tmp_inlined_3_inlined_4_inlined_5: int = div a_inlined_3_inlined_4_inlined_5 two_inlined_3_inlined_4_inlined_5;
+  tmp2_inlined_3_inlined_4_inlined_5: int = mul tmp_inlined_3_inlined_4_inlined_5 two_inlined_3_inlined_4_inlined_5;
+  tmp3_inlined_3_inlined_4_inlined_5: int = sub a_inlined_3_inlined_4_inlined_5 tmp2_inlined_3_inlined_4_inlined_5;
+  one_inlined_3_inlined_4_inlined_5: int = const 1;
+  ans_inlined_3_inlined_4_inlined_5: bool = eq one_inlined_3_inlined_4_inlined_5 tmp3_inlined_3_inlined_4_inlined_5;
+  mod2a_inlined_4_inlined_5: int = id ans_inlined_3_inlined_4_inlined_5;
+  jmp .inline_ret_mod2_3_inlined_4_inlined_5;
+.inline_ret_mod2_3_inlined_4_inlined_5:
+  jmp .prelog_mod2_0_inlined_4_inlined_5;
+.inline_ret_loop_subroutine_4_inlined_5:
+  ans: int = id v1_inlined_5;
+  jmp .inline_ret_OR_5;
+.inline_ret_OR_5:
+  jmp .end;
+.prelog_XOR_7:
+  a_inlined_7: int = id a;
+  b_inlined_7: int = id b;
+.XOR_inlined_7:
+  jmp .prelog_AND_10;
+.prelog_OR_6_inlined_7:
+  a_inlined_6_inlined_7: int = id a_inlined_7;
+  b_inlined_6_inlined_7: int = id b_inlined_7;
+.OR_inlined_6_inlined_7:
+  oper_inlined_6_inlined_7: bool = const true;
+  jmp .prelog_loop_subroutine_4_inlined_6_inlined_7;
+.prelog_loop_subroutine_4_inlined_6_inlined_7:
+  a_inlined_4_inlined_6_inlined_7: int = id a_inlined_6_inlined_7;
+  b_inlined_4_inlined_6_inlined_7: int = id b_inlined_6_inlined_7;
+  c_inlined_4_inlined_6_inlined_7: bool = id oper_inlined_6_inlined_7;
+.loop_subroutine_inlined_4_inlined_6_inlined_7:
+  i_inlined_4_inlined_6_inlined_7: int = const 0;
+  n_inlined_4_inlined_6_inlined_7: int = const 63;
+  one_inlined_4_inlined_6_inlined_7: int = const 1;
+  two_inlined_4_inlined_6_inlined_7: int = const 2;
+  ans_inlined_4_inlined_6_inlined_7: int = const 0;
+  to_add_inlined_4_inlined_6_inlined_7: int = const 1;
+.loop_inlined_4_inlined_6_inlined_7:
+  cond_inlined_4_inlined_6_inlined_7: bool = le i_inlined_4_inlined_6_inlined_7 n_inlined_4_inlined_6_inlined_7;
+  br cond_inlined_4_inlined_6_inlined_7 .here_inlined_4_inlined_6_inlined_7 .end_inlined_4_inlined_6_inlined_7;
+.here_inlined_4_inlined_6_inlined_7:
+  jmp .prelog_mod2_3_inlined_4_inlined_6_inlined_7;
+.doOr_inlined_4_inlined_6_inlined_7:
+  cond_add_inlined_4_inlined_6_inlined_7: bool = or mod2a_inlined_4_inlined_6_inlined_7 mod2b_inlined_4_inlined_6_inlined_7;
+.stay_inlined_4_inlined_6_inlined_7:
+  br cond_add_inlined_4_inlined_6_inlined_7 .add_inlined_4_inlined_6_inlined_7 .end_loop_inlined_4_inlined_6_inlined_7;
+.add_inlined_4_inlined_6_inlined_7:
+  ans_inlined_4_inlined_6_inlined_7: int = add ans_inlined_4_inlined_6_inlined_7 to_add_inlined_4_inlined_6_inlined_7;
+.end_loop_inlined_4_inlined_6_inlined_7:
+  a_inlined_4_inlined_6_inlined_7: int = div a_inlined_4_inlined_6_inlined_7 two_inlined_4_inlined_6_inlined_7;
+  b_inlined_4_inlined_6_inlined_7: int = div b_inlined_4_inlined_6_inlined_7 two_inlined_4_inlined_6_inlined_7;
+  to_add_inlined_4_inlined_6_inlined_7: int = mul to_add_inlined_4_inlined_6_inlined_7 two_inlined_4_inlined_6_inlined_7;
+  i_inlined_4_inlined_6_inlined_7: int = add i_inlined_4_inlined_6_inlined_7 one_inlined_4_inlined_6_inlined_7;
+  jmp .loop_inlined_4_inlined_6_inlined_7;
+.end_inlined_4_inlined_6_inlined_7:
+  v1_inlined_6_inlined_7: int = id ans_inlined_4_inlined_6_inlined_7;
+  jmp .inline_ret_loop_subroutine_4_inlined_6_inlined_7;
+.prelog_mod2_0_inlined_4_inlined_6_inlined_7:
+  a_inlined_0_inlined_4_inlined_6_inlined_7: int = id b_inlined_4_inlined_6_inlined_7;
+.mod2_inlined_0_inlined_4_inlined_6_inlined_7:
+  two_inlined_0_inlined_4_inlined_6_inlined_7: int = const 2;
+  tmp_inlined_0_inlined_4_inlined_6_inlined_7: int = div a_inlined_0_inlined_4_inlined_6_inlined_7 two_inlined_0_inlined_4_inlined_6_inlined_7;
+  tmp2_inlined_0_inlined_4_inlined_6_inlined_7: int = mul tmp_inlined_0_inlined_4_inlined_6_inlined_7 two_inlined_0_inlined_4_inlined_6_inlined_7;
+  tmp3_inlined_0_inlined_4_inlined_6_inlined_7: int = sub a_inlined_0_inlined_4_inlined_6_inlined_7 tmp2_inlined_0_inlined_4_inlined_6_inlined_7;
+  one_inlined_0_inlined_4_inlined_6_inlined_7: int = const 1;
+  ans_inlined_0_inlined_4_inlined_6_inlined_7: bool = eq one_inlined_0_inlined_4_inlined_6_inlined_7 tmp3_inlined_0_inlined_4_inlined_6_inlined_7;
+  mod2b_inlined_4_inlined_6_inlined_7: int = id ans_inlined_0_inlined_4_inlined_6_inlined_7;
+  jmp .inline_ret_mod2_0_inlined_4_inlined_6_inlined_7;
+.inline_ret_mod2_0_inlined_4_inlined_6_inlined_7:
+  cond_add_inlined_4_inlined_6_inlined_7: bool = and mod2a_inlined_4_inlined_6_inlined_7 mod2b_inlined_4_inlined_6_inlined_7;
+  br c_inlined_4_inlined_6_inlined_7 .doOr_inlined_4_inlined_6_inlined_7 .stay_inlined_4_inlined_6_inlined_7;
+.prelog_mod2_3_inlined_4_inlined_6_inlined_7:
+  a_inlined_3_inlined_4_inlined_6_inlined_7: int = id a_inlined_4_inlined_6_inlined_7;
+.mod2_inlined_3_inlined_4_inlined_6_inlined_7:
+  two_inlined_3_inlined_4_inlined_6_inlined_7: int = const 2;
+  tmp_inlined_3_inlined_4_inlined_6_inlined_7: int = div a_inlined_3_inlined_4_inlined_6_inlined_7 two_inlined_3_inlined_4_inlined_6_inlined_7;
+  tmp2_inlined_3_inlined_4_inlined_6_inlined_7: int = mul tmp_inlined_3_inlined_4_inlined_6_inlined_7 two_inlined_3_inlined_4_inlined_6_inlined_7;
+  tmp3_inlined_3_inlined_4_inlined_6_inlined_7: int = sub a_inlined_3_inlined_4_inlined_6_inlined_7 tmp2_inlined_3_inlined_4_inlined_6_inlined_7;
+  one_inlined_3_inlined_4_inlined_6_inlined_7: int = const 1;
+  ans_inlined_3_inlined_4_inlined_6_inlined_7: bool = eq one_inlined_3_inlined_4_inlined_6_inlined_7 tmp3_inlined_3_inlined_4_inlined_6_inlined_7;
+  mod2a_inlined_4_inlined_6_inlined_7: int = id ans_inlined_3_inlined_4_inlined_6_inlined_7;
+  jmp .inline_ret_mod2_3_inlined_4_inlined_6_inlined_7;
+.inline_ret_mod2_3_inlined_4_inlined_6_inlined_7:
+  jmp .prelog_mod2_0_inlined_4_inlined_6_inlined_7;
+.inline_ret_loop_subroutine_4_inlined_6_inlined_7:
+  or_val_inlined_7: int = id v1_inlined_6_inlined_7;
+  jmp .inline_ret_OR_6_inlined_7;
+.inline_ret_OR_6_inlined_7:
+  ans_inlined_7: int = sub or_val_inlined_7 and_val_inlined_7;
+  ans: int = id ans_inlined_7;
+  jmp .inline_ret_XOR_7;
+.inline_ret_XOR_7:
+.prelog_mod2_8:
+  a_inlined_8: int = id a_inlined_1_inlined_2;
+.mod2_inlined_8:
+  two_inlined_8: int = const 2;
+  tmp_inlined_8: int = div a_inlined_8 two_inlined_8;
+  tmp2_inlined_8: int = mul tmp_inlined_8 two_inlined_8;
+  tmp3_inlined_8: int = sub a_inlined_8 tmp2_inlined_8;
+  one_inlined_8: int = const 1;
+  ans_inlined_8: bool = eq one_inlined_8 tmp3_inlined_8;
+  mod2a_inlined_1_inlined_2: int = id ans_inlined_8;
+  jmp .inline_ret_mod2_8;
+.inline_ret_mod2_8:
+  jmp .prelog_mod2_0_inlined_1_inlined_2;
+.prelog_AND_10:
+  a_inlined_10: int = id a_inlined_7;
+  b_inlined_10: int = id b_inlined_7;
+.AND_inlined_10:
+  oper_inlined_10: bool = const false;
+  jmp .prelog_loop_subroutine_1_inlined_10;
+.prelog_loop_subroutine_1_inlined_10:
+  a_inlined_1_inlined_10: int = id a_inlined_10;
+  b_inlined_1_inlined_10: int = id b_inlined_10;
+  c_inlined_1_inlined_10: bool = id oper_inlined_10;
+.loop_subroutine_inlined_1_inlined_10:
+  i_inlined_1_inlined_10: int = const 0;
+  n_inlined_1_inlined_10: int = const 63;
+  one_inlined_1_inlined_10: int = const 1;
+  two_inlined_1_inlined_10: int = const 2;
+  ans_inlined_1_inlined_10: int = const 0;
+  to_add_inlined_1_inlined_10: int = const 1;
+.loop_inlined_1_inlined_10:
+  cond_inlined_1_inlined_10: bool = le i_inlined_1_inlined_10 n_inlined_1_inlined_10;
+  br cond_inlined_1_inlined_10 .here_inlined_1_inlined_10 .end_inlined_1_inlined_10;
+.here_inlined_1_inlined_10:
+  jmp .prelog_mod2_9_inlined_10;
+.doOr_inlined_1_inlined_10:
+  cond_add_inlined_1_inlined_10: bool = or mod2a_inlined_1_inlined_10 mod2b_inlined_1_inlined_10;
+.stay_inlined_1_inlined_10:
+  br cond_add_inlined_1_inlined_10 .add_inlined_1_inlined_10 .end_loop_inlined_1_inlined_10;
+.add_inlined_1_inlined_10:
+  ans_inlined_1_inlined_10: int = add ans_inlined_1_inlined_10 to_add_inlined_1_inlined_10;
+.end_loop_inlined_1_inlined_10:
+  a_inlined_1_inlined_10: int = div a_inlined_1_inlined_10 two_inlined_1_inlined_10;
+  b_inlined_1_inlined_10: int = div b_inlined_1_inlined_10 two_inlined_1_inlined_10;
+  to_add_inlined_1_inlined_10: int = mul to_add_inlined_1_inlined_10 two_inlined_1_inlined_10;
+  i_inlined_1_inlined_10: int = add i_inlined_1_inlined_10 one_inlined_1_inlined_10;
+  jmp .loop_inlined_1_inlined_10;
+.end_inlined_1_inlined_10:
+  v1_inlined_10: int = id ans_inlined_1_inlined_10;
+  jmp .inline_ret_loop_subroutine_1_inlined_10;
+.prelog_mod2_0_inlined_1_inlined_10:
+  a_inlined_0_inlined_1_inlined_10: int = id b_inlined_1_inlined_10;
+.mod2_inlined_0_inlined_1_inlined_10:
+  two_inlined_0_inlined_1_inlined_10: int = const 2;
+  tmp_inlined_0_inlined_1_inlined_10: int = div a_inlined_0_inlined_1_inlined_10 two_inlined_0_inlined_1_inlined_10;
+  tmp2_inlined_0_inlined_1_inlined_10: int = mul tmp_inlined_0_inlined_1_inlined_10 two_inlined_0_inlined_1_inlined_10;
+  tmp3_inlined_0_inlined_1_inlined_10: int = sub a_inlined_0_inlined_1_inlined_10 tmp2_inlined_0_inlined_1_inlined_10;
+  one_inlined_0_inlined_1_inlined_10: int = const 1;
+  ans_inlined_0_inlined_1_inlined_10: bool = eq one_inlined_0_inlined_1_inlined_10 tmp3_inlined_0_inlined_1_inlined_10;
+  mod2b_inlined_1_inlined_10: int = id ans_inlined_0_inlined_1_inlined_10;
+  jmp .inline_ret_mod2_0_inlined_1_inlined_10;
+.inline_ret_mod2_0_inlined_1_inlined_10:
+  cond_add_inlined_1_inlined_10: bool = and mod2a_inlined_1_inlined_10 mod2b_inlined_1_inlined_10;
+  br c_inlined_1_inlined_10 .doOr_inlined_1_inlined_10 .stay_inlined_1_inlined_10;
+.inline_ret_loop_subroutine_1_inlined_10:
+  and_val_inlined_7: int = id v1_inlined_10;
+  jmp .inline_ret_AND_10;
+.prelog_mod2_9_inlined_10:
+  a_inlined_9_inlined_10: int = id a_inlined_1_inlined_10;
+.mod2_inlined_9_inlined_10:
+  two_inlined_9_inlined_10: int = const 2;
+  tmp_inlined_9_inlined_10: int = div a_inlined_9_inlined_10 two_inlined_9_inlined_10;
+  tmp2_inlined_9_inlined_10: int = mul tmp_inlined_9_inlined_10 two_inlined_9_inlined_10;
+  tmp3_inlined_9_inlined_10: int = sub a_inlined_9_inlined_10 tmp2_inlined_9_inlined_10;
+  one_inlined_9_inlined_10: int = const 1;
+  ans_inlined_9_inlined_10: bool = eq one_inlined_9_inlined_10 tmp3_inlined_9_inlined_10;
+  mod2a_inlined_1_inlined_10: int = id ans_inlined_9_inlined_10;
+  jmp .inline_ret_mod2_9_inlined_10;
+.inline_ret_mod2_9_inlined_10:
+  jmp .prelog_mod2_0_inlined_1_inlined_10;
+.inline_ret_AND_10:
+  jmp .prelog_OR_6_inlined_7;
+}

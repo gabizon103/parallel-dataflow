@@ -1,0 +1,3 @@
+[envs.inliner]
+command = "bril2json < {filename} | cargo run --bin inliner | brili {args}"
+output.inliner = "-"

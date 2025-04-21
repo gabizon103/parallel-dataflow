@@ -1,0 +1,11 @@
+[package]
+name = "inliner"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lesson2.workspace = true
+bril-rs.workspace = true
+utils.workspace = true
+argh.workspace = true
+serde_json.workspace = true
