@@ -5,6 +5,7 @@ use std::{
     collections::{HashMap, VecDeque},
     fmt::Debug,
     hash::Hash,
+    ops::Deref,
     sync::{Arc, Mutex, RwLock, RwLockReadGuard},
     thread::{self, JoinHandle},
 };
@@ -74,14 +75,34 @@ where
                         let block = *block_ref;
                         drop(worklist_lock);
 
-                        // read lock on outs of all predecessors
-                        let incoming_values: Vec<RwLockReadGuard<T>> = match preds.get(&block) {
+                        // acquire read lock on out[p] for all p
+                        let read_guards: Vec<RwLockReadGuard<T>> = match preds.get(&block) {
                             None => vec![],
                             Some(p) => p.iter().map(|v| *v).collect(),
                         }
                         .into_iter()
-                        .map(|pred: usize| outs[pred].read().unwrap())
-                        .collect_vec();
+                        .map(|pred: usize| {
+                            let read_guard = outs[pred].read().unwrap();
+                            read_guard
+                            // let drf = RwLockReadGuard::deref(&pred_out);
+                            // let pred_out = read_guard.clone();
+                            // (read_guard, pred_out)
+                        })
+                        .collect();
+
+                        // get ownership over these by cloning
+                        let incoming_values = read_guards
+                            .iter()
+                            .map(|guard| {
+                                let guard_deref = RwLockReadGuard::deref(guard);
+                                guard_deref.clone()
+                            })
+                            .collect_vec();
+
+                        // merge
+
+                        // drop read access of each out[p] after finished merging
+                        read_guards.into_iter().for_each(drop);
 
                         ()
                     }
