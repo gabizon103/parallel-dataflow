@@ -1,0 +1,121 @@
+@main(a: int, b: int, c: bool): int {
+.main:
+  i: int = const 0;
+  n: int = const 63;
+  one: int = const 1;
+  two: int = const 2;
+  ans: int = const 0;
+  to_add: int = const 1;
+.loop:
+  print i;
+  cond: bool = le i n;
+  br cond .here .end;
+.here:
+  jmp .prelog_mod2_3;
+.doOr:
+  cond_add: bool = or mod2a mod2b;
+.stay:
+  br cond_add .add .end_loop;
+.add:
+  ans: int = add ans to_add;
+.end_loop:
+  a: int = div a two;
+  b: int = div b two;
+  to_add: int = mul to_add two;
+  i: int = add i one;
+  jmp .loop;
+.end:
+  ret ans;
+.prelog_mod2_0:
+  a_inlined_0: int = id b;
+.mod2_inlined_0:
+  two_inlined_0: int = const 2;
+  tmp_inlined_0: int = div a_inlined_0 two_inlined_0;
+  tmp2_inlined_0: int = mul tmp_inlined_0 two_inlined_0;
+  tmp3_inlined_0: int = sub a_inlined_0 tmp2_inlined_0;
+  one_inlined_0: int = const 1;
+  ans_inlined_0: bool = eq one_inlined_0 tmp3_inlined_0;
+  mod2b: int = id ans_inlined_0;
+  jmp .inline_ret_mod2_0;
+.inline_ret_mod2_0:
+  cond_add: bool = and mod2a mod2b;
+  br c .doOr .stay;
+.prelog_mod2_3:
+  a_inlined_3: int = id a;
+.mod2_inlined_3:
+  two_inlined_3: int = const 2;
+  tmp_inlined_3: int = div a_inlined_3 two_inlined_3;
+  tmp2_inlined_3: int = mul tmp_inlined_3 two_inlined_3;
+  tmp3_inlined_3: int = sub a_inlined_3 tmp2_inlined_3;
+  one_inlined_3: int = const 1;
+  ans_inlined_3: bool = eq one_inlined_3 tmp3_inlined_3;
+  mod2a: int = id ans_inlined_3;
+  jmp .inline_ret_mod2_3;
+.inline_ret_mod2_3:
+  jmp .prelog_mod2_0;
+}
+@OR(a: int, b: int): int {
+.OR:
+  oper: bool = const true;
+  jmp .prelog_loop_subroutine_4;
+.prelog_loop_subroutine_4:
+  a_inlined_4: int = id a;
+  b_inlined_4: int = id b;
+  c_inlined_4: bool = id oper;
+.loop_subroutine_inlined_4:
+  i_inlined_4: int = const 0;
+  n_inlined_4: int = const 63;
+  one_inlined_4: int = const 1;
+  two_inlined_4: int = const 2;
+  ans_inlined_4: int = const 0;
+  to_add_inlined_4: int = const 1;
+.loop_inlined_4:
+  cond_inlined_4: bool = le i_inlined_4 n_inlined_4;
+  br cond_inlined_4 .here_inlined_4 .end_inlined_4;
+.here_inlined_4:
+  jmp .prelog_mod2_3_inlined_4;
+.doOr_inlined_4:
+  cond_add_inlined_4: bool = or mod2a_inlined_4 mod2b_inlined_4;
+.stay_inlined_4:
+  br cond_add_inlined_4 .add_inlined_4 .end_loop_inlined_4;
+.add_inlined_4:
+  ans_inlined_4: int = add ans_inlined_4 to_add_inlined_4;
+.end_loop_inlined_4:
+  a_inlined_4: int = div a_inlined_4 two_inlined_4;
+  b_inlined_4: int = div b_inlined_4 two_inlined_4;
+  to_add_inlined_4: int = mul to_add_inlined_4 two_inlined_4;
+  i_inlined_4: int = add i_inlined_4 one_inlined_4;
+  jmp .loop_inlined_4;
+.end_inlined_4:
+  v1: int = id ans_inlined_4;
+  jmp .inline_ret_loop_subroutine_4;
+.prelog_mod2_0_inlined_4:
+  a_inlined_0_inlined_4: int = id b_inlined_4;
+.mod2_inlined_0_inlined_4:
+  two_inlined_0_inlined_4: int = const 2;
+  tmp_inlined_0_inlined_4: int = div a_inlined_0_inlined_4 two_inlined_0_inlined_4;
+  tmp2_inlined_0_inlined_4: int = mul tmp_inlined_0_inlined_4 two_inlined_0_inlined_4;
+  tmp3_inlined_0_inlined_4: int = sub a_inlined_0_inlined_4 tmp2_inlined_0_inlined_4;
+  one_inlined_0_inlined_4: int = const 1;
+  ans_inlined_0_inlined_4: bool = eq one_inlined_0_inlined_4 tmp3_inlined_0_inlined_4;
+  mod2b_inlined_4: int = id ans_inlined_0_inlined_4;
+  jmp .inline_ret_mod2_0_inlined_4;
+.inline_ret_mod2_0_inlined_4:
+  cond_add_inlined_4: bool = and mod2a_inlined_4 mod2b_inlined_4;
+  br c_inlined_4 .doOr_inlined_4 .stay_inlined_4;
+.prelog_mod2_3_inlined_4:
+  a_inlined_3_inlined_4: int = id a_inlined_4;
+.mod2_inlined_3_inlined_4:
+  two_inlined_3_inlined_4: int = const 2;
+  tmp_inlined_3_inlined_4: int = div a_inlined_3_inlined_4 two_inlined_3_inlined_4;
+  tmp2_inlined_3_inlined_4: int = mul tmp_inlined_3_inlined_4 two_inlined_3_inlined_4;
+  tmp3_inlined_3_inlined_4: int = sub a_inlined_3_inlined_4 tmp2_inlined_3_inlined_4;
+  one_inlined_3_inlined_4: int = const 1;
+  ans_inlined_3_inlined_4: bool = eq one_inlined_3_inlined_4 tmp3_inlined_3_inlined_4;
+  mod2a_inlined_4: int = id ans_inlined_3_inlined_4;
+  jmp .inline_ret_mod2_3_inlined_4;
+.inline_ret_mod2_3_inlined_4:
+  jmp .prelog_mod2_0_inlined_4;
+.inline_ret_loop_subroutine_4:
+  ret v1;
+}

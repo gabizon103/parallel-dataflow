@@ -1,4 +1,7 @@
-use std::{collections::{HashMap, HashSet, VecDeque}, fmt::Error};
+use std::{
+    collections::{HashMap, HashSet, VecDeque},
+    fmt::Error,
+};
 
 use bril_rs::{EffectOps, Instruction};
 use lesson2::{BasicBlock, CFGProgram, ControlFlow};
@@ -23,20 +26,22 @@ impl InstrLoc {
 
 pub struct Inliner<'a> {
     program: &'a mut CFGProgram,
-    instr_threshold: u32,
     iter: u32,
-    // func name -> (var name -> inlined var name)
-    name_map: HashMap<String, HashMap<String, String>>
+    paths: HashSet<Vec<InstrLoc>>,
 }
 
 impl<'a> Inliner<'a> {
-    pub fn new(program: &'a mut CFGProgram, instr_threshold: u32) -> Self {
+    pub fn new(program: &'a mut CFGProgram) -> Self {
         Self {
             program,
-            instr_threshold,
             iter: 0,
-            name_map: HashMap::new()
+            paths: HashSet::new(),
         }
+    }
+
+    pub fn is_call(&self, instr: &InstrLoc) -> bool {
+        let instr = &self.program.functions[instr.cfg_id].blocks[instr.blk_id].instrs[instr.instr_id];
+        is_call(instr)
     }
 
     // Finds the function given a name
@@ -70,6 +75,7 @@ impl<'a> Inliner<'a> {
         calls
     }
 
+    // gets the name of the function being called by `caller`
     pub fn get_callee_name(&self, caller: InstrLoc) -> Result<String, Error> {
         let call_blk = &self.program.functions[caller.cfg_id].blocks[caller.blk_id];
 
@@ -84,7 +90,7 @@ impl<'a> Inliner<'a> {
                 } else {
                     panic!("Instruction {call_instr} is not a call");
                 }
-            },
+            }
             bril_rs::Instruction::Effect { op, funcs, .. } => {
                 if matches!(op, bril_rs::EffectOps::Call) {
                     Ok(funcs[0].to_string())
@@ -97,50 +103,119 @@ impl<'a> Inliner<'a> {
         call_targ
     }
 
+    // gets the name of the function that `caller` is in
+    pub fn get_caller_src(&self, caller: InstrLoc) -> String {
+        let cfg_id = caller.cfg_id;
+        self.program.functions[cfg_id].name.clone()
+    }
 
     // traverses from a call to a leaf function and accumulates the path
-    pub fn traverse_call_path(&self, caller: InstrLoc, cur_path: Vec<InstrLoc>, paths: &mut HashSet<Vec<InstrLoc>>) -> Result<HashSet<Vec<InstrLoc>>, Error> {
-        let callee_name = self.get_callee_name(caller)?;
-        let callee_cfg_idx = self.find_cfg(&callee_name)?;
+    pub fn traverse_call_path(
+        &mut self,
+        caller: InstrLoc,
+        cur_path: &mut Vec<InstrLoc>,
+        visited: &mut HashSet<InstrLoc>,
+    ) {
+        let callee_name = self.get_callee_name(caller).expect("oops");
+        let callee_cfg_idx = self.find_cfg(&callee_name).expect("oops");
         let callee_cfg = &self.program.functions[callee_cfg_idx];
-        let mut new_paths = paths.clone();
+
+        visited.insert(caller);
+        // println!("visited: {:#?}", visited);
+        cur_path.push(caller);
+
+        // check if the last three calls are all recursive
+        let last_idx = cur_path.len() - 1;
+        let threshold = if last_idx >= 2 {
+            last_idx - 2
+        } else {
+            usize::MAX
+        };
+        let is_recursive: bool = cur_path
+            .iter()
+            .enumerate()
+            .filter(|(idx, _)| *idx >= last_idx)
+            .map(|(_, instrloc)| {
+                let caller_src = self.get_caller_src(caller);
+                // println!("caller_src: {caller_src}");
+                let callee_name = self.get_callee_name(*instrloc).expect("expected a call");
+                // println!("callee_name: {callee_name}");
+                caller_src == callee_name
+            })
+            .fold(true, |acc, b| acc && b);
 
         let calls_from_here = Self::get_calls(callee_cfg, callee_cfg_idx);
-        if calls_from_here.is_empty() {
-            new_paths.insert(cur_path);
+        if calls_from_here.is_empty() || is_recursive {
+            self.paths.insert(cur_path.to_vec());
         } else {
             calls_from_here.iter().for_each(|instrloc| {
-                let mut this_path = cur_path.clone();
-                this_path.push(instrloc.clone());
-                new_paths = self.traverse_call_path(instrloc.clone(), this_path, paths).expect("oops");
+                if !visited.contains(instrloc) {
+                    self.traverse_call_path(instrloc.clone(), cur_path, visited);
+                }
             });
         };
-
-        Ok(new_paths)
     }
 
     pub fn run_pass(&mut self) -> Result<(), Error> {
         let main_idx = self.find_cfg(&"main".to_string())?;
+        // println!("main_idx: {main_idx}");
         let main = &self.program.functions[main_idx].clone();
         let mut calls: VecDeque<InstrLoc> = Self::get_calls(main, main_idx).into();
 
-        while !calls.is_empty() {
-            // println!("entering while: calls = {:#?}", calls);
-            let this_call = calls.pop_front().unwrap();
-            let cur_path = vec![this_call.clone()];
-            let paths = &mut HashSet::new();
-            let all_paths = self.traverse_call_path(this_call.clone(), cur_path, paths).expect("oops");
-            all_paths.iter().for_each(|path| {
-                let rev_path: Vec<InstrLoc> = path.iter().copied().rev().collect();
-                rev_path.iter().for_each(|caller| {
-                    // println!("inlining {:#?}", caller);
-                    let _ = self.inline_call(caller);
-                    // println!("finished");
+        // while !calls.is_empty() {
+        //     // println!("entering while: {:#?}", calls);
+        //     let this_call = calls.pop_front().unwrap();
+        //     let mut cur_path = vec![];
+        //     let visited = &mut HashSet::new();
+        //     self.traverse_call_path(this_call.clone(), &mut cur_path, visited);
+        //     let all_paths = self.paths.clone();
+        //     // println!("got all paths: {:#?}", all_paths);
+        //     all_paths.iter().for_each(|path| {
+        //         let rev_path: Vec<InstrLoc> = path.iter().copied().rev().collect();
+        //         rev_path.iter().for_each(|caller| {
+        //             // println!("inlining {:#?}", caller);
+        //             let _ = self.inline_call(caller);
+        //             println!("finished");
+        //         });
+        //     });
+        //     let main = &self.program.functions[main_idx].clone();
+        //     // println!("main: {:#?}", main.blocks);
+        //     calls = Self::get_calls(main, main_idx).into();
+        // }
+
+        // let this_call = calls.pop_front().unwrap();
+        // let mut cur_path = vec![];
+        // let visited = &mut HashSet::new();
+        // self.traverse_call_path(this_call.clone(), &mut cur_path, visited);
+        // let all_paths = self.paths.clone();
+        // // println!("got all paths: {:#?}", all_paths);
+        // all_paths.iter().for_each(|path| {
+        //     let rev_path: Vec<InstrLoc> = path.iter().copied().rev().collect();
+        //     rev_path.iter().for_each(|caller| {
+        //         if self.is_call(caller) {
+        //             // println!("inlining {:#?}", caller);
+        //             let _ = self.inline_call(caller);
+        //             // println!("finished");
+        //         }
+        //     });
+        // });
+
+        let mut funcs = self.program.functions.clone();
+        for i in 0..2 {
+            // println!("outer loop iter {i}");
+            funcs.iter().enumerate().for_each(|(func_id, func)| {
+                let calls = Self::get_calls(func, func_id);
+                calls.iter().rev().for_each(|caller| {
+                    if self.is_call(caller) {
+                        // println!("inlining {:#?}", caller);
+                        let _ = self.inline_call(caller);
+                    }
                 });
             });
-            let main = &self.program.functions[main_idx].clone();
-            calls = Self::get_calls(main, main_idx).into();
+            funcs = self.program.functions.clone();
         }
+
+
 
         Ok(())
     }
@@ -167,7 +242,7 @@ impl<'a> Inliner<'a> {
                 } else {
                     panic!("Instruction {call_instr} is not a call");
                 }
-            },
+            }
             bril_rs::Instruction::Effect { op, funcs, .. } => {
                 if matches!(op, bril_rs::EffectOps::Call) {
                     Ok(funcs[0].to_string())
@@ -192,7 +267,7 @@ impl<'a> Inliner<'a> {
                 } else {
                     panic!("Instruction {call_instr} is not a call")
                 }
-            },
+            }
             bril_rs::Instruction::Effect { op, args, .. } => {
                 if matches!(op, bril_rs::EffectOps::Call) {
                     Ok(args.clone())
@@ -224,9 +299,10 @@ impl<'a> Inliner<'a> {
                     match instr {
                         Instruction::Constant { .. } | Instruction::Value { .. } => (),
                         Instruction::Effect { labels, op, .. } => {
-                            let new_labels = labels.iter().map(|label| {
-                                format!("{label}_inlined_{}", self.iter)
-                            }).collect();
+                            let new_labels = labels
+                                .iter()
+                                .map(|label| format!("{label}_inlined_{}", self.iter))
+                                .collect();
                             *labels = new_labels;
                         }
                     }
@@ -243,10 +319,10 @@ impl<'a> Inliner<'a> {
         let mut prelog: Vec<Instruction> = call_args
             .iter()
             .zip(callee_args.iter())
-            .map(|(item, arg)| { 
+            .map(|(item, arg)| {
                 let new_name = format!("{}_inlined_{}", arg.name, self.iter);
                 this_map.insert(arg.name.clone(), new_name.clone());
-                
+
                 Instruction::Value {
                     args: vec![item.clone()],
                     dest: new_name,
@@ -267,22 +343,25 @@ impl<'a> Inliner<'a> {
             blk.instrs.iter_mut().for_each(|instr| {
                 match instr {
                     Instruction::Constant { .. } => (),
-                    Instruction::Value { args, .. } | Instruction::Effect { args, ..} => {
-                        let new_args: Vec<String> = args.iter().map(|arg| {
-                            if let Some(renamed_arg) = this_map.get(arg) {
-                                renamed_arg.to_string()
-                            } else {
-                                arg.to_string()
-                            }
-                        }).collect();
+                    Instruction::Value { args, .. } | Instruction::Effect { args, .. } => {
+                        let new_args: Vec<String> = args
+                            .iter()
+                            .map(|arg| {
+                                if let Some(renamed_arg) = this_map.get(arg) {
+                                    renamed_arg.to_string()
+                                } else {
+                                    arg.to_string()
+                                }
+                            })
+                            .collect();
                         *args = new_args;
-                    },
+                    }
                 };
             })
         });
 
         // 2. add blocks to the caller
-        
+
         let blk_w_inlining = caller.blk_id;
 
         // replace rets with assignments and jmps
@@ -331,8 +410,6 @@ impl<'a> Inliner<'a> {
 
         caller_cfg.blocks.extend(new_callee_blocks);
         caller_cfg.blocks.push(inline_ret_blk); // also push the return blk
-
-        
 
         // 4. replace call with a jmp
         let start_name = caller_cfg.blocks[start_of_stitching].name.clone();

@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use argh::FromArgs;
 use inliner::Inliner;
-use lesson2::{form_blocks_from_read, CFGProgram, ControlFlow, FlatProgram};
+use lesson2::{CFGProgram, ControlFlow, FlatProgram, form_blocks_from_read};
 use utils::cli::read_input;
 
 /// inliner
@@ -28,13 +28,14 @@ pub fn main() {
         .map(|(name, blocks, map, args, ret_type)| {
             let mut cfg = ControlFlow::new(name, blocks, map, args, ret_type);
             cfg.build();
+            cfg.add_rets();
             cfg
         })
         .collect();
 
     let mut program = CFGProgram { functions: cfgs };
 
-    let mut inliner = Inliner::new(&mut program, 0);
+    let mut inliner = Inliner::new(&mut program);
     let _ = inliner.run_pass();
 
     let program_flat = program.flatten_blocks();

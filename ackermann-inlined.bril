@@ -1,0 +1,425 @@
+@ack(m: int, n: int): int {
+.ack:
+  zero: int = const 0;
+  one: int = const 1;
+  cond_m: bool = eq m zero;
+  br cond_m .m_zero .m_nonzero;
+.m_zero:
+  tmp: int = add n one;
+  ret tmp;
+.m_nonzero:
+  cond_n: bool = eq n zero;
+  br cond_n .n_zero .n_nonzero;
+.n_zero:
+  m1: int = sub m one;
+  jmp .prelog_ack_2;
+.n_nonzero:
+  m1: int = sub m one;
+  n1: int = sub n one;
+  jmp .prelog_ack_1;
+.prelog_ack_0:
+  m_inlined_0: int = id m1;
+  n_inlined_0: int = id t1;
+.ack_inlined_0:
+  zero_inlined_0: int = const 0;
+  one_inlined_0: int = const 1;
+  cond_m_inlined_0: bool = eq m_inlined_0 zero_inlined_0;
+  br cond_m_inlined_0 .m_zero_inlined_0 .m_nonzero_inlined_0;
+.m_zero_inlined_0:
+  tmp_inlined_0: int = add n_inlined_0 one_inlined_0;
+  t2: int = id tmp_inlined_0;
+  jmp .inline_ret_ack_0;
+.m_nonzero_inlined_0:
+  cond_n_inlined_0: bool = eq n_inlined_0 zero_inlined_0;
+  br cond_n_inlined_0 .n_zero_inlined_0 .n_nonzero_inlined_0;
+.n_zero_inlined_0:
+  m1_inlined_0: int = sub m_inlined_0 one_inlined_0;
+  tmp_inlined_0: int = call @ack m1_inlined_0 one_inlined_0;
+  t2: int = id tmp_inlined_0;
+  jmp .inline_ret_ack_0;
+.n_nonzero_inlined_0:
+  m1_inlined_0: int = sub m_inlined_0 one_inlined_0;
+  n1_inlined_0: int = sub n_inlined_0 one_inlined_0;
+  t1_inlined_0: int = call @ack m_inlined_0 n1_inlined_0;
+  t2_inlined_0: int = call @ack m1_inlined_0 t1_inlined_0;
+.inline_ret_ack_0:
+  ret t2;
+.prelog_ack_1:
+  m_inlined_1: int = id m;
+  n_inlined_1: int = id n1;
+.ack_inlined_1:
+  zero_inlined_1: int = const 0;
+  one_inlined_1: int = const 1;
+  cond_m_inlined_1: bool = eq m_inlined_1 zero_inlined_1;
+  br cond_m_inlined_1 .m_zero_inlined_1 .m_nonzero_inlined_1;
+.m_zero_inlined_1:
+  tmp_inlined_1: int = add n_inlined_1 one_inlined_1;
+  t1: int = id tmp_inlined_1;
+  jmp .inline_ret_ack_1;
+.m_nonzero_inlined_1:
+  cond_n_inlined_1: bool = eq n_inlined_1 zero_inlined_1;
+  br cond_n_inlined_1 .n_zero_inlined_1 .n_nonzero_inlined_1;
+.n_zero_inlined_1:
+  m1_inlined_1: int = sub m_inlined_1 one_inlined_1;
+  tmp_inlined_1: int = call @ack m1_inlined_1 one_inlined_1;
+  t1: int = id tmp_inlined_1;
+  jmp .inline_ret_ack_1;
+.n_nonzero_inlined_1:
+  m1_inlined_1: int = sub m_inlined_1 one_inlined_1;
+  n1_inlined_1: int = sub n_inlined_1 one_inlined_1;
+  t1_inlined_1: int = call @ack m_inlined_1 n1_inlined_1;
+.prelog_ack_0_inlined_1:
+  m_inlined_0_inlined_1: int = id m1_inlined_1;
+  n_inlined_0_inlined_1: int = id t1_inlined_1;
+.ack_inlined_0_inlined_1:
+  zero_inlined_0_inlined_1: int = const 0;
+  one_inlined_0_inlined_1: int = const 1;
+  cond_m_inlined_0_inlined_1: bool = eq m_inlined_0_inlined_1 zero_inlined_0_inlined_1;
+  br cond_m_inlined_0_inlined_1 .m_zero_inlined_0_inlined_1 .m_nonzero_inlined_0_inlined_1;
+.m_zero_inlined_0_inlined_1:
+  tmp_inlined_0_inlined_1: int = add n_inlined_0_inlined_1 one_inlined_0_inlined_1;
+  t2_inlined_1: int = id tmp_inlined_0_inlined_1;
+  jmp .inline_ret_ack_0_inlined_1;
+.m_nonzero_inlined_0_inlined_1:
+  cond_n_inlined_0_inlined_1: bool = eq n_inlined_0_inlined_1 zero_inlined_0_inlined_1;
+  br cond_n_inlined_0_inlined_1 .n_zero_inlined_0_inlined_1 .n_nonzero_inlined_0_inlined_1;
+.n_zero_inlined_0_inlined_1:
+  m1_inlined_0_inlined_1: int = sub m_inlined_0_inlined_1 one_inlined_0_inlined_1;
+  tmp_inlined_0_inlined_1: int = call @ack m1_inlined_0_inlined_1 one_inlined_0_inlined_1;
+  t2_inlined_1: int = id tmp_inlined_0_inlined_1;
+  jmp .inline_ret_ack_0_inlined_1;
+.n_nonzero_inlined_0_inlined_1:
+  m1_inlined_0_inlined_1: int = sub m_inlined_0_inlined_1 one_inlined_0_inlined_1;
+  n1_inlined_0_inlined_1: int = sub n_inlined_0_inlined_1 one_inlined_0_inlined_1;
+  t1_inlined_0_inlined_1: int = call @ack m_inlined_0_inlined_1 n1_inlined_0_inlined_1;
+  t2_inlined_0_inlined_1: int = call @ack m1_inlined_0_inlined_1 t1_inlined_0_inlined_1;
+.inline_ret_ack_0_inlined_1:
+  t1: int = id t2_inlined_1;
+  jmp .inline_ret_ack_1;
+.inline_ret_ack_1:
+  jmp .prelog_ack_0;
+.prelog_ack_2:
+  m_inlined_2: int = id m1;
+  n_inlined_2: int = id one;
+.ack_inlined_2:
+  zero_inlined_2: int = const 0;
+  one_inlined_2: int = const 1;
+  cond_m_inlined_2: bool = eq m_inlined_2 zero_inlined_2;
+  br cond_m_inlined_2 .m_zero_inlined_2 .m_nonzero_inlined_2;
+.m_zero_inlined_2:
+  tmp_inlined_2: int = add n_inlined_2 one_inlined_2;
+  tmp: int = id tmp_inlined_2;
+  jmp .inline_ret_ack_2;
+.m_nonzero_inlined_2:
+  cond_n_inlined_2: bool = eq n_inlined_2 zero_inlined_2;
+  br cond_n_inlined_2 .n_zero_inlined_2 .n_nonzero_inlined_2;
+.n_zero_inlined_2:
+  m1_inlined_2: int = sub m_inlined_2 one_inlined_2;
+  tmp_inlined_2: int = call @ack m1_inlined_2 one_inlined_2;
+.n_nonzero_inlined_2:
+  m1_inlined_2: int = sub m_inlined_2 one_inlined_2;
+  n1_inlined_2: int = sub n_inlined_2 one_inlined_2;
+  jmp .prelog_ack_1_inlined_2;
+.prelog_ack_0_inlined_2:
+  m_inlined_0_inlined_2: int = id m1_inlined_2;
+  n_inlined_0_inlined_2: int = id t1_inlined_2;
+.ack_inlined_0_inlined_2:
+  zero_inlined_0_inlined_2: int = const 0;
+  one_inlined_0_inlined_2: int = const 1;
+  cond_m_inlined_0_inlined_2: bool = eq m_inlined_0_inlined_2 zero_inlined_0_inlined_2;
+  br cond_m_inlined_0_inlined_2 .m_zero_inlined_0_inlined_2 .m_nonzero_inlined_0_inlined_2;
+.m_zero_inlined_0_inlined_2:
+  tmp_inlined_0_inlined_2: int = add n_inlined_0_inlined_2 one_inlined_0_inlined_2;
+  t2_inlined_2: int = id tmp_inlined_0_inlined_2;
+  jmp .inline_ret_ack_0_inlined_2;
+.m_nonzero_inlined_0_inlined_2:
+  cond_n_inlined_0_inlined_2: bool = eq n_inlined_0_inlined_2 zero_inlined_0_inlined_2;
+  br cond_n_inlined_0_inlined_2 .n_zero_inlined_0_inlined_2 .n_nonzero_inlined_0_inlined_2;
+.n_zero_inlined_0_inlined_2:
+  m1_inlined_0_inlined_2: int = sub m_inlined_0_inlined_2 one_inlined_0_inlined_2;
+  tmp_inlined_0_inlined_2: int = call @ack m1_inlined_0_inlined_2 one_inlined_0_inlined_2;
+  t2_inlined_2: int = id tmp_inlined_0_inlined_2;
+  jmp .inline_ret_ack_0_inlined_2;
+.n_nonzero_inlined_0_inlined_2:
+  m1_inlined_0_inlined_2: int = sub m_inlined_0_inlined_2 one_inlined_0_inlined_2;
+  n1_inlined_0_inlined_2: int = sub n_inlined_0_inlined_2 one_inlined_0_inlined_2;
+  t1_inlined_0_inlined_2: int = call @ack m_inlined_0_inlined_2 n1_inlined_0_inlined_2;
+  t2_inlined_0_inlined_2: int = call @ack m1_inlined_0_inlined_2 t1_inlined_0_inlined_2;
+.inline_ret_ack_0_inlined_2:
+  tmp: int = id t2_inlined_2;
+  jmp .inline_ret_ack_2;
+.prelog_ack_1_inlined_2:
+  m_inlined_1_inlined_2: int = id m_inlined_2;
+  n_inlined_1_inlined_2: int = id n1_inlined_2;
+.ack_inlined_1_inlined_2:
+  zero_inlined_1_inlined_2: int = const 0;
+  one_inlined_1_inlined_2: int = const 1;
+  cond_m_inlined_1_inlined_2: bool = eq m_inlined_1_inlined_2 zero_inlined_1_inlined_2;
+  br cond_m_inlined_1_inlined_2 .m_zero_inlined_1_inlined_2 .m_nonzero_inlined_1_inlined_2;
+.m_zero_inlined_1_inlined_2:
+  tmp_inlined_1_inlined_2: int = add n_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  t1_inlined_2: int = id tmp_inlined_1_inlined_2;
+  jmp .inline_ret_ack_1_inlined_2;
+.m_nonzero_inlined_1_inlined_2:
+  cond_n_inlined_1_inlined_2: bool = eq n_inlined_1_inlined_2 zero_inlined_1_inlined_2;
+  br cond_n_inlined_1_inlined_2 .n_zero_inlined_1_inlined_2 .n_nonzero_inlined_1_inlined_2;
+.n_zero_inlined_1_inlined_2:
+  m1_inlined_1_inlined_2: int = sub m_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  tmp_inlined_1_inlined_2: int = call @ack m1_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  t1_inlined_2: int = id tmp_inlined_1_inlined_2;
+  jmp .inline_ret_ack_1_inlined_2;
+.n_nonzero_inlined_1_inlined_2:
+  m1_inlined_1_inlined_2: int = sub m_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  n1_inlined_1_inlined_2: int = sub n_inlined_1_inlined_2 one_inlined_1_inlined_2;
+  t1_inlined_1_inlined_2: int = call @ack m_inlined_1_inlined_2 n1_inlined_1_inlined_2;
+.prelog_ack_0_inlined_1_inlined_2:
+  m_inlined_0_inlined_1_inlined_2: int = id m1_inlined_1_inlined_2;
+  n_inlined_0_inlined_1_inlined_2: int = id t1_inlined_1_inlined_2;
+.ack_inlined_0_inlined_1_inlined_2:
+  zero_inlined_0_inlined_1_inlined_2: int = const 0;
+  one_inlined_0_inlined_1_inlined_2: int = const 1;
+  cond_m_inlined_0_inlined_1_inlined_2: bool = eq m_inlined_0_inlined_1_inlined_2 zero_inlined_0_inlined_1_inlined_2;
+  br cond_m_inlined_0_inlined_1_inlined_2 .m_zero_inlined_0_inlined_1_inlined_2 .m_nonzero_inlined_0_inlined_1_inlined_2;
+.m_zero_inlined_0_inlined_1_inlined_2:
+  tmp_inlined_0_inlined_1_inlined_2: int = add n_inlined_0_inlined_1_inlined_2 one_inlined_0_inlined_1_inlined_2;
+  t2_inlined_1_inlined_2: int = id tmp_inlined_0_inlined_1_inlined_2;
+  jmp .inline_ret_ack_0_inlined_1_inlined_2;
+.m_nonzero_inlined_0_inlined_1_inlined_2:
+  cond_n_inlined_0_inlined_1_inlined_2: bool = eq n_inlined_0_inlined_1_inlined_2 zero_inlined_0_inlined_1_inlined_2;
+  br cond_n_inlined_0_inlined_1_inlined_2 .n_zero_inlined_0_inlined_1_inlined_2 .n_nonzero_inlined_0_inlined_1_inlined_2;
+.n_zero_inlined_0_inlined_1_inlined_2:
+  m1_inlined_0_inlined_1_inlined_2: int = sub m_inlined_0_inlined_1_inlined_2 one_inlined_0_inlined_1_inlined_2;
+  tmp_inlined_0_inlined_1_inlined_2: int = call @ack m1_inlined_0_inlined_1_inlined_2 one_inlined_0_inlined_1_inlined_2;
+  t2_inlined_1_inlined_2: int = id tmp_inlined_0_inlined_1_inlined_2;
+  jmp .inline_ret_ack_0_inlined_1_inlined_2;
+.n_nonzero_inlined_0_inlined_1_inlined_2:
+  m1_inlined_0_inlined_1_inlined_2: int = sub m_inlined_0_inlined_1_inlined_2 one_inlined_0_inlined_1_inlined_2;
+  n1_inlined_0_inlined_1_inlined_2: int = sub n_inlined_0_inlined_1_inlined_2 one_inlined_0_inlined_1_inlined_2;
+  t1_inlined_0_inlined_1_inlined_2: int = call @ack m_inlined_0_inlined_1_inlined_2 n1_inlined_0_inlined_1_inlined_2;
+  t2_inlined_0_inlined_1_inlined_2: int = call @ack m1_inlined_0_inlined_1_inlined_2 t1_inlined_0_inlined_1_inlined_2;
+.inline_ret_ack_0_inlined_1_inlined_2:
+  t1_inlined_2: int = id t2_inlined_1_inlined_2;
+  jmp .inline_ret_ack_1_inlined_2;
+.inline_ret_ack_1_inlined_2:
+  jmp .prelog_ack_0_inlined_2;
+.inline_ret_ack_2:
+  ret tmp;
+}
+@main(m: int, n: int) {
+.main:
+  jmp .prelog_ack_3;
+.prelog_ack_3:
+  m_inlined_3: int = id m;
+  n_inlined_3: int = id n;
+.ack_inlined_3:
+  zero_inlined_3: int = const 0;
+  one_inlined_3: int = const 1;
+  cond_m_inlined_3: bool = eq m_inlined_3 zero_inlined_3;
+  br cond_m_inlined_3 .m_zero_inlined_3 .m_nonzero_inlined_3;
+.m_zero_inlined_3:
+  tmp_inlined_3: int = add n_inlined_3 one_inlined_3;
+  tmp: int = id tmp_inlined_3;
+  jmp .inline_ret_ack_3;
+.m_nonzero_inlined_3:
+  cond_n_inlined_3: bool = eq n_inlined_3 zero_inlined_3;
+  br cond_n_inlined_3 .n_zero_inlined_3 .n_nonzero_inlined_3;
+.n_zero_inlined_3:
+  m1_inlined_3: int = sub m_inlined_3 one_inlined_3;
+  jmp .prelog_ack_2_inlined_3;
+.n_nonzero_inlined_3:
+  m1_inlined_3: int = sub m_inlined_3 one_inlined_3;
+  n1_inlined_3: int = sub n_inlined_3 one_inlined_3;
+  jmp .prelog_ack_1_inlined_3;
+.prelog_ack_0_inlined_3:
+  m_inlined_0_inlined_3: int = id m1_inlined_3;
+  n_inlined_0_inlined_3: int = id t1_inlined_3;
+.ack_inlined_0_inlined_3:
+  zero_inlined_0_inlined_3: int = const 0;
+  one_inlined_0_inlined_3: int = const 1;
+  cond_m_inlined_0_inlined_3: bool = eq m_inlined_0_inlined_3 zero_inlined_0_inlined_3;
+  br cond_m_inlined_0_inlined_3 .m_zero_inlined_0_inlined_3 .m_nonzero_inlined_0_inlined_3;
+.m_zero_inlined_0_inlined_3:
+  tmp_inlined_0_inlined_3: int = add n_inlined_0_inlined_3 one_inlined_0_inlined_3;
+  t2_inlined_3: int = id tmp_inlined_0_inlined_3;
+  jmp .inline_ret_ack_0_inlined_3;
+.m_nonzero_inlined_0_inlined_3:
+  cond_n_inlined_0_inlined_3: bool = eq n_inlined_0_inlined_3 zero_inlined_0_inlined_3;
+  br cond_n_inlined_0_inlined_3 .n_zero_inlined_0_inlined_3 .n_nonzero_inlined_0_inlined_3;
+.n_zero_inlined_0_inlined_3:
+  m1_inlined_0_inlined_3: int = sub m_inlined_0_inlined_3 one_inlined_0_inlined_3;
+  tmp_inlined_0_inlined_3: int = call @ack m1_inlined_0_inlined_3 one_inlined_0_inlined_3;
+  t2_inlined_3: int = id tmp_inlined_0_inlined_3;
+  jmp .inline_ret_ack_0_inlined_3;
+.n_nonzero_inlined_0_inlined_3:
+  m1_inlined_0_inlined_3: int = sub m_inlined_0_inlined_3 one_inlined_0_inlined_3;
+  n1_inlined_0_inlined_3: int = sub n_inlined_0_inlined_3 one_inlined_0_inlined_3;
+  t1_inlined_0_inlined_3: int = call @ack m_inlined_0_inlined_3 n1_inlined_0_inlined_3;
+  t2_inlined_0_inlined_3: int = call @ack m1_inlined_0_inlined_3 t1_inlined_0_inlined_3;
+.inline_ret_ack_0_inlined_3:
+  tmp: int = id t2_inlined_3;
+  jmp .inline_ret_ack_3;
+.prelog_ack_1_inlined_3:
+  m_inlined_1_inlined_3: int = id m_inlined_3;
+  n_inlined_1_inlined_3: int = id n1_inlined_3;
+.ack_inlined_1_inlined_3:
+  zero_inlined_1_inlined_3: int = const 0;
+  one_inlined_1_inlined_3: int = const 1;
+  cond_m_inlined_1_inlined_3: bool = eq m_inlined_1_inlined_3 zero_inlined_1_inlined_3;
+  br cond_m_inlined_1_inlined_3 .m_zero_inlined_1_inlined_3 .m_nonzero_inlined_1_inlined_3;
+.m_zero_inlined_1_inlined_3:
+  tmp_inlined_1_inlined_3: int = add n_inlined_1_inlined_3 one_inlined_1_inlined_3;
+  t1_inlined_3: int = id tmp_inlined_1_inlined_3;
+  jmp .inline_ret_ack_1_inlined_3;
+.m_nonzero_inlined_1_inlined_3:
+  cond_n_inlined_1_inlined_3: bool = eq n_inlined_1_inlined_3 zero_inlined_1_inlined_3;
+  br cond_n_inlined_1_inlined_3 .n_zero_inlined_1_inlined_3 .n_nonzero_inlined_1_inlined_3;
+.n_zero_inlined_1_inlined_3:
+  m1_inlined_1_inlined_3: int = sub m_inlined_1_inlined_3 one_inlined_1_inlined_3;
+  tmp_inlined_1_inlined_3: int = call @ack m1_inlined_1_inlined_3 one_inlined_1_inlined_3;
+  t1_inlined_3: int = id tmp_inlined_1_inlined_3;
+  jmp .inline_ret_ack_1_inlined_3;
+.n_nonzero_inlined_1_inlined_3:
+  m1_inlined_1_inlined_3: int = sub m_inlined_1_inlined_3 one_inlined_1_inlined_3;
+  n1_inlined_1_inlined_3: int = sub n_inlined_1_inlined_3 one_inlined_1_inlined_3;
+  t1_inlined_1_inlined_3: int = call @ack m_inlined_1_inlined_3 n1_inlined_1_inlined_3;
+.prelog_ack_0_inlined_1_inlined_3:
+  m_inlined_0_inlined_1_inlined_3: int = id m1_inlined_1_inlined_3;
+  n_inlined_0_inlined_1_inlined_3: int = id t1_inlined_1_inlined_3;
+.ack_inlined_0_inlined_1_inlined_3:
+  zero_inlined_0_inlined_1_inlined_3: int = const 0;
+  one_inlined_0_inlined_1_inlined_3: int = const 1;
+  cond_m_inlined_0_inlined_1_inlined_3: bool = eq m_inlined_0_inlined_1_inlined_3 zero_inlined_0_inlined_1_inlined_3;
+  br cond_m_inlined_0_inlined_1_inlined_3 .m_zero_inlined_0_inlined_1_inlined_3 .m_nonzero_inlined_0_inlined_1_inlined_3;
+.m_zero_inlined_0_inlined_1_inlined_3:
+  tmp_inlined_0_inlined_1_inlined_3: int = add n_inlined_0_inlined_1_inlined_3 one_inlined_0_inlined_1_inlined_3;
+  t2_inlined_1_inlined_3: int = id tmp_inlined_0_inlined_1_inlined_3;
+  jmp .inline_ret_ack_0_inlined_1_inlined_3;
+.m_nonzero_inlined_0_inlined_1_inlined_3:
+  cond_n_inlined_0_inlined_1_inlined_3: bool = eq n_inlined_0_inlined_1_inlined_3 zero_inlined_0_inlined_1_inlined_3;
+  br cond_n_inlined_0_inlined_1_inlined_3 .n_zero_inlined_0_inlined_1_inlined_3 .n_nonzero_inlined_0_inlined_1_inlined_3;
+.n_zero_inlined_0_inlined_1_inlined_3:
+  m1_inlined_0_inlined_1_inlined_3: int = sub m_inlined_0_inlined_1_inlined_3 one_inlined_0_inlined_1_inlined_3;
+  tmp_inlined_0_inlined_1_inlined_3: int = call @ack m1_inlined_0_inlined_1_inlined_3 one_inlined_0_inlined_1_inlined_3;
+  t2_inlined_1_inlined_3: int = id tmp_inlined_0_inlined_1_inlined_3;
+  jmp .inline_ret_ack_0_inlined_1_inlined_3;
+.n_nonzero_inlined_0_inlined_1_inlined_3:
+  m1_inlined_0_inlined_1_inlined_3: int = sub m_inlined_0_inlined_1_inlined_3 one_inlined_0_inlined_1_inlined_3;
+  n1_inlined_0_inlined_1_inlined_3: int = sub n_inlined_0_inlined_1_inlined_3 one_inlined_0_inlined_1_inlined_3;
+  t1_inlined_0_inlined_1_inlined_3: int = call @ack m_inlined_0_inlined_1_inlined_3 n1_inlined_0_inlined_1_inlined_3;
+  t2_inlined_0_inlined_1_inlined_3: int = call @ack m1_inlined_0_inlined_1_inlined_3 t1_inlined_0_inlined_1_inlined_3;
+.inline_ret_ack_0_inlined_1_inlined_3:
+  t1_inlined_3: int = id t2_inlined_1_inlined_3;
+  jmp .inline_ret_ack_1_inlined_3;
+.inline_ret_ack_1_inlined_3:
+  jmp .prelog_ack_0_inlined_3;
+.prelog_ack_2_inlined_3:
+  m_inlined_2_inlined_3: int = id m1_inlined_3;
+  n_inlined_2_inlined_3: int = id one_inlined_3;
+.ack_inlined_2_inlined_3:
+  zero_inlined_2_inlined_3: int = const 0;
+  one_inlined_2_inlined_3: int = const 1;
+  cond_m_inlined_2_inlined_3: bool = eq m_inlined_2_inlined_3 zero_inlined_2_inlined_3;
+  br cond_m_inlined_2_inlined_3 .m_zero_inlined_2_inlined_3 .m_nonzero_inlined_2_inlined_3;
+.m_zero_inlined_2_inlined_3:
+  tmp_inlined_2_inlined_3: int = add n_inlined_2_inlined_3 one_inlined_2_inlined_3;
+  tmp_inlined_3: int = id tmp_inlined_2_inlined_3;
+  jmp .inline_ret_ack_2_inlined_3;
+.m_nonzero_inlined_2_inlined_3:
+  cond_n_inlined_2_inlined_3: bool = eq n_inlined_2_inlined_3 zero_inlined_2_inlined_3;
+  br cond_n_inlined_2_inlined_3 .n_zero_inlined_2_inlined_3 .n_nonzero_inlined_2_inlined_3;
+.n_zero_inlined_2_inlined_3:
+  m1_inlined_2_inlined_3: int = sub m_inlined_2_inlined_3 one_inlined_2_inlined_3;
+  tmp_inlined_2_inlined_3: int = call @ack m1_inlined_2_inlined_3 one_inlined_2_inlined_3;
+.n_nonzero_inlined_2_inlined_3:
+  m1_inlined_2_inlined_3: int = sub m_inlined_2_inlined_3 one_inlined_2_inlined_3;
+  n1_inlined_2_inlined_3: int = sub n_inlined_2_inlined_3 one_inlined_2_inlined_3;
+  jmp .prelog_ack_1_inlined_2_inlined_3;
+.prelog_ack_0_inlined_2_inlined_3:
+  m_inlined_0_inlined_2_inlined_3: int = id m1_inlined_2_inlined_3;
+  n_inlined_0_inlined_2_inlined_3: int = id t1_inlined_2_inlined_3;
+.ack_inlined_0_inlined_2_inlined_3:
+  zero_inlined_0_inlined_2_inlined_3: int = const 0;
+  one_inlined_0_inlined_2_inlined_3: int = const 1;
+  cond_m_inlined_0_inlined_2_inlined_3: bool = eq m_inlined_0_inlined_2_inlined_3 zero_inlined_0_inlined_2_inlined_3;
+  br cond_m_inlined_0_inlined_2_inlined_3 .m_zero_inlined_0_inlined_2_inlined_3 .m_nonzero_inlined_0_inlined_2_inlined_3;
+.m_zero_inlined_0_inlined_2_inlined_3:
+  tmp_inlined_0_inlined_2_inlined_3: int = add n_inlined_0_inlined_2_inlined_3 one_inlined_0_inlined_2_inlined_3;
+  t2_inlined_2_inlined_3: int = id tmp_inlined_0_inlined_2_inlined_3;
+  jmp .inline_ret_ack_0_inlined_2_inlined_3;
+.m_nonzero_inlined_0_inlined_2_inlined_3:
+  cond_n_inlined_0_inlined_2_inlined_3: bool = eq n_inlined_0_inlined_2_inlined_3 zero_inlined_0_inlined_2_inlined_3;
+  br cond_n_inlined_0_inlined_2_inlined_3 .n_zero_inlined_0_inlined_2_inlined_3 .n_nonzero_inlined_0_inlined_2_inlined_3;
+.n_zero_inlined_0_inlined_2_inlined_3:
+  m1_inlined_0_inlined_2_inlined_3: int = sub m_inlined_0_inlined_2_inlined_3 one_inlined_0_inlined_2_inlined_3;
+  tmp_inlined_0_inlined_2_inlined_3: int = call @ack m1_inlined_0_inlined_2_inlined_3 one_inlined_0_inlined_2_inlined_3;
+  t2_inlined_2_inlined_3: int = id tmp_inlined_0_inlined_2_inlined_3;
+  jmp .inline_ret_ack_0_inlined_2_inlined_3;
+.n_nonzero_inlined_0_inlined_2_inlined_3:
+  m1_inlined_0_inlined_2_inlined_3: int = sub m_inlined_0_inlined_2_inlined_3 one_inlined_0_inlined_2_inlined_3;
+  n1_inlined_0_inlined_2_inlined_3: int = sub n_inlined_0_inlined_2_inlined_3 one_inlined_0_inlined_2_inlined_3;
+  t1_inlined_0_inlined_2_inlined_3: int = call @ack m_inlined_0_inlined_2_inlined_3 n1_inlined_0_inlined_2_inlined_3;
+  t2_inlined_0_inlined_2_inlined_3: int = call @ack m1_inlined_0_inlined_2_inlined_3 t1_inlined_0_inlined_2_inlined_3;
+.inline_ret_ack_0_inlined_2_inlined_3:
+  tmp_inlined_3: int = id t2_inlined_2_inlined_3;
+  jmp .inline_ret_ack_2_inlined_3;
+.prelog_ack_1_inlined_2_inlined_3:
+  m_inlined_1_inlined_2_inlined_3: int = id m_inlined_2_inlined_3;
+  n_inlined_1_inlined_2_inlined_3: int = id n1_inlined_2_inlined_3;
+.ack_inlined_1_inlined_2_inlined_3:
+  zero_inlined_1_inlined_2_inlined_3: int = const 0;
+  one_inlined_1_inlined_2_inlined_3: int = const 1;
+  cond_m_inlined_1_inlined_2_inlined_3: bool = eq m_inlined_1_inlined_2_inlined_3 zero_inlined_1_inlined_2_inlined_3;
+  br cond_m_inlined_1_inlined_2_inlined_3 .m_zero_inlined_1_inlined_2_inlined_3 .m_nonzero_inlined_1_inlined_2_inlined_3;
+.m_zero_inlined_1_inlined_2_inlined_3:
+  tmp_inlined_1_inlined_2_inlined_3: int = add n_inlined_1_inlined_2_inlined_3 one_inlined_1_inlined_2_inlined_3;
+  t1_inlined_2_inlined_3: int = id tmp_inlined_1_inlined_2_inlined_3;
+  jmp .inline_ret_ack_1_inlined_2_inlined_3;
+.m_nonzero_inlined_1_inlined_2_inlined_3:
+  cond_n_inlined_1_inlined_2_inlined_3: bool = eq n_inlined_1_inlined_2_inlined_3 zero_inlined_1_inlined_2_inlined_3;
+  br cond_n_inlined_1_inlined_2_inlined_3 .n_zero_inlined_1_inlined_2_inlined_3 .n_nonzero_inlined_1_inlined_2_inlined_3;
+.n_zero_inlined_1_inlined_2_inlined_3:
+  m1_inlined_1_inlined_2_inlined_3: int = sub m_inlined_1_inlined_2_inlined_3 one_inlined_1_inlined_2_inlined_3;
+  tmp_inlined_1_inlined_2_inlined_3: int = call @ack m1_inlined_1_inlined_2_inlined_3 one_inlined_1_inlined_2_inlined_3;
+  t1_inlined_2_inlined_3: int = id tmp_inlined_1_inlined_2_inlined_3;
+  jmp .inline_ret_ack_1_inlined_2_inlined_3;
+.n_nonzero_inlined_1_inlined_2_inlined_3:
+  m1_inlined_1_inlined_2_inlined_3: int = sub m_inlined_1_inlined_2_inlined_3 one_inlined_1_inlined_2_inlined_3;
+  n1_inlined_1_inlined_2_inlined_3: int = sub n_inlined_1_inlined_2_inlined_3 one_inlined_1_inlined_2_inlined_3;
+  t1_inlined_1_inlined_2_inlined_3: int = call @ack m_inlined_1_inlined_2_inlined_3 n1_inlined_1_inlined_2_inlined_3;
+.prelog_ack_0_inlined_1_inlined_2_inlined_3:
+  m_inlined_0_inlined_1_inlined_2_inlined_3: int = id m1_inlined_1_inlined_2_inlined_3;
+  n_inlined_0_inlined_1_inlined_2_inlined_3: int = id t1_inlined_1_inlined_2_inlined_3;
+.ack_inlined_0_inlined_1_inlined_2_inlined_3:
+  zero_inlined_0_inlined_1_inlined_2_inlined_3: int = const 0;
+  one_inlined_0_inlined_1_inlined_2_inlined_3: int = const 1;
+  cond_m_inlined_0_inlined_1_inlined_2_inlined_3: bool = eq m_inlined_0_inlined_1_inlined_2_inlined_3 zero_inlined_0_inlined_1_inlined_2_inlined_3;
+  br cond_m_inlined_0_inlined_1_inlined_2_inlined_3 .m_zero_inlined_0_inlined_1_inlined_2_inlined_3 .m_nonzero_inlined_0_inlined_1_inlined_2_inlined_3;
+.m_zero_inlined_0_inlined_1_inlined_2_inlined_3:
+  tmp_inlined_0_inlined_1_inlined_2_inlined_3: int = add n_inlined_0_inlined_1_inlined_2_inlined_3 one_inlined_0_inlined_1_inlined_2_inlined_3;
+  t2_inlined_1_inlined_2_inlined_3: int = id tmp_inlined_0_inlined_1_inlined_2_inlined_3;
+  jmp .inline_ret_ack_0_inlined_1_inlined_2_inlined_3;
+.m_nonzero_inlined_0_inlined_1_inlined_2_inlined_3:
+  cond_n_inlined_0_inlined_1_inlined_2_inlined_3: bool = eq n_inlined_0_inlined_1_inlined_2_inlined_3 zero_inlined_0_inlined_1_inlined_2_inlined_3;
+  br cond_n_inlined_0_inlined_1_inlined_2_inlined_3 .n_zero_inlined_0_inlined_1_inlined_2_inlined_3 .n_nonzero_inlined_0_inlined_1_inlined_2_inlined_3;
+.n_zero_inlined_0_inlined_1_inlined_2_inlined_3:
+  m1_inlined_0_inlined_1_inlined_2_inlined_3: int = sub m_inlined_0_inlined_1_inlined_2_inlined_3 one_inlined_0_inlined_1_inlined_2_inlined_3;
+  tmp_inlined_0_inlined_1_inlined_2_inlined_3: int = call @ack m1_inlined_0_inlined_1_inlined_2_inlined_3 one_inlined_0_inlined_1_inlined_2_inlined_3;
+  t2_inlined_1_inlined_2_inlined_3: int = id tmp_inlined_0_inlined_1_inlined_2_inlined_3;
+  jmp .inline_ret_ack_0_inlined_1_inlined_2_inlined_3;
+.n_nonzero_inlined_0_inlined_1_inlined_2_inlined_3:
+  m1_inlined_0_inlined_1_inlined_2_inlined_3: int = sub m_inlined_0_inlined_1_inlined_2_inlined_3 one_inlined_0_inlined_1_inlined_2_inlined_3;
+  n1_inlined_0_inlined_1_inlined_2_inlined_3: int = sub n_inlined_0_inlined_1_inlined_2_inlined_3 one_inlined_0_inlined_1_inlined_2_inlined_3;
+  t1_inlined_0_inlined_1_inlined_2_inlined_3: int = call @ack m_inlined_0_inlined_1_inlined_2_inlined_3 n1_inlined_0_inlined_1_inlined_2_inlined_3;
+  t2_inlined_0_inlined_1_inlined_2_inlined_3: int = call @ack m1_inlined_0_inlined_1_inlined_2_inlined_3 t1_inlined_0_inlined_1_inlined_2_inlined_3;
+.inline_ret_ack_0_inlined_1_inlined_2_inlined_3:
+  t1_inlined_2_inlined_3: int = id t2_inlined_1_inlined_2_inlined_3;
+  jmp .inline_ret_ack_1_inlined_2_inlined_3;
+.inline_ret_ack_1_inlined_2_inlined_3:
+  jmp .prelog_ack_0_inlined_2_inlined_3;
+.inline_ret_ack_2_inlined_3:
+  tmp: int = id tmp_inlined_3;
+  jmp .inline_ret_ack_3;
+.inline_ret_ack_3:
+  print tmp;
+  ret;
+}

@@ -306,6 +306,7 @@
   ans_inlined_1_inlined_2: int = const 0;
   to_add_inlined_1_inlined_2: int = const 1;
 .loop_inlined_1_inlined_2:
+  print i_inlined_1_inlined_2;
   cond_inlined_1_inlined_2: bool = le i_inlined_1_inlined_2 n_inlined_1_inlined_2;
   br cond_inlined_1_inlined_2 .here_inlined_1_inlined_2 .end_inlined_1_inlined_2;
 .here_inlined_1_inlined_2:
