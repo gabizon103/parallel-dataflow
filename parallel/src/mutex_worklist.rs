@@ -1,12 +1,10 @@
 use itertools::Itertools;
-use lesson2::ControlFlow;
-use lesson4::framework::{AnalysisFramework, DataFlowAnalysis, Direction};
+use lesson4::framework::{AnalysisFramework, DataFlowAnalysis};
 use std::{
     collections::{HashMap, VecDeque},
     fmt::Debug,
-    hash::Hash,
-    ops::Deref,
-    sync::{Arc, Mutex, RwLock, RwLockReadGuard},
+    ops::{Deref, DerefMut},
+    sync::{Arc, Mutex, RwLock, RwLockReadGuard, RwLockWriteGuard},
     thread::{self, JoinHandle},
 };
 
@@ -14,20 +12,24 @@ const NUM_WORKERS: u8 = 5;
 
 /// Trait required to extend functionality of externally-defined AnalysisFramework struct.
 /// Generic type `T` is meant to represent the elements of the lattice.
-pub trait MutexFixpoint<T>
+pub trait MutexFixpoint<'b, 'c, T>
 where
-    T: Default + Clone + PartialEq + Debug + Send + Sync + 'static,
+    T: Default + Clone + PartialEq + Debug + Send + Sync,
 {
-    fn worklist(&mut self, analysis: &impl DataFlowAnalysis<T>) -> ();
+    fn worklist(&'b mut self, analysis: impl (DataFlowAnalysis<T>) + Send + Sync + 'c) -> ();
 }
 
-impl<T> MutexFixpoint<T> for AnalysisFramework<T>
+impl<'b, 'c, T> MutexFixpoint<'b, 'c, T> for AnalysisFramework<T>
 where
-    T: Default + Clone + PartialEq + Debug + Send + Sync + 'static,
+    T: Default + Clone + PartialEq + Debug + Send + Sync + 'c,
+    'c: 'static,
 {
-    fn worklist(&mut self, analysis: &impl DataFlowAnalysis<T>) {
+    fn worklist(&'b mut self, analysis: impl (DataFlowAnalysis<T>) + Send + Sync + 'c) {
         // define vec to force completion of threads later
         let mut handles: Vec<JoinHandle<()>> = vec![];
+
+        // use access to functions in `analysis`
+        let shareable_analysis = Arc::new(analysis);
 
         // read access for successors and predecessors of each block
         let block_ids = self.cfg.lbl_to_block.values().collect_vec();
@@ -56,15 +58,16 @@ where
             .collect_tuple()
             .unwrap();
 
-        // init threads; each thread in charge of computing in[b] and out[b] for
-        // one b in worklist
+        // init threads
         for _ in 0..NUM_WORKERS {
-            let (worklist, succs, preds, ins, outs) = (
+            // pass an atomic reference of each object to each thread
+            let (worklist, succs, preds, ins, outs, analysis) = (
                 Arc::clone(&shareable_worklist),
                 Arc::clone(&shareable_succs),
                 Arc::clone(&shareable_preds),
                 Arc::clone(&shareable_ins),
                 Arc::clone(&shareable_outs),
+                Arc::clone(&shareable_analysis),
             );
             let handle = thread::spawn(move || {
                 let worklist_lock = worklist.lock().unwrap();
@@ -75,8 +78,8 @@ where
                         let block = *block_ref;
                         drop(worklist_lock);
 
-                        // acquire read lock on out[p] for all p
-                        let read_guards: Vec<RwLockReadGuard<T>> = match preds.get(&block) {
+                        // // acquire read lock on out[p] for all p
+                        let out_read_guards: Vec<RwLockReadGuard<T>> = match preds.get(&block) {
                             None => vec![],
                             Some(p) => p.iter().map(|v| *v).collect(),
                         }
@@ -84,14 +87,11 @@ where
                         .map(|pred: usize| {
                             let read_guard = outs[pred].read().unwrap();
                             read_guard
-                            // let drf = RwLockReadGuard::deref(&pred_out);
-                            // let pred_out = read_guard.clone();
-                            // (read_guard, pred_out)
                         })
                         .collect();
 
                         // get ownership over these by cloning
-                        let incoming_values = read_guards
+                        let incoming_values = out_read_guards
                             .iter()
                             .map(|guard| {
                                 let guard_deref = RwLockReadGuard::deref(guard);
@@ -99,10 +99,22 @@ where
                             })
                             .collect_vec();
 
+                        // read access to in[b]
+                        let in_b_read_guard = ins[block].read().unwrap();
+                        let in_b = RwLockReadGuard::deref(&in_b_read_guard);
+
                         // merge
+                        let merge_output = analysis.merge(in_b, incoming_values);
+                        drop(in_b_read_guard);
+
+                        // write access to in[b]
+                        let mut in_b_write_guard = ins[block].write().unwrap();
+                        let in_b = RwLockWriteGuard::deref_mut(&mut in_b_write_guard);
+                        *in_b = merge_output;
+                        drop(in_b_write_guard);
 
                         // drop read access of each out[p] after finished merging
-                        read_guards.into_iter().for_each(drop);
+                        out_read_guards.into_iter().for_each(drop);
 
                         ()
                     }
