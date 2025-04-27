@@ -7,3 +7,8 @@ edition = "2024"
 itertools = "0.14.0"
 lesson2 = { git = "https://github.com/gabizon103/cs6120.git" }
 lesson4 = { git = "https://github.com/gabizon103/cs6120.git" }
+utils = { git = "https://github.com/gabizon103/cs6120" }
+env_logger = "0.11.8"
+log = "0.4.27"
+argh = "0.1.13"
+struct-variant = "1.0.2"
