@@ -14,6 +14,9 @@ pub struct Args {
     /// the pass to run
     #[argh(option, short = 'p')]
     pass: Pass,
+    /// flag to output raw perf data
+    #[argh(switch, short = 'r')]
+    raw: bool,
 }
 
 fn main() {
@@ -28,9 +31,15 @@ fn main() {
 
     let result = args.pass.execute(&args.algorithm, std::io::stdin().lock());
 
-    println!("{}", result.result);
+    if (args.raw) {
+        println!("{}", result.loadtime.as_nanos());
+        println!("{}", result.runtime.as_nanos());
+        println!("{}", result.writetime.as_nanos());
+    } else {
+        println!("{}", result.result);
 
-    println!("Load time: {:?}", result.loadtime);
-    println!("Runtime: {:?}", result.runtime);
-    println!("Write time: {:?}", result.writetime);
+        println!("Load time: {:?}", result.loadtime);
+        println!("Runtime: {:?}", result.runtime);
+        println!("Write time: {:?}", result.writetime);
+    }
 }
