@@ -1,9 +1,10 @@
 use crate::{ParallelExecutor, SequentialExecutor};
 use passes::ReachingDefs;
+use serde::Serialize;
 use strum::{Display, EnumIter, EnumString};
 use utils::{DataflowExecutor, DataflowResults};
 
-#[derive(EnumString, EnumIter, Display)]
+#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy)]
 pub enum Executor {
     /// Basic sequential worklist algorithm
     #[strum(serialize = "s", serialize = "sequential")]
@@ -13,7 +14,7 @@ pub enum Executor {
     Parallel,
 }
 
-#[derive(EnumString, EnumIter, Display)]
+#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy)]
 pub enum Pass {
     /// Reaching definitions
     #[strum(

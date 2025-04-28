@@ -13,3 +13,5 @@ simple_logger.workspace = true
 log.workspace = true
 rayon.workspace = true
 strum.workspace = true
+csv.workspace = true
+serde.workspace = true
