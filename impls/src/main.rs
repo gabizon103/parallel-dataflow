@@ -64,6 +64,16 @@ macro_rules! run {
     };
 }
 
+fn fmt_duration(duration: std::time::Duration) -> String {
+    if duration.as_millis() > 100 {
+        format!("{}ms", duration.as_millis())
+    } else if duration.as_micros() > 100 {
+        format!("{}us", duration.as_micros())
+    } else {
+        format!("{}ns", duration.as_nanos())
+    }
+}
+
 fn main() {
     let args: Args = argh::from_env();
 
@@ -78,5 +88,9 @@ fn main() {
         Pass::ReachingDefinitions => run!(args.algorithm, ReachingDefs),
     };
 
-    println!("{}", result)
+    println!("{}", result.result);
+
+    println!("Load time: {}", fmt_duration(result.loadtime));
+    println!("Runtime: {}", fmt_duration(result.runtime));
+    println!("Write time: {}", fmt_duration(result.writetime));
 }
