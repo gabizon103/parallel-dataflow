@@ -58,9 +58,9 @@ fn main() {
                 entry.path().display(),
             );
             let input = std::fs::File::open(entry.path()).unwrap();
-            for pass in Pass::iter() {
-                for executor in Executor::iter() {
-                    for iter in 0..args.iterations {
+            for iter in 0..args.iterations {
+                for pass in Pass::iter() {
+                    for executor in Executor::iter() {
                         let result = pass.execute(&executor, input.try_clone().unwrap());
 
                         wtr.serialize(Record {
