@@ -1,5 +1,5 @@
 [workspace]
-members = ["sequential", "parallel", "utils", "passes"]
+members = ["sequential", "utils", "passes"]
 resolver = "2"
 
 [workspace.dependencies]

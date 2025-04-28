@@ -2,10 +2,16 @@ use bril_utils::{BBFunction, BasicBlock, InstrExt};
 use std::{collections::HashSet, fmt::Debug, hash::Hash};
 use utils::DataflowSpec;
 
-#[derive(Clone, Debug, Eq, Hash, PartialEq, PartialOrd)]
+#[derive(Clone, Eq, Hash, PartialEq, PartialOrd)]
 pub struct ReachingDefinition {
     name: String,
     block: usize,
+}
+
+impl Debug for ReachingDefinition {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} @ {}", self.name, self.block)
+    }
 }
 
 #[derive(Default)]
