@@ -67,9 +67,9 @@ fn main() {
                 args.iterations,
                 entry.path().display(),
             );
-            for iter in 0..args.iterations {
-                for pass in Pass::iter() {
-                    for executor in Executor::iter() {
+            for pass in Pass::iter() {
+                for executor in Executor::iter() {
+                    for iter in 0..args.iterations {
                         // Dispatch a new process for each pass and executor to avoid cache
                         // pollution. The process is located in /target/release/main
 
