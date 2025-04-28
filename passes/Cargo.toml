@@ -1,10 +1,8 @@
 [package]
-name = "sequential"
+name = "passes"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 bril-utils.workspace = true
 utils.workspace = true
-itertools.workspace = true
-passes.workspace = true

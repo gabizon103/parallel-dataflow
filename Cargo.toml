@@ -1,5 +1,5 @@
 [workspace]
-members = ["sequential", "parallel", "utils"]
+members = ["sequential", "parallel", "utils", "passes"]
 resolver = "2"
 
 [workspace.dependencies]
@@ -7,3 +7,4 @@ bril-utils = { git = "https://github.com/UnsignedByte/6120", package = "utils" }
 argh = "0.1.13"
 itertools = "0.14.0"
 utils = { version = "0.1.0", path = "utils" }
+passes = { version = "0.1.0", path = "passes" }

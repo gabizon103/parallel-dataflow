@@ -6,6 +6,11 @@ pub trait DataflowSpec<Val>
 where
     Val: Eq + Clone + Debug,
 {
+    /// Whether this dataflow pass is reversed
+    fn reversed(&self) -> bool {
+        false
+    }
+
     /// Initial values generated from arguments
     fn entry(&self, func: &BBFunction) -> Val {
         self.init(func)

@@ -12,6 +12,12 @@ where
     Pass: DataflowSpec<Val>,
 {
     fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Val> {
+        let cfg = if cfg.reversed() != pass.reversed() {
+            cfg.reverse()
+        } else {
+            cfg
+        };
+
         let n = cfg.len();
 
         let mut in_vals = vec![pass.init(cfg.func()); n];
