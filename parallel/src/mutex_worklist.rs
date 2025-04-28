@@ -2,14 +2,14 @@ use itertools::Itertools;
 use lesson2::BasicBlock;
 use lesson4::framework::{AnalysisFramework, DataFlowAnalysis};
 use std::{
-    collections::{HashMap, HashSet},
+    collections::{HashMap, VecDeque},
     fmt::Debug,
     ops::{Deref, DerefMut},
     sync::{Arc, Mutex, MutexGuard, RwLock, RwLockReadGuard, RwLockWriteGuard},
     thread::{self},
 };
 
-const NUM_WORKERS: u8 = 1;
+const NUM_WORKERS: u8 = 2;
 
 /// Trait required to extend functionality of externally-defined AnalysisFramework struct.
 /// Generic type `T` is meant to represent the elements of the lattice. In addition
@@ -46,8 +46,8 @@ where
         let shareable_preds = Arc::new(preds_map);
 
         // shared memory of worklist
-        let shareable_worklist: Arc<Mutex<HashSet<usize>>> =
-            Arc::new(Mutex::new(HashSet::from_iter(self.worklist.drain(..))));
+        let shareable_worklist: Arc<Mutex<VecDeque<usize>>> =
+            Arc::new(Mutex::new(VecDeque::from_iter(self.worklist.drain(..))));
 
         // shared memory of `in` and `out` arrays
         let (shareable_ins, shareable_outs) = vec![self.ins.drain(..), self.outs.drain(..)]
@@ -61,7 +61,7 @@ where
 
         // init threads
         thread::scope(|spawner| {
-            for _ in 0..NUM_WORKERS {
+            for i in 0..NUM_WORKERS {
                 // pass a reference of each object to each thread
                 let (worklist, succs, preds, ins, outs, analysis, blocks) = (
                     Arc::clone(&shareable_worklist),
@@ -75,22 +75,18 @@ where
                 spawner.spawn(move || {
                     loop {
                         // acquire lock to pop block off of worklist queue
-                        let mut worklist_lock: MutexGuard<HashSet<usize>> =
+                        let mut worklist_lock: MutexGuard<VecDeque<usize>> =
                             worklist.lock().unwrap();
 
                         // now, we have a lock
-                        match worklist_lock.iter().next() {
+                        match worklist_lock.pop_front() {
                             None => {
                                 drop(worklist_lock);
                                 break;
                             }
-                            Some(block_ref) => {
-                                worklist_lock.iter().for_each(|v| println!("{}", v));
-                                println!();
+                            Some(block) => {
                                 // release lock on worklist queue
-                                let block = *block_ref;
-                                worklist_lock.remove(&block);
-                                drop(worklist_lock);
+                                // drop(worklist_lock);
 
                                 // acquire read lock on out[p] for all p
                                 let out_read_guards: Vec<RwLockReadGuard<T>> =
@@ -143,8 +139,14 @@ where
                                 let new_out =
                                     analysis.transfer(in_b, blocks.get(block).unwrap(), block);
 
+                                drop(in_b_read_guard);
+
                                 // compare results
                                 if !(out_b_write_guard.deref().eq(&new_out)) {
+                                    // write successors to worklist
+                                    // let mut worklist_lock: MutexGuard<VecDeque<usize>> =
+                                    //     worklist.lock().unwrap();
+
                                     // write to out[b]
                                     let out_b = out_b_write_guard.deref_mut();
                                     *out_b = new_out;
@@ -154,11 +156,10 @@ where
                                         Some(p) => p.iter().map(|v| *v).collect(),
                                     };
 
-                                    // write successors to worklist
-                                    let mut worklist_lock: MutexGuard<HashSet<usize>> =
-                                        worklist.lock().unwrap();
                                     worklist_lock.extend(block_succs);
                                 }
+                                drop(worklist_lock);
+                                drop(out_b_write_guard);
                             }
                         }
                     }
