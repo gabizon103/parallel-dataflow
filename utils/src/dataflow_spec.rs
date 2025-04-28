@@ -1,10 +1,9 @@
 use bril_utils::{BBFunction, BasicBlock};
-use std::fmt::Debug;
 
 /// Specifies a dataflow pass to be executed by a DataflowExecutor
 pub trait DataflowSpec<Val>
 where
-    Val: Eq + Clone + Debug,
+    Val: Eq + Clone,
 {
     /// Whether this dataflow pass is reversed
     fn reversed(&self) -> bool {

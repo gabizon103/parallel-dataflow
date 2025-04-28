@@ -1,5 +1,5 @@
 use bril_utils::{BBFunction, BasicBlock, InstrExt};
-use std::collections::HashSet;
+use std::{collections::HashSet, fmt::Debug, hash::Hash};
 use utils::DataflowSpec;
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq, PartialOrd)]

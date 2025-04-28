@@ -973,8 +973,11 @@ checksum = "56e6fa9c48d24d85fb3de5ad847117517440f6beceb7798af16b4a87d616b8d0"
 name = "sequential"
 version = "0.1.0"
 dependencies = [
+ "argh",
  "itertools",
+ "log",
  "passes",
+ "simple_logger",
  "utils 0.0.1",
  "utils 0.1.0",
 ]
@@ -1181,7 +1184,7 @@ checksum = "5a5f39404a5da50712a4c1eecf25e90dd62b613502b7e925fd4e4d19b5c96512"
 [[package]]
 name = "utils"
 version = "0.0.1"
-source = "git+https://github.com/UnsignedByte/6120#99fc560f1d51af9bc9fd22b85cb94bb6320d2987"
+source = "git+https://github.com/UnsignedByte/6120#7a5f18cf83167ad425690a0dd52b21655f8863dd"
 dependencies = [
  "argh",
  "bril-rs",

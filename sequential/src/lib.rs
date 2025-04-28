@@ -1,3 +1,5 @@
-mod executor;
+mod parallel;
+mod sequential;
 
-pub use executor::SequentialExecutor;
+pub use parallel::ParallelExecutor;
+pub use sequential::SequentialExecutor;
