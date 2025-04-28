@@ -18,8 +18,8 @@ impl FromStr for Executor {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
-            "sequential" => Ok(Executor::Sequential),
-            "parallel" => Ok(Executor::Parallel),
+            "sequential" | "s" => Ok(Executor::Sequential),
+            "parallel" | "p" => Ok(Executor::Parallel),
             _ => Err(format!("Unknown executor: {}", s)),
         }
     }
