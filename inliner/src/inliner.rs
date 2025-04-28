@@ -4,7 +4,9 @@ use std::{
 };
 
 use bril_rs::{EffectOps, Instruction};
+use itertools::Itertools;
 use lesson2::{BasicBlock, CFGProgram, ControlFlow};
+use multiset::HashMultiSet;
 use utils::cfg::{get_dest, get_uses, is_call, is_ret, set_dest};
 
 #[derive(Clone, Eq, PartialEq, Hash, Debug, Copy)]
@@ -28,6 +30,9 @@ pub struct Inliner<'a> {
     program: &'a mut CFGProgram,
     iter: u32,
     paths: HashSet<Vec<InstrLoc>>,
+    // map calls to maps of var renamings
+    rename_map: HashMap<InstrLoc, HashMap<String, String>>,
+    new_program: CFGProgram,
 }
 
 impl<'a> Inliner<'a> {
@@ -36,11 +41,14 @@ impl<'a> Inliner<'a> {
             program,
             iter: 0,
             paths: HashSet::new(),
+            rename_map: HashMap::new(),
+            new_program: CFGProgram { functions: Vec::new() },
         }
     }
 
     pub fn is_call(&self, instr: &InstrLoc) -> bool {
-        let instr = &self.program.functions[instr.cfg_id].blocks[instr.blk_id].instrs[instr.instr_id];
+        let instr =
+            &self.program.functions[instr.cfg_id].blocks[instr.blk_id].instrs[instr.instr_id];
         is_call(instr)
     }
 
@@ -76,7 +84,7 @@ impl<'a> Inliner<'a> {
     }
 
     // gets the name of the function being called by `caller`
-    pub fn get_callee_name(&self, caller: InstrLoc) -> Result<String, Error> {
+    pub fn get_callee_name(&self, caller: &InstrLoc) -> Result<String, Error> {
         let call_blk = &self.program.functions[caller.cfg_id].blocks[caller.blk_id];
 
         let call_instr = &call_blk.instrs[caller.instr_id];
@@ -109,48 +117,74 @@ impl<'a> Inliner<'a> {
         self.program.functions[cfg_id].name.clone()
     }
 
+    fn set_contains_name(&self, set: &HashMultiSet<InstrLoc>, caller: &InstrLoc) -> usize {
+        let caller_func_name = &self.program.functions[caller.cfg_id].name;
+        let set_named: HashMultiSet<String> = set
+            .iter()
+            .map(|set_loc| {
+                let name = &self.program.functions[set_loc.cfg_id].name;
+                name.clone()
+            })
+            .collect();
+        let count = set_named.count_of(caller_func_name);
+        count
+    }
+
+    fn named_path(&self, path: &Vec<InstrLoc>) -> Vec<String> {
+        path.iter().map(|instrloc| {
+            self.program.functions[instrloc.cfg_id].name.clone()
+        }).collect()
+    }
+
     // traverses from a call to a leaf function and accumulates the path
+    // a dfs where the nodes are callers
     pub fn traverse_call_path(
         &mut self,
-        caller: InstrLoc,
+        caller: &InstrLoc,
         cur_path: &mut Vec<InstrLoc>,
-        visited: &mut HashSet<InstrLoc>,
+        visited: &mut HashMultiSet<InstrLoc>,
     ) {
         let callee_name = self.get_callee_name(caller).expect("oops");
         let callee_cfg_idx = self.find_cfg(&callee_name).expect("oops");
         let callee_cfg = &self.program.functions[callee_cfg_idx];
 
-        visited.insert(caller);
-        // println!("visited: {:#?}", visited);
-        cur_path.push(caller);
+        // set of visited calls
+        visited.insert(*caller);
 
-        // check if the last three calls are all recursive
-        let last_idx = cur_path.len() - 1;
-        let threshold = if last_idx >= 2 {
-            last_idx - 2
-        } else {
-            usize::MAX
-        };
-        let is_recursive: bool = cur_path
-            .iter()
-            .enumerate()
-            .filter(|(idx, _)| *idx >= last_idx)
-            .map(|(_, instrloc)| {
-                let caller_src = self.get_caller_src(caller);
-                // println!("caller_src: {caller_src}");
-                let callee_name = self.get_callee_name(*instrloc).expect("expected a call");
-                // println!("callee_name: {callee_name}");
-                caller_src == callee_name
-            })
-            .fold(true, |acc, b| acc && b);
+        // let last_idx = cur_path.len() - 1;
+        // let is_recursive: bool = cur_path
+        //     .iter()
+        //     .enumerate()
+        //     .filter(|(idx, _)| *idx >= last_idx)
+        //     .map(|(_, instrloc)| {
+        //         let caller_src = self.get_caller_src(*caller);
+        //         let callee_name = self.get_callee_name(instrloc).expect("expected a call");
+        //         caller_src == callee_name
+        //     })
+        //     .fold(true, |acc, b| acc && b);
 
-        let calls_from_here = Self::get_calls(callee_cfg, callee_cfg_idx);
-        if calls_from_here.is_empty() || is_recursive {
+        let is_recursive = self.get_caller_src(*caller) == self.get_callee_name(caller).expect("");
+        let caller_src = self.get_caller_src(*caller);
+        let callee_name = self.get_callee_name(caller).expect("");
+
+        let calls_from_callee = Self::get_calls(callee_cfg, callee_cfg_idx);
+        let calls_filtered: Vec<&InstrLoc> = calls_from_callee.iter().filter(|call| {
+            self.set_contains_name(visited, call) <= 2
+        }).collect();
+        let all_calls_exceed = calls_from_callee.iter().map(|call| {
+            self.set_contains_name(visited, call) > 2
+        }).fold(true, |acc, b| acc && b);
+
+        // println!("calls_filtered: {:#?}", calls_filtered);
+        if calls_filtered.is_empty() {
             self.paths.insert(cur_path.to_vec());
         } else {
-            calls_from_here.iter().for_each(|instrloc| {
-                if !visited.contains(instrloc) {
-                    self.traverse_call_path(instrloc.clone(), cur_path, visited);
+            cur_path.push(*caller);
+
+            calls_from_callee.iter().for_each(|instrloc| {
+                // if recursive call, check that depth isnt exceeded
+                if self.set_contains_name(visited, instrloc) <= 2 {
+                    self.traverse_call_path(&instrloc, cur_path, visited);
                 }
             });
         };
@@ -160,14 +194,64 @@ impl<'a> Inliner<'a> {
         let main_idx = self.find_cfg(&"main".to_string())?;
         // println!("main_idx: {main_idx}");
         let main = &self.program.functions[main_idx].clone();
-        let mut calls: VecDeque<InstrLoc> = Self::get_calls(main, main_idx).into();
+
+        let calls: VecDeque<InstrLoc> = Self::get_calls(main, main_idx).into();
+        // let mut cur_path = vec![];
+        // let visited = &mut HashMultiSet::new();
+
+        // no calls in main
+        if calls.is_empty() {
+            return Ok(());
+        }
+
+        calls.iter().for_each(|call| {
+            let mut cur_path = vec![];
+            let visited = &mut HashMultiSet::new();
+            self.traverse_call_path(call, &mut cur_path, visited);
+        });
+
+        // println!("{:#?}", self.paths);
+
+        let init_paths = self.paths.clone();
+        let mut paths_as_vec: Vec<Vec<InstrLoc>> = self.paths.clone().into_iter().collect();
+        
+        let named_paths: Vec<Vec<String>> = paths_as_vec.iter().map(|path| {
+            self.named_path(path)
+        }).collect();
+        println!("{:#?}", named_paths);
+        
+        while !paths_as_vec.is_empty() {
+            let mut this_path = paths_as_vec.pop().unwrap();
+            let this_path_named: Vec<String> = self.named_path(&this_path);
+
+            this_path.iter().rev().for_each(|caller| {
+                let _ = self.inline_call(caller);
+            });
+            // println!("inlined path {:#?}", this_path_named);
+
+            // did inlining, now need to reconstruct call graph thingy
+            let main = &self.program.functions[main_idx];
+            let calls = Self::get_calls(main, main_idx);
+            calls.iter().for_each(|call| {
+                self.paths = HashSet::new();
+                let mut cur_path = vec![];
+                let visited = &mut HashMultiSet::new();
+                self.traverse_call_path(call, &mut cur_path, visited);
+            });
+            paths_as_vec = self.paths.clone().into_iter().filter(|path| {
+                let named = self.named_path(path);
+                named != this_path_named && init_paths.contains(path)
+            }).collect();
+            // println!("{}", paths_as_vec.len())
+        }
 
         // while !calls.is_empty() {
         //     // println!("entering while: {:#?}", calls);
         //     let this_call = calls.pop_front().unwrap();
         //     let mut cur_path = vec![];
         //     let visited = &mut HashSet::new();
-        //     self.traverse_call_path(this_call.clone(), &mut cur_path, visited);
+        //     self.traverse_call_path(&this_call, &mut cur_path, visited);
+        //     println!("paths: {:#?}", self.paths);
         //     let all_paths = self.paths.clone();
         //     // println!("got all paths: {:#?}", all_paths);
         //     all_paths.iter().for_each(|path| {
@@ -175,7 +259,7 @@ impl<'a> Inliner<'a> {
         //         rev_path.iter().for_each(|caller| {
         //             // println!("inlining {:#?}", caller);
         //             let _ = self.inline_call(caller);
-        //             println!("finished");
+        //             // println!("finished");
         //         });
         //     });
         //     let main = &self.program.functions[main_idx].clone();
@@ -200,24 +284,32 @@ impl<'a> Inliner<'a> {
         //     });
         // });
 
-        let mut funcs = self.program.functions.clone();
-        for i in 0..2 {
-            // println!("outer loop iter {i}");
-            funcs.iter().enumerate().for_each(|(func_id, func)| {
-                let calls = Self::get_calls(func, func_id);
-                calls.iter().rev().for_each(|caller| {
-                    if self.is_call(caller) {
-                        // println!("inlining {:#?}", caller);
-                        let _ = self.inline_call(caller);
-                    }
-                });
-            });
-            funcs = self.program.functions.clone();
-        }
-
-
+        // let mut funcs = self.program.functions.clone();
+        // for i in 0..1 {
+        //     // println!("outer loop iter {i}");
+        //     funcs.iter().enumerate().for_each(|(func_id, func)| {
+        //         let calls = Self::get_calls(func, func_id);
+        //         calls.iter().rev().for_each(|caller| {
+        //             if self.is_call(caller) {
+        //                 // println!("inlining {:#?}", caller);
+        //                 let instr = &funcs[caller.cfg_id].blocks[caller.blk_id].instrs[caller.instr_id];
+        //                 println!("inlining call {instr} in {}", &funcs[caller.cfg_id].name);
+        //                 let _ = self.inline_call(caller);
+        //             }
+        //         });
+        //     });
+        //     funcs = self.program.functions.clone();
+        // }
 
         Ok(())
+    }
+
+    fn is_jump(instr: &Instruction) -> bool {
+        match instr {
+            Instruction::Constant { .. } => false,
+            Instruction::Value { .. } => false,
+            Instruction::Effect { op, .. } => matches!(op, EffectOps::Jump),
+        }
     }
 
     pub fn inline_call(&mut self, caller: &InstrLoc) -> Result<(), Error> {
@@ -226,9 +318,51 @@ impl<'a> Inliner<'a> {
         // 2. add all the blocks to the caller
         // 3. add assignments to args
         // 4. add a jmp to the first block
+        // println!("call is in {}", self.program.functions[caller.cfg_id].name);
+
+        // need to make ret blk jmp back to rest of program
+        // first find the successor of the block the call is in, create a jmp the succ
+        let caller_cfg = &self.program.functions[caller.cfg_id];
+        let caller_cfg_name = caller_cfg.name.clone();
+
+        let last_instr_call_blk = caller_cfg.blocks[caller.blk_id].instrs.last().unwrap();
+        let succ = if Self::is_jump(last_instr_call_blk) {
+            last_instr_call_blk.clone()
+        } else {
+            Instruction::Effect {
+                args: vec![],
+                funcs: vec![],
+                labels: vec![],
+                op: EffectOps::Return,
+                pos: None,
+            }
+        };
+
+        // let succ = match &caller_cfg.edges[caller.blk_id] {
+        //     lesson2::Edge::Uncond(targ) => {
+        //         let targ_blk_name = &caller_cfg.blocks[*targ].name;
+        //         Instruction::Effect {
+        //             args: vec![],
+        //             funcs: vec![],
+        //             labels: vec![targ_blk_name.clone()],
+        //             op: EffectOps::Jump,
+        //             pos: None,
+        //         }
+        //     },
+        //     lesson2::Edge::Cond { true_targ, false_targ } => todo!(),
+        //     lesson2::Edge::None => Instruction::Effect {
+        //         args: vec![],
+        //         funcs: vec![],
+        //         labels: vec![],
+        //         op: EffectOps::Return,
+        //         pos: None
+        //     },
+        // };
 
         let call_blk = &mut self.program.functions[caller.cfg_id].blocks[caller.blk_id];
-        let inline_ret_instrs = call_blk.instrs.split_off(caller.instr_id + 1);
+        let mut inline_ret_instrs = call_blk.instrs.split_off(caller.instr_id + 1);
+        // add the jmp to succ to the ret blk
+        inline_ret_instrs.push(succ);
 
         let call_instr = &mut call_blk.instrs[caller.instr_id];
         let call_dest = get_dest(call_instr);
@@ -247,7 +381,7 @@ impl<'a> Inliner<'a> {
                 if matches!(op, bril_rs::EffectOps::Call) {
                     Ok(funcs[0].to_string())
                 } else {
-                    panic!("Instruction {call_instr} is not a call")
+                    Err(std::fmt::Error)
                 }
             }
         }?;
@@ -291,7 +425,15 @@ impl<'a> Inliner<'a> {
             blk.name = format!("{}_inlined_{}", blk.name, self.iter);
             blk.instrs.iter_mut().for_each(|instr| {
                 if let Some(dest) = get_dest(instr) {
-                    let new_dest = format!("{dest}_inlined_{}", self.iter);
+                    let new_dest = if let Some(call_dest) = &call_dest {
+                        if *call_dest == dest {
+                            dest.clone()
+                        } else {
+                            format!("{dest}_inlined_{}", self.iter)
+                        }
+                    } else {
+                        format!("{dest}_inlined_{}", self.iter)
+                    };
                     set_dest(instr, new_dest.clone());
                     this_map.insert(dest, new_dest);
                 } else {
@@ -348,8 +490,10 @@ impl<'a> Inliner<'a> {
                             .iter()
                             .map(|arg| {
                                 if let Some(renamed_arg) = this_map.get(arg) {
+                                    // println!("found {arg}->{renamed_arg} in rename map");
                                     renamed_arg.to_string()
                                 } else {
+                                    // println!("didn't find {arg} in rename map");
                                     arg.to_string()
                                 }
                             })
@@ -362,17 +506,19 @@ impl<'a> Inliner<'a> {
 
         // 2. add blocks to the caller
 
-        let blk_w_inlining = caller.blk_id;
-
         // replace rets with assignments and jmps
         // (y = call foo; ... ret b) -> (y = b; jmp)
         // (call foo; ... ret) -> jmp
-        let new_callee_blocks = callee_blocks.iter().map(|blk| {
+        // println!("callee is {call_targ}");
+        let old_blk_offset = caller_cfg.blocks.len();
+        let new_callee_blocks = callee_blocks.iter().enumerate().map(|(blk_id, blk)| {
             let mut new_blk = BasicBlock::default();
             new_blk.name = blk.name.clone();
+            let this_blk_id = old_blk_offset + blk_id;
 
             blk.instrs.iter().for_each(|instr| {
                 if is_ret(instr) {
+                    // println!("{instr} is a ret");
                     if let Some(dest) = &call_dest {
                         let op_type = match instr {
                             Instruction::Constant { .. } => panic!("ahh"),
@@ -381,16 +527,19 @@ impl<'a> Inliner<'a> {
                         };
 
                         let args = get_uses(instr);
-                        let assign_ret = Instruction::Value {
-                            args: vec![args[0].clone()],
-                            dest: dest.clone(),
-                            funcs: vec![],
-                            labels: vec![],
-                            op: bril_rs::ValueOps::Id,
-                            pos: None,
-                            op_type: op_type.clone(),
+                        if !args.is_empty() {
+                            let assign_ret = Instruction::Value {
+                                args: vec![args[0].clone()],
+                                dest: dest.clone(),
+                                funcs: vec![],
+                                labels: vec![],
+                                op: bril_rs::ValueOps::Id,
+                                pos: None,
+                                op_type: op_type.clone(),
+                            };
+                            new_blk.instrs.push(assign_ret);
                         };
-                        new_blk.instrs.push(assign_ret);
+                        
                     };
                     let jmp = Instruction::Effect {
                         args: vec![],
@@ -399,8 +548,10 @@ impl<'a> Inliner<'a> {
                         op: EffectOps::Jump,
                         pos: None,
                     };
+                    caller_cfg.edges.push(lesson2::Edge::Uncond(this_blk_id));
                     new_blk.instrs.push(jmp);
                 } else {
+                    // println!("pushing {instr}");
                     new_blk.instrs.push(instr.clone());
                 }
             });
@@ -421,6 +572,7 @@ impl<'a> Inliner<'a> {
             op: EffectOps::Jump,
             pos: None,
         };
+        // caller_cfg.edges.insert(caller.blk_id, lesson2::Edge::Uncond(start_of_stitching));
         self.program.functions[caller.cfg_id].blocks[caller.blk_id].instrs[caller.instr_id] = jmp;
         self.iter += 1;
 

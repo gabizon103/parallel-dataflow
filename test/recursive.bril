@@ -1,0 +1,30 @@
+@dec(y: int): int {
+  one: int = const 1;
+  sub:int = sub y one;
+  ret sub;
+}
+
+@rec(x: int): int {
+  print x;
+  zero: int = const 0;
+  one: int = const 1;
+  nine: int = const 9;
+  cond: bool = eq x zero;
+
+  br cond .true .false;
+
+  .true:
+  ret nine;
+
+  .false:
+  x_min_1: int = call @dec x;
+  r: int = call @rec x_min_1;
+  ret r;
+}
+
+@main {
+  x: int = const 4;
+  one: int = const 1;
+  y:int = call @rec x;
+  print y;
+}

@@ -1,0 +1,620 @@
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 0,
+            instr_id: 0,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 1,
+            instr_id: 1,
+        },
+    ],
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 0,
+            instr_id: 0,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 1,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 1,
+            instr_id: 3,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 0,
+        instr_id: 0,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 1,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 1,
+        instr_id: 3,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 7,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 7,
+        instr_id: 3,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 7,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 7,
+            instr_id: 3,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 5,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 5,
+            instr_id: 3,
+        },
+    ],
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 7,
+            instr_id: 1,
+        },
+    ],
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 7,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 7,
+            instr_id: 3,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 5,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 7,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 7,
+        instr_id: 3,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 5,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 28,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 28,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 13,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 28,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 13,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 62,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 62,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 28,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 62,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 28,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 125,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 125,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 59,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 125,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 59,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 252,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 252,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 122,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 252,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 122,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 507,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 507,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 249,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 507,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 249,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 1018,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 1018,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 504,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 1018,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 504,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 2041,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 2041,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 1015,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 2041,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 1015,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 4088,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 4088,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 2038,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 4088,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 2038,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 8183,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 8183,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 4085,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 8183,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 4085,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 16374,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 16374,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 8180,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 16374,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 8180,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 32757,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 32757,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 16371,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 32757,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 16371,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 65524,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 65524,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 32754,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 65524,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 32754,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 131059,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 131059,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 65521,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 131059,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 65521,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 262130,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 262130,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 131056,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 262130,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 131056,
+        instr_id: 1,
+    },
+]
+calls: [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 524273,
+        instr_id: 1,
+    },
+]
+all paths: [
+    [
+        InstrLoc {
+            cfg_id: 0,
+            blk_id: 524273,
+            instr_id: 1,
+        },
+        InstrLoc {
+            cfg_id: 1,
+            blk_id: 262127,
+            instr_id: 1,
+        },
+    ],
+]
+inlining path [
+    InstrLoc {
+        cfg_id: 0,
+        blk_id: 524273,
+        instr_id: 1,
+    },
+    InstrLoc {
+        cfg_id: 1,
+        blk_id: 262127,
+        instr_id: 1,
+    },
+]

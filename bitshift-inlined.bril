@@ -1,0 +1,286 @@
+@pow(x: int, n: int): int {
+.pow:
+  v1: int = id n;
+  v2: int = const 1;
+  v3: bool = eq v1 v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: int = id x;
+  ret v4;
+.else.0:
+  v5: int = id x;
+  v6: int = id n;
+  v7: int = const 2;
+  v8: int = div v6 v7;
+  jmp .prelog_pow_0;
+.then.12:
+  v18: int = id half2;
+  v19: int = id x;
+  v20: int = mul v18 v19;
+  ans: int = id v20;
+  jmp .endif.12;
+.else.12:
+  v21: int = id half2;
+  ans: int = id v21;
+.endif.12:
+  v22: int = id ans;
+  ret v22;
+.prelog_pow_0:
+  x_inlined_0: int = id v5;
+  n_inlined_0: int = id v8;
+.pow_inlined_0:
+  v1_inlined_0: int = id n_inlined_0;
+  v2_inlined_0: int = const 1;
+  v3_inlined_0: bool = eq v1_inlined_0 v2_inlined_0;
+  br v3_inlined_0 .then.0_inlined_0 .else.0_inlined_0;
+.then.0_inlined_0:
+  v4_inlined_0: int = id x_inlined_0;
+  half: int = id v4_inlined_0;
+  jmp .inline_ret_pow_0;
+.else.0_inlined_0:
+  v5_inlined_0: int = id x_inlined_0;
+  v6_inlined_0: int = id n_inlined_0;
+  v7_inlined_0: int = const 2;
+  v8_inlined_0: int = div v6_inlined_0 v7_inlined_0;
+  half: int = call @pow v5_inlined_0 v8_inlined_0;
+.then.12_inlined_0:
+  v18_inlined_0: int = id half2;
+  v19_inlined_0: int = id x_inlined_0;
+  v20_inlined_0: int = mul v18_inlined_0 v19_inlined_0;
+  ans_inlined_0: int = id v20_inlined_0;
+  jmp .endif.12_inlined_0;
+.else.12_inlined_0:
+  v21_inlined_0: int = id half2;
+  ans_inlined_0: int = id v21_inlined_0;
+.endif.12_inlined_0:
+  v22_inlined_0: int = id ans_inlined_0;
+  half: int = id v22_inlined_0;
+  jmp .inline_ret_pow_0;
+.inline_ret_pow_0:
+  half: int = id half;
+  v9: int = id half;
+  v10: int = id half;
+  v11: int = mul v9 v10;
+  half2: int = id v11;
+  v13: int = id n;
+  v14: int = const 2;
+  v15: int = call @mod v13 v14;
+  v16: int = const 1;
+  v17: bool = eq v15 v16;
+  br v17 .then.12 .else.12;
+  ret;
+}
+@mod(a: int, b: int): int {
+.mod:
+  v0: int = id a;
+  v1: int = id a;
+  v2: int = id b;
+  v3: int = div v1 v2;
+  v4: int = id b;
+  v5: int = mul v3 v4;
+  v6: int = sub v0 v5;
+  ret v6;
+}
+@LEFTSHIFT(x: int, step: int): int {
+.LEFTSHIFT:
+  v0: int = const 2;
+  v1: int = id step;
+  p: int = call @pow v0 v1;
+  p: int = id p;
+  v2: int = id x;
+  v3: int = id p;
+  v4: int = mul v2 v3;
+  ret v4;
+}
+@RIGHTSHIFT(x: int, step: int): int {
+.RIGHTSHIFT:
+  v0: int = const 2;
+  v1: int = id step;
+  jmp .prelog_pow_1;
+.prelog_pow_1:
+  x_inlined_1: int = id v0;
+  n_inlined_1: int = id v1;
+.pow_inlined_1:
+  v1_inlined_1: int = id n_inlined_1;
+  v2_inlined_1: int = const 1;
+  v3_inlined_1: bool = eq v1_inlined_1 v2_inlined_1;
+  br v3_inlined_1 .then.0_inlined_1 .else.0_inlined_1;
+.then.0_inlined_1:
+  v4_inlined_1: int = id x_inlined_1;
+  p: int = id v4_inlined_1;
+  jmp .inline_ret_pow_1;
+.else.0_inlined_1:
+  v5_inlined_1: int = id x_inlined_1;
+  v6_inlined_1: int = id n_inlined_1;
+  v7_inlined_1: int = const 2;
+  v8_inlined_1: int = div v6_inlined_1 v7_inlined_1;
+  jmp .prelog_pow_0_inlined_1;
+.then.12_inlined_1:
+  v18_inlined_1: int = id half2_inlined_1;
+  v19_inlined_1: int = id x_inlined_1;
+  v20_inlined_1: int = mul v18_inlined_1 v19_inlined_1;
+  ans_inlined_1: int = id v20_inlined_1;
+  jmp .endif.12_inlined_1;
+.else.12_inlined_1:
+  v21_inlined_1: int = id half2_inlined_1;
+  ans_inlined_1: int = id v21_inlined_1;
+.endif.12_inlined_1:
+  v22_inlined_1: int = id ans_inlined_1;
+  p: int = id v22_inlined_1;
+  jmp .inline_ret_pow_1;
+.prelog_pow_0_inlined_1:
+  x_inlined_0_inlined_1: int = id v5_inlined_1;
+  n_inlined_0_inlined_1: int = id v8_inlined_1;
+.pow_inlined_0_inlined_1:
+  v1_inlined_0_inlined_1: int = id n_inlined_0_inlined_1;
+  v2_inlined_0_inlined_1: int = const 1;
+  v3_inlined_0_inlined_1: bool = eq v1_inlined_0_inlined_1 v2_inlined_0_inlined_1;
+  br v3_inlined_0_inlined_1 .then.0_inlined_0_inlined_1 .else.0_inlined_0_inlined_1;
+.then.0_inlined_0_inlined_1:
+  v4_inlined_0_inlined_1: int = id x_inlined_0_inlined_1;
+  half_inlined_1: int = id v4_inlined_0_inlined_1;
+  jmp .inline_ret_pow_0_inlined_1;
+.else.0_inlined_0_inlined_1:
+  v5_inlined_0_inlined_1: int = id x_inlined_0_inlined_1;
+  v6_inlined_0_inlined_1: int = id n_inlined_0_inlined_1;
+  v7_inlined_0_inlined_1: int = const 2;
+  v8_inlined_0_inlined_1: int = div v6_inlined_0_inlined_1 v7_inlined_0_inlined_1;
+  half_inlined_1: int = call @pow v5_inlined_0_inlined_1 v8_inlined_0_inlined_1;
+.then.12_inlined_0_inlined_1:
+  v18_inlined_0_inlined_1: int = id half2_inlined_1;
+  v19_inlined_0_inlined_1: int = id x_inlined_0_inlined_1;
+  v20_inlined_0_inlined_1: int = mul v18_inlined_0_inlined_1 v19_inlined_0_inlined_1;
+  ans_inlined_0_inlined_1: int = id v20_inlined_0_inlined_1;
+  jmp .endif.12_inlined_0_inlined_1;
+.else.12_inlined_0_inlined_1:
+  v21_inlined_0_inlined_1: int = id half2_inlined_1;
+  ans_inlined_0_inlined_1: int = id v21_inlined_0_inlined_1;
+.endif.12_inlined_0_inlined_1:
+  v22_inlined_0_inlined_1: int = id ans_inlined_0_inlined_1;
+  half_inlined_1: int = id v22_inlined_0_inlined_1;
+  jmp .inline_ret_pow_0_inlined_1;
+.inline_ret_pow_0_inlined_1:
+  half_inlined_1: int = id half_inlined_1;
+  v9_inlined_1: int = id half_inlined_1;
+  v10_inlined_1: int = id half_inlined_1;
+  v11_inlined_1: int = mul v9_inlined_1 v10_inlined_1;
+  half2_inlined_1: int = id v11_inlined_1;
+  v13_inlined_1: int = id n_inlined_1;
+  v14_inlined_1: int = const 2;
+  v15_inlined_1: int = call @mod v13_inlined_1 v14_inlined_1;
+  v16_inlined_1: int = const 1;
+  v17_inlined_1: bool = eq v15_inlined_1 v16_inlined_1;
+  br v17_inlined_1 .then.12_inlined_1 .else.12_inlined_1;
+  jmp .inline_ret_pow_1;
+.inline_ret_pow_1:
+  p: int = id p;
+  v2: int = id x;
+  v3: int = id p;
+  v4: int = div v2 v3;
+  ret v4;
+  ret;
+}
+@main(a: int, b: int, c: int, d: int) {
+.main:
+  v2: int = id a;
+  v3: int = id b;
+  ans1: int = call @LEFTSHIFT v2 v3;
+  print ans1;
+  v4: int = id c;
+  v5: int = id d;
+  jmp .prelog_RIGHTSHIFT_2;
+.prelog_RIGHTSHIFT_2:
+  x_inlined_2: int = id v4;
+  step_inlined_2: int = id v5;
+.RIGHTSHIFT_inlined_2:
+  v0_inlined_2: int = const 2;
+  v1_inlined_2: int = id step_inlined_2;
+  jmp .prelog_pow_1_inlined_2;
+.prelog_pow_1_inlined_2:
+  x_inlined_1_inlined_2: int = id v0_inlined_2;
+  n_inlined_1_inlined_2: int = id v1_inlined_2;
+.pow_inlined_1_inlined_2:
+  v1_inlined_1_inlined_2: int = id n_inlined_1_inlined_2;
+  v2_inlined_1_inlined_2: int = const 1;
+  v3_inlined_1_inlined_2: bool = eq v1_inlined_1_inlined_2 v2_inlined_1_inlined_2;
+  br v3_inlined_1_inlined_2 .then.0_inlined_1_inlined_2 .else.0_inlined_1_inlined_2;
+.then.0_inlined_1_inlined_2:
+  v4_inlined_1_inlined_2: int = id x_inlined_1_inlined_2;
+  p_inlined_2: int = id v4_inlined_1_inlined_2;
+  jmp .inline_ret_pow_1_inlined_2;
+.else.0_inlined_1_inlined_2:
+  v5_inlined_1_inlined_2: int = id x_inlined_1_inlined_2;
+  v6_inlined_1_inlined_2: int = id n_inlined_1_inlined_2;
+  v7_inlined_1_inlined_2: int = const 2;
+  v8_inlined_1_inlined_2: int = div v6_inlined_1_inlined_2 v7_inlined_1_inlined_2;
+  jmp .prelog_pow_0_inlined_1_inlined_2;
+.then.12_inlined_1_inlined_2:
+  v18_inlined_1_inlined_2: int = id half2_inlined_1_inlined_2;
+  v19_inlined_1_inlined_2: int = id x_inlined_1_inlined_2;
+  v20_inlined_1_inlined_2: int = mul v18_inlined_1_inlined_2 v19_inlined_1_inlined_2;
+  ans_inlined_1_inlined_2: int = id v20_inlined_1_inlined_2;
+  jmp .endif.12_inlined_1_inlined_2;
+.else.12_inlined_1_inlined_2:
+  v21_inlined_1_inlined_2: int = id half2_inlined_1_inlined_2;
+  ans_inlined_1_inlined_2: int = id v21_inlined_1_inlined_2;
+.endif.12_inlined_1_inlined_2:
+  v22_inlined_1_inlined_2: int = id ans_inlined_1_inlined_2;
+  p_inlined_2: int = id v22_inlined_1_inlined_2;
+  jmp .inline_ret_pow_1_inlined_2;
+.prelog_pow_0_inlined_1_inlined_2:
+  x_inlined_0_inlined_1_inlined_2: int = id v5_inlined_1_inlined_2;
+  n_inlined_0_inlined_1_inlined_2: int = id v8_inlined_1_inlined_2;
+.pow_inlined_0_inlined_1_inlined_2:
+  v1_inlined_0_inlined_1_inlined_2: int = id n_inlined_0_inlined_1_inlined_2;
+  v2_inlined_0_inlined_1_inlined_2: int = const 1;
+  v3_inlined_0_inlined_1_inlined_2: bool = eq v1_inlined_0_inlined_1_inlined_2 v2_inlined_0_inlined_1_inlined_2;
+  br v3_inlined_0_inlined_1_inlined_2 .then.0_inlined_0_inlined_1_inlined_2 .else.0_inlined_0_inlined_1_inlined_2;
+.then.0_inlined_0_inlined_1_inlined_2:
+  v4_inlined_0_inlined_1_inlined_2: int = id x_inlined_0_inlined_1_inlined_2;
+  half_inlined_1_inlined_2: int = id v4_inlined_0_inlined_1_inlined_2;
+  jmp .inline_ret_pow_0_inlined_1_inlined_2;
+.else.0_inlined_0_inlined_1_inlined_2:
+  v5_inlined_0_inlined_1_inlined_2: int = id x_inlined_0_inlined_1_inlined_2;
+  v6_inlined_0_inlined_1_inlined_2: int = id n_inlined_0_inlined_1_inlined_2;
+  v7_inlined_0_inlined_1_inlined_2: int = const 2;
+  v8_inlined_0_inlined_1_inlined_2: int = div v6_inlined_0_inlined_1_inlined_2 v7_inlined_0_inlined_1_inlined_2;
+  half_inlined_1_inlined_2: int = call @pow v5_inlined_0_inlined_1_inlined_2 v8_inlined_0_inlined_1_inlined_2;
+.then.12_inlined_0_inlined_1_inlined_2:
+  v18_inlined_0_inlined_1_inlined_2: int = id half2_inlined_1_inlined_2;
+  v19_inlined_0_inlined_1_inlined_2: int = id x_inlined_0_inlined_1_inlined_2;
+  v20_inlined_0_inlined_1_inlined_2: int = mul v18_inlined_0_inlined_1_inlined_2 v19_inlined_0_inlined_1_inlined_2;
+  ans_inlined_0_inlined_1_inlined_2: int = id v20_inlined_0_inlined_1_inlined_2;
+  jmp .endif.12_inlined_0_inlined_1_inlined_2;
+.else.12_inlined_0_inlined_1_inlined_2:
+  v21_inlined_0_inlined_1_inlined_2: int = id half2_inlined_1_inlined_2;
+  ans_inlined_0_inlined_1_inlined_2: int = id v21_inlined_0_inlined_1_inlined_2;
+.endif.12_inlined_0_inlined_1_inlined_2:
+  v22_inlined_0_inlined_1_inlined_2: int = id ans_inlined_0_inlined_1_inlined_2;
+  half_inlined_1_inlined_2: int = id v22_inlined_0_inlined_1_inlined_2;
+  jmp .inline_ret_pow_0_inlined_1_inlined_2;
+.inline_ret_pow_0_inlined_1_inlined_2:
+  half_inlined_1_inlined_2: int = id half_inlined_1_inlined_2;
+  v9_inlined_1_inlined_2: int = id half_inlined_1_inlined_2;
+  v10_inlined_1_inlined_2: int = id half_inlined_1_inlined_2;
+  v11_inlined_1_inlined_2: int = mul v9_inlined_1_inlined_2 v10_inlined_1_inlined_2;
+  half2_inlined_1_inlined_2: int = id v11_inlined_1_inlined_2;
+  v13_inlined_1_inlined_2: int = id n_inlined_1_inlined_2;
+  v14_inlined_1_inlined_2: int = const 2;
+  v15_inlined_1_inlined_2: int = call @mod v13_inlined_1_inlined_2 v14_inlined_1_inlined_2;
+  v16_inlined_1_inlined_2: int = const 1;
+  v17_inlined_1_inlined_2: bool = eq v15_inlined_1_inlined_2 v16_inlined_1_inlined_2;
+  br v17_inlined_1_inlined_2 .then.12_inlined_1_inlined_2 .else.12_inlined_1_inlined_2;
+  jmp .inline_ret_pow_1_inlined_2;
+.inline_ret_pow_1_inlined_2:
+  p_inlined_2: int = id p_inlined_2;
+  v2_inlined_2: int = id x_inlined_2;
+  v3_inlined_2: int = id p_inlined_2;
+  v4_inlined_2: int = div v2_inlined_2 v3_inlined_2;
+  ans2: int = id v4_inlined_2;
+  jmp .inline_ret_RIGHTSHIFT_2;
+  jmp .inline_ret_RIGHTSHIFT_2;
+.inline_ret_RIGHTSHIFT_2:
+  print ans2;
+  ret;
+  ret;
+}
