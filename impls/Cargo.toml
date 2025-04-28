@@ -1,5 +1,5 @@
 [package]
-name = "sequential"
+name = "impls"
 version = "0.1.0"
 edition = "2024"
 
@@ -12,3 +12,4 @@ passes.workspace = true
 simple_logger.workspace = true
 log.workspace = true
 rayon.workspace = true
+strum.workspace = true

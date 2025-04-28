@@ -1,8 +1,6 @@
 use crate::DataflowSpec;
-use bril_utils::{
-    CFG, Dataflow,
-    bril_rs::{Program, load_abstract_program_from_read},
-};
+use bril_utils::{CFG, Dataflow, bril_rs::Program};
+use bril2json::parse_abstract_program_from_read;
 use itertools::Itertools;
 use std::fmt::Debug;
 use std::time::{Duration, Instant};
@@ -20,12 +18,11 @@ where
     Val: Eq + Clone + Debug,
 {
     /// Run the dataflow pass on the input program and perform performance measurements
-    fn run(pass: &Pass) -> DataflowResults {
+    fn run<R: std::io::Read>(pass: &Pass, input: R) -> DataflowResults {
         let start = Instant::now();
-        let input = std::io::stdin();
 
         // Read stdin and parse it into a Program using serde
-        let prog: Program = load_abstract_program_from_read(input.lock())
+        let prog: Program = parse_abstract_program_from_read(input, false, false, None)
             .try_into()
             .unwrap();
 
