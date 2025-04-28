@@ -11,3 +11,4 @@ itertools.workspace = true
 passes.workspace = true
 simple_logger.workspace = true
 log.workspace = true
+rayon.workspace = true

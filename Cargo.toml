@@ -10,3 +10,4 @@ utils = { version = "0.1.0", path = "utils" }
 passes = { version = "0.1.0", path = "passes" }
 simple_logger = "5.0.0"
 log = "0.4"
+rayon = "1.10.0"
