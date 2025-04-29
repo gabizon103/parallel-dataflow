@@ -1,7 +1,7 @@
 use bril_utils::{CFG, Dataflow};
 use itertools::Itertools;
 use rayon::prelude::*;
-use std::{collections::HashSet, fmt::Debug};
+use std::collections::HashSet;
 use utils::{DataflowExecutor, DataflowSpec};
 
 #[derive(Default)]

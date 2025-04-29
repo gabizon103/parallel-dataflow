@@ -1,6 +1,6 @@
 use bril_utils::{CFG, Dataflow};
 use itertools::Itertools;
-use std::{collections::LinkedList, fmt::Debug};
+use std::collections::LinkedList;
 use utils::{DataflowExecutor, DataflowSpec};
 
 #[derive(Default)]

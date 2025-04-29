@@ -31,7 +31,7 @@ fn main() {
 
     let (timing, result) = args.pass.execute(&args.algorithm, std::io::stdin().lock());
 
-    if (args.raw) {
+    if args.raw {
         println!("{}", timing.loadtime.as_nanos());
         println!("{}", timing.runtime.as_nanos());
     } else {

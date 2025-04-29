@@ -1,7 +1,7 @@
 use crate::{ParallelExecutor, SequentialExecutor};
 use passes::ReachingDefs;
 use serde::Serialize;
-use strum::{Display, EnumIter, EnumString, IntoEnumIterator};
+use strum::{Display, EnumIter, EnumString};
 use utils::{DataflowExecutor, PassTiming};
 
 #[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy, PartialEq, Eq)]
