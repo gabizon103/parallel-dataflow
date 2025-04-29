@@ -7,12 +7,12 @@ use utils::{DataflowExecutor, DataflowSpec};
 #[derive(Default)]
 pub struct ParallelExecutor;
 
-impl<Pass, Val> DataflowExecutor<Pass, Val> for ParallelExecutor
+impl<Pass> DataflowExecutor<Pass> for ParallelExecutor
 where
-    Val: Eq + Clone + Debug + Send + Sync,
-    Pass: DataflowSpec<Val> + Send + Sync,
+    Pass: DataflowSpec + Send + Sync,
 {
-    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Val> {
+    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
+        log::debug!("Function {}", cfg.name());
         let cfg = if cfg.reversed() != pass.reversed() {
             cfg.reverse()
         } else {
@@ -27,10 +27,11 @@ where
         let mut worklist: HashSet<_> = (0..n).collect();
 
         while !worklist.is_empty() {
+            log::trace!("Worklist: {:?}", worklist);
             // Dispatch the worklist to multiple threads
             let results: Vec<_> = std::mem::take(&mut worklist)
                 .into_par_iter()
-                .filter_map(|i| {
+                .map(|i| {
                     let i_vals = if cfg.func().get(i).is_entry() {
                         pass.entry(cfg.func())
                     } else {
@@ -44,19 +45,29 @@ where
 
                     let o_vals = pass.transfer(cfg.func().get(i), &i_vals);
 
-                    if o_vals != out_vals[i] {
-                        Some((i, cfg.succs(i), i_vals, o_vals))
-                    } else {
-                        None
-                    }
+                    (
+                        i,
+                        i_vals,
+                        if o_vals != out_vals[i] {
+                            Some((cfg.succs(i), o_vals))
+                        } else {
+                            None
+                        },
+                    )
                 })
                 .collect();
 
-            for (i, result_succs, i_vals, o_vals) in results {
-                out_vals[i] = o_vals;
+            for (i, i_vals, changed) in results {
                 in_vals[i] = i_vals;
-                for j in result_succs {
-                    worklist.insert(j);
+
+                if let Some((result_succs, o_vals)) = changed {
+                    // If the out value changed, add successors to the worklist
+                    log::trace!("Out value changed for block {}: {:?}", i, o_vals);
+                    out_vals[i] = o_vals;
+                    // Add successors to the worklist
+                    for j in result_succs {
+                        worklist.insert(j);
+                    }
                 }
             }
         }

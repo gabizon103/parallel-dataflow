@@ -17,7 +17,9 @@ impl Debug for ReachingDefinition {
 #[derive(Default)]
 pub struct ReachingDefs;
 
-impl DataflowSpec<HashSet<ReachingDefinition>> for ReachingDefs {
+impl DataflowSpec for ReachingDefs {
+    type Val = HashSet<ReachingDefinition>;
+
     fn init(&self, func: &BBFunction) -> HashSet<ReachingDefinition> {
         func.args
             .iter()

@@ -6,12 +6,12 @@ use utils::{DataflowExecutor, DataflowSpec};
 #[derive(Default)]
 pub struct SequentialExecutor;
 
-impl<Pass, Val> DataflowExecutor<Pass, Val> for SequentialExecutor
+impl<Pass> DataflowExecutor<Pass> for SequentialExecutor
 where
-    Val: Eq + Clone + Debug,
-    Pass: DataflowSpec<Val>,
+    Pass: DataflowSpec,
 {
-    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Val> {
+    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
+        log::debug!("Function {}", cfg.name());
         let cfg = if cfg.reversed() != pass.reversed() {
             cfg.reverse()
         } else {
@@ -25,6 +25,7 @@ where
 
         let mut worklist: LinkedList<_> = (0..n).collect();
         while let Some(i) = worklist.pop_front() {
+            log::trace!("Worklist: {:?}", worklist);
             in_vals[i] = if cfg.func().get(i).is_entry() {
                 pass.entry(cfg.func())
             } else {
@@ -39,6 +40,7 @@ where
             let new_vals = pass.transfer(cfg.func().get(i), &in_vals[i]);
 
             if new_vals != out_vals[i] {
+                log::trace!("New values for block {}: {:?}", i, new_vals);
                 out_vals[i] = new_vals;
                 for j in cfg.succs(i) {
                     worklist.push_back(j);

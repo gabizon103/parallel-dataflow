@@ -29,17 +29,15 @@ fn main() {
         .init()
         .unwrap();
 
-    let result = args.pass.execute(&args.algorithm, std::io::stdin().lock());
+    let (timing, result) = args.pass.execute(&args.algorithm, std::io::stdin().lock());
 
     if (args.raw) {
-        println!("{}", result.loadtime.as_nanos());
-        println!("{}", result.runtime.as_nanos());
-        println!("{}", result.writetime.as_nanos());
+        println!("{}", timing.loadtime.as_nanos());
+        println!("{}", timing.runtime.as_nanos());
     } else {
-        println!("{}", result.result);
+        println!("{}", result);
 
-        println!("Load time: {:?}", result.loadtime);
-        println!("Runtime: {:?}", result.runtime);
-        println!("Write time: {:?}", result.writetime);
+        println!("Load time: {:?}", timing.loadtime);
+        println!("Runtime: {:?}", timing.runtime);
     }
 }

@@ -1,10 +1,10 @@
 use crate::{ParallelExecutor, SequentialExecutor};
 use passes::ReachingDefs;
 use serde::Serialize;
-use strum::{Display, EnumIter, EnumString};
-use utils::{DataflowExecutor, DataflowResults};
+use strum::{Display, EnumIter, EnumString, IntoEnumIterator};
+use utils::{DataflowExecutor, PassTiming};
 
-#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy)]
+#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy, PartialEq, Eq)]
 pub enum Executor {
     /// Basic sequential worklist algorithm
     #[strum(serialize = "s", serialize = "sequential")]
@@ -14,7 +14,7 @@ pub enum Executor {
     Parallel,
 }
 
-#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy)]
+#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy, PartialEq, Eq)]
 pub enum Pass {
     /// Reaching definitions
     #[strum(
@@ -26,16 +26,23 @@ pub enum Pass {
 }
 
 macro_rules! run {
-    ($executor: expr, $pass: ident, $input: ident) => {
-        match $executor {
+    ($executor: expr, $pass: ident, $input: ident) => {{
+        let (timings, data) = match $executor {
             Executor::Sequential => SequentialExecutor::run(&$pass, $input),
             Executor::Parallel => ParallelExecutor::run(&$pass, $input),
-        }
-    };
+        };
+
+        let result = data
+            .into_iter()
+            .map(|d| format!("{:?}", d))
+            .collect::<Vec<_>>()
+            .join("\n");
+        (timings, result)
+    }};
 }
 
 impl Pass {
-    pub fn execute<R: std::io::Read>(&self, executor: &Executor, input: R) -> DataflowResults {
+    pub fn execute<R: std::io::Read>(&self, executor: &Executor, input: R) -> (PassTiming, String) {
         match self {
             Pass::ReachingDefinitions => run!(executor, ReachingDefs, input),
         }

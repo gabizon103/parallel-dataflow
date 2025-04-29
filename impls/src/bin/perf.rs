@@ -30,7 +30,6 @@ struct Record {
     iteration: usize,
     loadtime: u128,
     runtime: u128,
-    writetime: u128,
 }
 
 // Path to the main executable
@@ -85,7 +84,7 @@ fn main() {
 
                         let output = std::str::from_utf8(&output.stdout).unwrap();
 
-                        // Output consists of the 3 times in nanoseconds separated by newlines
+                        // Output consists of the 2 times in nanoseconds separated by newlines
                         let times: Vec<u128> = output
                             .lines()
                             .map(|line| line.parse::<u128>().unwrap())
@@ -97,7 +96,6 @@ fn main() {
                             iteration: iter,
                             loadtime: times[0],
                             runtime: times[1],
-                            writetime: times[2],
                         })
                         .unwrap();
                     }
