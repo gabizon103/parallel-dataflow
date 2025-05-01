@@ -14,9 +14,9 @@ def aggregate_bar(df, ycol, out_dir):
     # Create a bar plot
     plt.figure(figsize=(10, 6))
     sns.barplot(x="pass", y=ycol, hue="executor", data=df)
-    plt.title("Performance by Pass and Executor")
+    plt.title(f"{ycol.title()} by Pass and Executor")
     plt.xlabel("Pass")
-    plt.ylabel("Mean Value")
+    plt.ylabel("Time (ns)")
     plt.legend(title="Executor")
     plt.tight_layout()
     plt.savefig(f"{out_dir}/averages_{ycol}.png")

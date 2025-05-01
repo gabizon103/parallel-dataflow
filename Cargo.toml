@@ -3,7 +3,7 @@ members = ["impls", "utils", "passes"]
 resolver = "2"
 
 [workspace.dependencies]
-bril-utils = { git = "https://github.com/UnsignedByte/6120", package = "utils" }
+bril-utils = { git = "https://github.com/UnsignedByte/6120", package = "utils", rev = "77916a04a620010b487b10550fb6340a519ba87c" }
 bril2json = { git = "https://github.com/sampsyo/bril", version = "0.1.0" }
 argh = "0.1.13"
 itertools = "0.14.0"

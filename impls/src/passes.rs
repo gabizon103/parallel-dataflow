@@ -1,5 +1,5 @@
 use crate::{ParallelExecutor, SequentialExecutor};
-use passes::{LiveVars, ReachingDefs};
+use passes::{ConstProp, LiveVars, ReachingDefs};
 use serde::Serialize;
 use strum::{Display, EnumIter, EnumString};
 use utils::{DataflowExecutor, PassTiming};
@@ -29,6 +29,8 @@ pub enum Pass {
         serialize = "live-variables"
     )]
     LiveVariables,
+    #[strum(serialize = "const-prop", serialize = "const-propagation")]
+    ConstProp,
 }
 
 macro_rules! run {
@@ -52,6 +54,7 @@ impl Pass {
         match self {
             Pass::ReachingDefinitions => run!(executor, ReachingDefs, input),
             Pass::LiveVariables => run!(executor, LiveVars, input),
+            Pass::ConstProp => run!(executor, ConstProp, input),
         }
     }
 }

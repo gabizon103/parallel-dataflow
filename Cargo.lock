@@ -1689,7 +1689,7 @@ checksum = "06abde3611657adf66d383f00b093d7faecc7fa57071cce2578660c9f1010821"
 [[package]]
 name = "utils"
 version = "0.0.1"
-source = "git+https://github.com/UnsignedByte/6120#1a205590620020421c2a27ba6c71a4e25a11e203"
+source = "git+https://github.com/UnsignedByte/6120?rev=77916a04a620010b487b10550fb6340a519ba87c#77916a04a620010b487b10550fb6340a519ba87c"
 dependencies = [
  "argh",
  "bril-rs",

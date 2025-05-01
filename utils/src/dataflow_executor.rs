@@ -1,5 +1,5 @@
 use crate::DataflowSpec;
-use bril_utils::{CFG, Dataflow, bril_rs::Program};
+use bril_utils::{CFG, CanonicalizeLiterals, Dataflow, Pass, bril_rs::Program};
 use bril2json::parse_abstract_program_from_read;
 use itertools::Itertools;
 use std::time::{Duration, Instant};
@@ -21,6 +21,9 @@ where
         let prog: Program = parse_abstract_program_from_read(input, false, false, None)
             .try_into()
             .unwrap();
+
+        // Perform CanonicalizeLiterals always just to make sure things are canonical
+        let prog = CanonicalizeLiterals.run(prog);
 
         let loadtime = start.elapsed();
         let start = Instant::now();
