@@ -1,5 +1,5 @@
 use crate::{ParallelExecutor, SequentialExecutor};
-use passes::ReachingDefs;
+use passes::{LiveVars, ReachingDefs};
 use serde::Serialize;
 use strum::{Display, EnumIter, EnumString};
 use utils::{DataflowExecutor, PassTiming};
@@ -23,6 +23,12 @@ pub enum Pass {
         serialize = "reaching-defs"
     )]
     ReachingDefinitions,
+    #[strum(
+        serialize = "lv",
+        serialize = "live-vars",
+        serialize = "live-variables"
+    )]
+    LiveVariables,
 }
 
 macro_rules! run {
@@ -45,6 +51,7 @@ impl Pass {
     pub fn execute<R: std::io::Read>(&self, executor: &Executor, input: R) -> (PassTiming, String) {
         match self {
             Pass::ReachingDefinitions => run!(executor, ReachingDefs, input),
+            Pass::LiveVariables => run!(executor, LiveVars, input),
         }
     }
 }

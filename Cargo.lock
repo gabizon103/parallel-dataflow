@@ -1039,6 +1039,7 @@ dependencies = [
 name = "passes"
 version = "0.1.0"
 dependencies = [
+ "log",
  "utils 0.0.1",
  "utils 0.1.0",
 ]
