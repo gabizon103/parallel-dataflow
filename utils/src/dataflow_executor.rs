@@ -14,7 +14,11 @@ where
     Pass: DataflowSpec,
 {
     /// Run the dataflow pass on the input program and perform performance measurements
-    fn run<R: std::io::Read>(pass: &Pass, input: R) -> (PassTiming, Vec<Dataflow<Pass::Val>>) {
+    fn run<R: std::io::Read>(
+        &self,
+        pass: &Pass,
+        input: R,
+    ) -> (PassTiming, Vec<Dataflow<Pass::Val>>) {
         let start = Instant::now();
 
         // Read stdin and parse it into a Program using serde
@@ -31,7 +35,7 @@ where
         let results = prog
             .functions
             .iter()
-            .map(|f| Self::cfg(pass, CFG::from(f.clone())))
+            .map(|f| self.cfg(pass, CFG::from(f.clone())))
             .collect_vec();
 
         let runtime = start.elapsed();
@@ -39,5 +43,5 @@ where
         (PassTiming { loadtime, runtime }, results)
     }
 
-    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val>;
+    fn cfg(&self, pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val>;
 }

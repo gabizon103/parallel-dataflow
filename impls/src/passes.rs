@@ -1,17 +1,76 @@
-use crate::{ParallelExecutor, SequentialExecutor};
 use passes::{ConstProp, LiveVars, ReachingDefs};
+use regex::Regex;
 use serde::Serialize;
+use std::{fmt::Display, str::FromStr};
 use strum::{Display, EnumIter, EnumString};
 use utils::{DataflowExecutor, PassTiming};
 
-#[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Executor {
     /// Basic sequential worklist algorithm
-    #[strum(serialize = "s", serialize = "sequential")]
     Sequential,
     /// Parallel worklist algorithm
-    #[strum(serialize = "p", serialize = "parallel")]
     Parallel,
+    /// Mixed worklist algorithm
+    Mixed(usize),
+}
+
+impl FromStr for Executor {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        // Simple pattern matching
+        let simple = match s {
+            "sequential" | "seq" => Some(Executor::Sequential),
+            "parallel" | "par" => Some(Executor::Parallel),
+            _ => None,
+        };
+
+        if let Some(executor) = simple {
+            Ok(executor)
+        } else {
+            // Parse strings with arguments
+            let re = Regex::new(r"^mixed-(\d+)$").unwrap();
+            if let Some(caps) = re.captures(s) {
+                let thresh = caps[1].parse().unwrap();
+                Ok(Executor::Mixed(thresh))
+            } else {
+                Err(format!("Unknown executor {}", s))
+            }
+        }
+    }
+}
+
+impl Display for Executor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Executor::Sequential => "sequential".fmt(f),
+            Executor::Parallel => "parallel".fmt(f),
+            Executor::Mixed(thresh) => write!(f, "mixed-{thresh}"),
+        }
+    }
+}
+
+impl Serialize for Executor {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.collect_str(self)
+    }
+}
+
+impl Executor {
+    pub fn iter() -> impl Iterator<Item = Self> {
+        vec![
+            Executor::Sequential,
+            Executor::Parallel,
+            Executor::Mixed(5),
+            Executor::Mixed(10),
+            Executor::Mixed(30),
+        ]
+        .into_iter()
+    }
 }
 
 #[derive(EnumString, EnumIter, Debug, Display, Serialize, Clone, Copy, PartialEq, Eq)]
@@ -34,11 +93,8 @@ pub enum Pass {
 }
 
 macro_rules! run {
-    ($executor: expr, $pass: ident, $input: ident) => {{
-        let (timings, data) = match $executor {
-            Executor::Sequential => SequentialExecutor::run(&$pass, $input),
-            Executor::Parallel => ParallelExecutor::run(&$pass, $input),
-        };
+    ($executor: ident, $pass: ident, $input: ident) => {{
+        let (timings, data) = $crate::execute_pass!($pass, $executor, $input);
 
         let result = data
             .into_iter()

@@ -11,7 +11,7 @@ impl<Pass> DataflowExecutor<Pass> for ParallelExecutor
 where
     Pass: DataflowSpec + Send + Sync,
 {
-    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
+    fn cfg(&self, pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
         log::debug!("Function {}", cfg.name());
         let cfg = if cfg.reversed() != pass.reversed() {
             cfg.reverse()

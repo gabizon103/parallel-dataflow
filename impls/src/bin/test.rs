@@ -1,5 +1,5 @@
 use argh::FromArgs;
-use impls::{Executor, ParallelExecutor, Pass, SequentialExecutor};
+use impls::{Executor, Pass, execute_pass};
 use passes::{ConstProp, LiveVars, ReachingDefs};
 use simple_logger::SimpleLogger;
 use strum::IntoEnumIterator;
@@ -22,12 +22,9 @@ macro_rules! test {
     ($pass: ident, $input: expr) => {{
         let mut expectation = None;
 
-        for executor in Executor::iter() {
+        for ref executor in Executor::iter() {
             let input = std::fs::File::open($input).unwrap();
-            let (_, result) = match executor {
-                Executor::Sequential => SequentialExecutor::run(&$pass, input.try_clone().unwrap()),
-                Executor::Parallel => ParallelExecutor::run(&$pass, input.try_clone().unwrap()),
-            };
+            let (_, result) = execute_pass!($pass, executor, input);
 
             match expectation {
                 None => {

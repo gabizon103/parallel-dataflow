@@ -768,6 +768,7 @@ dependencies = [
  "log",
  "passes",
  "rayon",
+ "regex",
  "serde",
  "simple_logger",
  "strum",

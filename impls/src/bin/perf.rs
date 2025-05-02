@@ -90,6 +90,11 @@ fn main() {
                             .map(|line| line.parse::<u128>().unwrap())
                             .collect();
 
+                        if times.len() != 2 {
+                            log::error!("Invalid output: {}", output);
+                            continue;
+                        }
+
                         wtr.serialize(Record {
                             pass,
                             executor,

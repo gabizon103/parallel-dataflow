@@ -10,7 +10,7 @@ impl<Pass> DataflowExecutor<Pass> for SequentialExecutor
 where
     Pass: DataflowSpec,
 {
-    fn cfg(pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
+    fn cfg(&self, pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
         log::debug!("Function {}", cfg.name());
         let cfg = if cfg.reversed() != pass.reversed() {
             cfg.reverse()
