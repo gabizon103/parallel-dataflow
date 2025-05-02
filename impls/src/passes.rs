@@ -65,8 +65,9 @@ impl Executor {
         vec![
             Executor::Sequential,
             Executor::Parallel,
-            Executor::Mixed(5),
-            Executor::Mixed(10),
+            Executor::Mixed(15),
+            Executor::Mixed(20),
+            Executor::Mixed(25),
             Executor::Mixed(30),
         ]
         .into_iter()

@@ -6,8 +6,14 @@ import argparse
 
 # Group by pass & executor and calculate mean of all iterations.
 # Show a bar plot of the mean values, grouped by pass and colored by executor.
-def aggregate_bar(df, ycol, out_dir):
+def aggregate_bar(df, ycol, out_dir, limit=None):
     df = df.groupby(["pass", "executor"]).mean().reset_index()
+
+    if limit:
+        # Take only the top N executors for each pass
+        df = df.groupby("pass").apply(lambda x: x.nsmallest(limit, ycol)).reset_index(drop=True)
+        print(df)
+
     # Set the color palette
     palette = sns.color_palette("husl", len(df["executor"].unique()))
     sns.set_palette(palette)
@@ -17,9 +23,13 @@ def aggregate_bar(df, ycol, out_dir):
     plt.title(f"{ycol.title()} by Pass and Executor")
     plt.xlabel("Pass")
     plt.ylabel("Time (ns)")
+    plt.ylim(bottom=0)
     plt.legend(title="Executor")
     plt.tight_layout()
-    plt.savefig(f"{out_dir}/averages_{ycol}.png")
+    if limit:
+        plt.savefig(f"{out_dir}/averages_{ycol}_top_{limit}.png")
+    else:
+        plt.savefig(f"{out_dir}/averages_{ycol}.png")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot graphs from performance data.")
@@ -36,3 +46,5 @@ if __name__ == "__main__":
 
     aggregate_bar(df, "runtime", args.out_dir)
     aggregate_bar(df, "loadtime", args.out_dir)
+    aggregate_bar(df, "runtime", args.out_dir, limit=3)
+    aggregate_bar(df, "loadtime", args.out_dir, limit=3)
