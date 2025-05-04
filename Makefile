@@ -1,4 +1,4 @@
-.PHONY: build release graphs test
+.PHONY: build perf release graphs test
 
 build:
 	@cargo build
@@ -6,10 +6,10 @@ build:
 release:
 	@cargo build --release
 
-./perf.csv: release
+perf: release
 	@cargo run --release --bin perf
 
-graphs: ./perf.csv
+graphs: perf
 	@python3 graphs.py
 
 test: release
