@@ -6,10 +6,10 @@ build:
 release:
 	@cargo build --release
 
-perf.csv: release
+./perf.csv: release
 	@cargo run --release --bin perf
 
-graphs: perf.csv
+graphs: ./perf.csv
 	@python3 graphs.py
 
 test: release
