@@ -1,4 +1,4 @@
-use passes::{ConstProp, LiveVars, ReachingDefs};
+use passes::{AvailableExpr, ConstProp, LiveVars, ReachingDefs};
 use regex::Regex;
 use serde::Serialize;
 use std::{fmt::Display, str::FromStr};
@@ -91,6 +91,12 @@ pub enum Pass {
     LiveVariables,
     #[strum(serialize = "const-prop", serialize = "const-propagation")]
     ConstProp,
+    #[strum(
+        serialize = "available-expr",
+        serialize = "available-expressions",
+        serialize = "available-exprs"
+    )]
+    AvailableExpr,
 }
 
 macro_rules! run {
@@ -112,6 +118,7 @@ impl Pass {
             Pass::ReachingDefinitions => run!(executor, ReachingDefs, input),
             Pass::LiveVariables => run!(executor, LiveVars, input),
             Pass::ConstProp => run!(executor, ConstProp, input),
+            Pass::AvailableExpr => run!(executor, AvailableExpr, input),
         }
     }
 }

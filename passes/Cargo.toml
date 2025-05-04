@@ -7,3 +7,4 @@ edition = "2024"
 bril-utils.workspace = true
 utils.workspace = true
 log.workspace = true
+itertools.workspace = true

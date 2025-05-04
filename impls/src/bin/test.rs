@@ -1,6 +1,6 @@
 use argh::FromArgs;
 use impls::{Executor, Pass, execute_pass};
-use passes::{ConstProp, LiveVars, ReachingDefs};
+use passes::{AvailableExpr, ConstProp, LiveVars, ReachingDefs};
 use simple_logger::SimpleLogger;
 use strum::IntoEnumIterator;
 use utils::DataflowExecutor;
@@ -95,6 +95,7 @@ fn main() {
                     Pass::ReachingDefinitions => test!(ReachingDefs, entry.path()),
                     Pass::LiveVariables => test!(LiveVars, entry.path()),
                     Pass::ConstProp => test!(ConstProp, entry.path()),
+                    Pass::AvailableExpr => test!(AvailableExpr, entry.path()),
                 };
             }
         }

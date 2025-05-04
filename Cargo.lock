@@ -1040,6 +1040,7 @@ dependencies = [
 name = "passes"
 version = "0.1.0"
 dependencies = [
+ "itertools",
  "log",
  "utils 0.0.1",
  "utils 0.1.0",
