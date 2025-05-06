@@ -1,0 +1,12 @@
+@main(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  print b;
+  _t0: int = const 50;
+  _t1: int = const -55;
+  _t2: int = const 50;
+  _t3: int = sub _t1 _t2;
+  _t4: bool = lt _t0 _t3;
+  e: bool = id _t4;
+.block.1:
+}

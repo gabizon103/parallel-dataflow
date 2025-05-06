@@ -1,0 +1,79 @@
+@main(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  v7tVelG: int = id c;
+  jmp .block.3;
+.block.7:
+  print d;
+  jmp .block.23;
+.block.10:
+  jmp .block.12;
+.block.16:
+  jmp .block.22;
+.block.19:
+  jmp .block.22;
+.block.21:
+.block.22:
+  _t22: bool = const true;
+  _t23: bool = not _t22;
+  vjKre6a: bool = id _t23;
+.block.23:
+  print e;
+.block.4:
+  _t4: int = const 0;
+  _t5: int = add c _t4;
+  _t6: int = const 1;
+  _t7: int = add _t5 _t6;
+  v7tVelG: int = add v7tVelG _t7;
+.block.3:
+  _t0: int = const -31;
+  _t1: int = const 32;
+  _t2: int = add _t0 _t1;
+  _t3: bool = lt v7tVelG _t2;
+  br _t3 .block.6 .block.24;
+.block.6:
+.block.8:
+  print b;
+  _t8: bool = const true;
+  v9fMU2I: bool = id _t8;
+  _t9: bool = const true;
+  br _t9 .block.9 .block.11;
+.block.9:
+  nop break;
+  jmp .block.5;
+.block.11:
+  print b;
+.block.12:
+  _t10: int = mul c v7tVelG;
+  _t11: int = const -92;
+  _t12: int = mul _t11 v7tVelG;
+  _t13: int = add _t12 v7tVelG;
+  _t14: int = mul _t13 c;
+  _t15: int = add _t10 _t14;
+  _t16: int = const 110;
+  _t17: bool = eq _t15 _t16;
+  br _t17 .block.17 .block.13;
+.block.13:
+  _t18: int = const -1930;
+  _t19: bool = eq _t15 _t18;
+  br _t19 .block.18 .block.14;
+.block.14:
+  _t20: int = const -3036;
+  _t21: bool = eq _t15 _t20;
+  br _t21 .block.20 .block.15;
+.block.15:
+  nop continue;
+  jmp .block.4;
+.block.17:
+  print e;
+  jmp .block.22;
+.block.18:
+  nop break;
+.block.5:
+.block.24:
+  print c;
+  jmp .block.1;
+.block.20:
+  ret;
+.block.1:
+}

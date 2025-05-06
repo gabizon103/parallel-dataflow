@@ -1,0 +1,8 @@
+@main(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  print a;
+  print a;
+  print e;
+.block.1:
+}
