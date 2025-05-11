@@ -53,9 +53,9 @@ We evaluated our implementations on the Bril core benchmarks and a series of 50 
 ## Average Runtime
 The first metric we were interested in was average runtime for each pass, with each type of algorithm, across all benchmarks. 
 
-![alt text](../perf_rand/averages_runtime.png)
+![alt text](./averages_runtime.png)
 In general, it seems our parallel algorithm provides at least some speedup over the sequential one. It also seems that our heuristics for all of our hybrid algorithms were quite bad, since at best they are on par with the fully parallel implementation. In the case of the reaching definitions analysis all of the hybrid algorithms are actually slower than the sequential one, so our heuristics were probably wrong more often than they were right. It is also possible that different heuristics are required for different types of analyses, which we did not explore.
 
 We also were interested in evaluating our algorithms on specific benchmarks.
-![alt text](../perf_rand_small/averages_by_bmark_ReachingDefinitions_runtime.png)
+![alt text](../averages_by_bmark_ReachingDefinitions_runtime.png)
 We examined the performance of reaching definitions, with each algorithm, on ten random benchmarks. The results are promising; at best, the parallel algorithm far outperforms the sequential one, and at worst the sequential algorithm slightly outperforms the parallel one. Out of these ten random benchmarks, sequential outperforms parallel on only one.
