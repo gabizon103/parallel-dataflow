@@ -1,9 +1,11 @@
 use argh::FromArgs;
 use impls::{Executor, Pass};
+use itertools::Itertools;
 use serde::Serialize;
 use simple_logger::SimpleLogger;
 use std::process::Command;
 use strum::IntoEnumIterator;
+use std::ffi::OsString;
 
 #[derive(FromArgs)]
 /// Generate performance statistics for all benchmarks in a directory
@@ -25,6 +27,7 @@ struct Args {
 
 #[derive(Serialize)]
 struct Record {
+    name: String,
     pass: Pass,
     executor: Executor,
     iteration: usize,
@@ -60,13 +63,15 @@ fn main() {
 
     for entry in dir {
         let entry = entry.unwrap();
+        let entry_name = entry.file_name().clone();
+        let entry_name = entry_name.to_str().unwrap().split(".").collect_vec()[0];
         if entry.path().extension().unwrap() == "bril" {
             log::info!(
                 "Running ({}x) benchmarks for {}",
                 args.iterations,
                 entry.path().display(),
             );
-            for pass in Pass::iter() {
+            for pass in Pass::iter().filter(|pass| !matches!(pass, Pass::ConstProp)) {
                 for executor in Executor::iter() {
                     for iter in 0..args.iterations {
                         // Dispatch a new process for each pass and executor to avoid cache
@@ -96,6 +101,7 @@ fn main() {
                         }
 
                         wtr.serialize(Record {
+                            name: entry_name.into(),
                             pass,
                             executor,
                             iteration: iter,
