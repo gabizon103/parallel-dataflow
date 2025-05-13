@@ -34,6 +34,12 @@ At a high level, our idea is to let multiple threads process different blocks of
 # Implementation
 All of our implementations are written in Rust and operate on Bril programs.
 
+To make our code less dependent on the specific implementation of the worklist algorithm (i.e. parallel, sequential, mixed, etc.), our code has a flexible trait system. First, we have a trait called `DataflowExecutor`, parameterized on a generic type `Pass`. Given an implementation of the function `cfg`, which runs a worklist algorithm dictated by `Pass` on a control-flow graph `CFG` object, `DataflowExecutor` provides the function `run` that will run dataflow on all functions within a Bril program and concatenate the results for emission to `stdout`.
+
+Here, `Pass` is meant to be a generic type representing the kinds of analyses a compiler might use: reaching definitions, constant propagation, liveness analysis, etc. Hence, an element in `Pass` must implement the framework we learned in class, here encoded as a trait called `DataflowSpec`. This interface requires its objects to implement a `init`, `meet`, and `transfer` functions.
+
+Finally, because every worklist implementation must use this same trait, we required both `DataflowExecutor` and `Pass` to implement `Send + Sync`, which allows objects and their references to be transferrable across threads.
+
 ## Sequential
 Our sequential algorithm is a straightforward implementation of the pseudocode given above.
 
@@ -47,13 +53,6 @@ This version of the algorithm takes an integer threshold as an additional input;
 
 ## Parallel Across Functions
 We also implemented another type of algorithm which parallelizes dataflow analysis across functions. In a Bril file with 4 functions, this algorithm will assign a CFG to 4 threads and achieve parallelism that way. This implementation is likely more useful in an ahead of time compiler rather than a JIT, but we thought it would interesting to explore what kind of speedups we can achieve with a different parallelism scheme.
-
-## Code Organization
-To make our code less dependent on the specific implementation of the worklist algorithm (i.e. parallel, sequential, mixed, etc.), our code has a flexible trait system. First, we have a trait called `DataflowExecutor`, parameterized on a generic type `Pass`. Given an implementation of the function `cfg`, which runs a worklist algorithm dictated by `Pass` on a control-flow graph `CFG` object, `DataflowExecutor` provides the function `run` that will run dataflow on all functions within a Bril program and concatenate the results for emission to `stdout`.
-
-Here, `Pass` is meant to be a generic type representing the kinds of analyses a compiler might use: reaching definitions, constant propagation, liveness analysis, etc. Hence, an element in `Pass` must implement the framework we learned in class, here encoded as a trait called `DataflowSpec`. This interface requires its objects to implement a `init`, `meet`, and `transfer` functions.
-
-Finally, because every worklist implementation must use this same trait, we required both `DataflowExecutor` and `Pass` to implement `Send + Sync`, which allows objects and their references to be transferrable across threads.
 
 # Testing
 For correctness testing, we implemented a textual output for each of our dataflow analyses. Then, for each parallel algorithm we checked that its output matches the sequential output for all of the tests in the Bril core benchmarks, and our randomly generated Bril programs. We were confident our sequential algorithm was correct and were mainly concerned with bugs arising from parallelization.
