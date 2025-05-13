@@ -79,3 +79,19 @@ These results are somewhat disappointing, and serve as a good insight as to why 
 
 This trend holds true across the other analyses as well. 
 ![alt text](averages_runtime_par.png)
+
+# Considerations Along the Way
+
+Out of the gate, one of our biggest concerns was the correctness of the parallel version of the worklist algorithm. In particular, our experience with multithreading was limited to pre-defined, known algorithms, often containing highly independent sub-problems that could be discharged to different threads (e.g. parallel merge sort). On the other hand, the parallelization of the worklist algorithm was hard in the sense that the threads are operating on highly inter-dependent data (the `in` and `out` arrays), and there was no clear way to "divide and conquer" the problem.
+
+This uncertainty poses two issues with respect to correctness:
+- What guarantee do we have that, if the threads terminate, the `in` / `out` arrays have the right values?
+- How do we know the threads won't enter deadlock?
+
+As far as that first question, we had some intuition that the "clobbering" method would be fine. That is, any number of threads could each pull from the worklist queue and, as long as the threads each added their successors at the end, things would work out. Indeed, our correctness tests on the benchmarks suite supports this. That said, we are not sure how to prove the correctness of this method. 
+
+Next, because our final implementation did not use any locks, we knew deadlocking wasn't an option. However, our original implementation did include locks, so we wanted to provide a brief rationale about why deadlock (probably!) wouldn't occur there either.
+
+First, note that a deadlock probably would occur if we did not implement a `RWLock` for each `out[b]`. In the event that there were two blocks `b1` and `b2` such that blocks `p1` and `p2` are predecessors of each `b1` and `b2`, then it's possible that one thread could completely lock `out[p1]` and the other thread could lock `out[p2]`, resulting in a deadlock. So, we certainly need to be able to have unlimited read access to these fields.
+
+So, if deadlock did occur, it would be where a thread `t1` is trying to write to `out[b]` in the line `out[b] = transfer(b, in[b])`. But, if this is a case of deadlock, there must be another thread `t2` that owns write access to `in[b]`. The only way this could happen is if there were two threads that are operating on block `b` simultaneously, which we can easily disallow. So, as long as we don't allow two different threads to perform the worklist algorithm on the same block, we can avoid deadlock!
