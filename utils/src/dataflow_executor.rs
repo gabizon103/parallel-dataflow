@@ -2,7 +2,11 @@ use crate::DataflowSpec;
 use bril_utils::{CFG, CanonicalizeLiterals, Dataflow, Pass, bril_rs::Program};
 use bril2json::parse_abstract_program_from_read;
 use itertools::Itertools;
-use std::time::{Duration, Instant};
+use std::{
+    sync::{Arc, Mutex},
+    thread::{self},
+    time::{Duration, Instant},
+};
 
 pub struct PassTiming {
     pub loadtime: Duration,
@@ -11,13 +15,15 @@ pub struct PassTiming {
 
 pub trait DataflowExecutor<Pass>
 where
-    Pass: DataflowSpec,
+    Pass: DataflowSpec + Send + Sync,
+    Self: Send + Sync,
 {
     /// Run the dataflow pass on the input program and perform performance measurements
     fn run<R: std::io::Read>(
         &self,
         pass: &Pass,
         input: R,
+        par_func_analysis: bool,
     ) -> (PassTiming, Vec<Dataflow<Pass::Val>>) {
         let start = Instant::now();
 
@@ -30,17 +36,52 @@ where
         let prog = CanonicalizeLiterals.run(prog);
 
         let loadtime = start.elapsed();
-        let start = Instant::now();
 
-        let results = prog
-            .functions
-            .iter()
-            .map(|f| self.cfg(pass, CFG::from(f.clone())))
-            .collect_vec();
+        if par_func_analysis {
+            let start = Instant::now();
+            let shared_results = Arc::new(Mutex::new(Vec::new()));
 
-        let runtime = start.elapsed();
+            thread::scope(|thread_spawner| {
+                prog.functions
+                    .iter()
+                    .map(|f| CFG::from(f.clone()))
+                    .enumerate()
+                    .for_each(|(i, cfg)| {
+                        let local_results_ref = Arc::clone(&shared_results);
+                        thread_spawner.spawn(move || {
+                            local_results_ref
+                                .lock()
+                                .unwrap()
+                                .push((i, self.cfg(pass, cfg)));
+                        });
+                    })
+            });
 
-        (PassTiming { loadtime, runtime }, results)
+            let results = Arc::try_unwrap(shared_results)
+                .unwrap()
+                .into_inner()
+                .unwrap()
+                .into_iter()
+                .sorted_by(|(i, _), (j, _)| i.cmp(j))
+                .map(|(_, r)| r)
+                .collect_vec();
+
+            let runtime = start.elapsed();
+
+            (PassTiming { loadtime, runtime }, results)
+        } else {
+            let start = Instant::now();
+
+            let results = prog
+                .functions
+                .iter()
+                .map(|f| self.cfg(pass, CFG::from(f.clone())))
+                .collect_vec();
+
+            let runtime = start.elapsed();
+
+            (PassTiming { loadtime, runtime }, results)
+        }
     }
 
     fn cfg(&self, pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val>;

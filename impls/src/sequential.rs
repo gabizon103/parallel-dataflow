@@ -8,7 +8,7 @@ pub struct SequentialExecutor;
 
 impl<Pass> DataflowExecutor<Pass> for SequentialExecutor
 where
-    Pass: DataflowSpec,
+    Pass: DataflowSpec + Send + Sync,
 {
     fn cfg(&self, pass: &Pass, cfg: CFG) -> Dataflow<Pass::Val> {
         log::debug!("Function {}", cfg.name());
