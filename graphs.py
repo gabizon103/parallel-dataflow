@@ -102,7 +102,10 @@ def aggregate_bar_by_benchmark(df, ycol, out_dir, pass_, limit=None):
         plt.savefig(f"{out_dir}/averages_by_bmark_{pass_}_{ycol}.png")
 
 # Create a violin plot of the data, grouped by pass and colored by executor.
-def violin(df, ycol, out_dir, limit=None):
+def violin(df, ycol, out_dir, pass_="", limit=None):
+    if pass_ != "":
+        df = df[df["pass"] == pass_]
+
     df = df.drop(columns=['name'])
     
     if limit:
@@ -119,16 +122,16 @@ def violin(df, ycol, out_dir, limit=None):
     # Create a violin plot
     plt.figure(figsize=(10, 6))
     sns.violinplot(x="pass", y=ycol, hue="executor", data=df)
-    plt.title(f"{ycol.title()} by Pass and Executor")
+    plt.title(f"{ycol.title()} for {pass_} by Executor")
     plt.xlabel("Pass")
     plt.ylabel("Time (ns)")
     plt.ylim(bottom=0)
     plt.legend(title="Executor")
     plt.tight_layout()
     if limit:
-        plt.savefig(f"{out_dir}/violin_{ycol}_top_{limit}.png")
+        plt.savefig(f"{out_dir}/violin_{ycol}_{pass_}_top_{limit}.png")
     else:
-        plt.savefig(f"{out_dir}/violin_{ycol}.png")
+        plt.savefig(f"{out_dir}/violin_{ycol}_{pass_}.png")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot graphs from performance data.")
@@ -149,7 +152,9 @@ if __name__ == "__main__":
     aggregate_bar(df, "loadtime", args.out_dir, limit=3)
     aggregate_bar_by_benchmark(df, "runtime", args.out_dir, "ReachingDefinitions")
 
-    violin(df, "runtime", args.out_dir)
+    violin(df, "runtime", args.out_dir, "ReachingDefinitions")
+    violin(df, "runtime", args.out_dir, "LiveVariables")
+    violin(df, "runtime", args.out_dir, "AvailableExpr")
     violin(df, "loadtime", args.out_dir)
     violin(df, "runtime", args.out_dir, limit=3)
     violin(df, "loadtime", args.out_dir, limit=3)
