@@ -11,6 +11,9 @@ pub enum Executor {
     Sequential,
     /// Parallel worklist algorithm
     Parallel,
+    /// Within each function, worklist proceeds sequentially. Parallelization
+    /// occurs across functions.
+    ParallelizedAcrossFunctions,
     /// Mixed worklist algorithm
     Mixed(usize),
 }
@@ -23,6 +26,7 @@ impl FromStr for Executor {
         let simple = match s {
             "sequential" | "seq" => Some(Executor::Sequential),
             "parallel" | "par" => Some(Executor::Parallel),
+            "parallel_across_functions" => Some(Executor::ParallelizedAcrossFunctions),
             _ => None,
         };
 
@@ -46,6 +50,7 @@ impl Display for Executor {
         match self {
             Executor::Sequential => "sequential".fmt(f),
             Executor::Parallel => "parallel".fmt(f),
+            Executor::ParallelizedAcrossFunctions => "parallel_across_functions".fmt(f),
             Executor::Mixed(thresh) => write!(f, "mixed-{thresh}"),
         }
     }
@@ -65,6 +70,7 @@ impl Executor {
         vec![
             Executor::Sequential,
             Executor::Parallel,
+            Executor::ParallelizedAcrossFunctions,
             Executor::Mixed(10),
             Executor::Mixed(15),
             Executor::Mixed(20),

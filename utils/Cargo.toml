@@ -7,3 +7,5 @@ edition = "2024"
 bril-utils.workspace = true
 itertools.workspace = true
 bril2json.workspace = true
+rayon.workspace = true
+log.workspace = true
