@@ -1,0 +1,2179 @@
+@rand16(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  print c;
+  _t0: int = const -1;
+  _t1: int = const -1;
+  _t2: int = add _t0 _t1;
+  _t3: int = const -1;
+  _t4: int = add _t2 _t3;
+  vVgdHKY: int = id _t4;
+.block.5:
+  _t14: int = const 98;
+  _t15: int = const -45;
+  _t16: int = add b _t15;
+  _t17: int = add _t16 a;
+  _t18: int = mul _t14 _t17;
+  _t19: int = const 3936;
+  _t20: bool = eq _t18 _t19;
+  br _t20 .block.15 .block.6;
+.block.6:
+  _t21: int = const -4415;
+  _t22: bool = eq _t18 _t21;
+  br _t22 .block.16 .block.7;
+.block.7:
+  _t23: int = const 9779;
+  _t24: bool = eq _t18 _t23;
+  br _t24 .block.33 .block.8;
+.block.10:
+  print e;
+  jmp .block.12;
+.block.17:
+  _t27: int = const -27;
+  _t28: int = const -27;
+  _t29: int = const -27;
+  _t30: int = add _t28 _t29;
+  _t31: bool = eq _t27 _t30;
+  vImcJL4: bool = id _t31;
+  jmp .block.19;
+.block.26:
+  print d;
+  jmp .block.28;
+.block.40:
+  ret;
+.block.41:
+.block.49:
+  _t104: int = const -36;
+  _t105: int = const -86;
+  _t106: int = sub _t104 _t105;
+  _t107: int = const 16;
+  _t108: int = add _t106 _t107;
+  _t109: int = const 82;
+  _t110: int = const -6;
+  _t111: int = const -68;
+  _t112: int = add _t110 _t111;
+  _t113: int = add _t109 _t112;
+  _t114: int = const -21;
+  _t115: bool = lt _t113 _t114;
+  _t116: bool = const true;
+  _t117: int = const -22;
+  _t118: int = const -69;
+  _t119: bool = ge _t117 _t118;
+  _t120: bool = or _t116 _t119;
+  _t121: bool = or _t115 _t120;
+  vWS935O: bool = id _t121;
+.block.50:
+  _t122: int = const -15;
+  _t123: int = const 45;
+  _t124: bool = lt _t122 _t123;
+  _t125: int = const 17;
+  _t126: int = const 47;
+  _t127: int = sub _t125 _t126;
+  _t128: int = const 18;
+  _t129: bool = lt _t127 _t128;
+  _t130: bool = or _t124 _t129;
+  br _t130 .block.51 .block.52;
+.block.51:
+  _t131: int = const -51;
+  _t132: int = const 10;
+  _t133: int = add _t131 _t132;
+  _t134: int = const 90;
+  _t135: bool = eq _t133 _t134;
+  vWS935O: bool = id _t135;
+  jmp .block.53;
+.block.52:
+  _t136: int = const 72;
+  _t137: int = const -100;
+  _t138: int = const 9;
+  _t139: int = add _t137 _t138;
+  _t140: bool = ge _t136 _t139;
+  _t141: int = const 15;
+  _t142: int = const 15;
+  _t143: bool = eq _t141 _t142;
+  _t144: bool = or _t140 _t143;
+  _t145: bool = not _t144;
+  vWS935O: bool = id _t145;
+.block.53:
+  _t146: int = const -44;
+  vwqv5IS: int = id _t146;
+.block.56:
+  _t152: int = const -12;
+  _t153: int = const -12;
+  _t154: bool = eq _t152 _t153;
+  br _t154 .block.65 .block.57;
+.block.57:
+  _t155: int = const -12;
+  _t156: bool = eq _t152 _t155;
+  br _t156 .block.66 .block.58;
+.block.58:
+  _t157: int = const -12;
+  _t158: bool = eq _t152 _t157;
+  br _t158 .block.67 .block.59;
+.block.59:
+  _t159: int = const -12;
+  _t160: bool = eq _t152 _t159;
+  br _t160 .block.68 .block.60;
+.block.60:
+  _t161: int = const -12;
+  _t162: bool = eq _t152 _t161;
+  br _t162 .block.69 .block.61;
+.block.61:
+  _t163: int = const -12;
+  _t164: bool = eq _t152 _t163;
+  br _t164 .block.70 .block.62;
+.block.62:
+  _t165: int = const -12;
+  _t166: bool = eq _t152 _t165;
+  br _t166 .block.71 .block.63;
+.block.63:
+  _t167: int = const -12;
+  _t168: bool = eq _t152 _t167;
+  br _t168 .block.72 .block.64;
+.block.3:
+  _t5: int = const -1;
+  _t6: int = const -1;
+  _t7: int = add _t5 _t6;
+  _t8: int = add c b;
+  _t9: int = mul _t7 _t8;
+  _t10: int = const 300;
+  _t11: int = add _t9 _t10;
+  _t12: int = const 1;
+  _t13: int = add _t11 _t12;
+  vVgdHKY: int = add vVgdHKY _t13;
+.block.86:
+  _t285: int = const 79;
+  _t286: bool = lt vVgdHKY _t285;
+  br _t286 .block.15 .block.4;
+.block.4:
+.block.87:
+  jmp .block.1;
+.block.15:
+  _t25: bool = const true;
+  e: bool = id _t25;
+  print c;
+.block.16:
+  print a;
+  _t26: bool = const true;
+  vImcJL4: bool = id _t26;
+.block.18:
+  _t32: bool = const true;
+  vImcJL4: bool = id _t32;
+.block.19:
+  _t33: int = const 65;
+  _t34: int = add vVgdHKY _t33;
+  _t35: int = const 9;
+  _t36: int = add _t34 _t35;
+  _t37: int = const -2;
+  _t38: int = add _t36 _t37;
+  v6JoAj9: int = id _t38;
+.block.22:
+  _t47: int = const -38;
+  _t48: bool = eq b _t47;
+  br _t48 .block.25 .block.23;
+.block.23:
+  _t49: int = const 3;
+  _t50: bool = eq b _t49;
+  br _t50 .block.29 .block.24;
+.block.8:
+  print a;
+  print vVgdHKY;
+  br e .block.9 .block.13;
+.block.9:
+  print a;
+.block.11:
+  print e;
+.block.12:
+  jmp .block.14;
+.block.13:
+  print vVgdHKY;
+.block.14:
+.block.85:
+  jmp .block.3;
+.block.20:
+  _t39: int = const 77;
+  _t40: int = mul _t39 vVgdHKY;
+  _t41: int = const -41;
+  _t42: int = add _t40 _t41;
+  _t43: int = const 272;
+  _t44: int = add _t42 _t43;
+  _t45: int = const 1;
+  _t46: int = add _t44 _t45;
+  v6JoAj9: int = add v6JoAj9 _t46;
+.block.31:
+  _t53: int = const -80;
+  _t54: int = const 20;
+  _t55: int = mul _t53 _t54;
+  _t56: int = const 1670;
+  _t57: int = add _t55 _t56;
+  _t58: bool = lt v6JoAj9 _t57;
+  br _t58 .block.25 .block.21;
+.block.21:
+.block.32:
+.block.33:
+  print d;
+  _t59: int = const -11;
+  vKOsazX: int = id _t59;
+  jmp .block.36;
+.block.25:
+.block.27:
+  _t51: int = const 93;
+  _t52: bool = le _t51 b;
+  e: bool = id _t52;
+.block.28:
+  e: bool = id d;
+.block.29:
+  print v6JoAj9;
+.block.24:
+  print d;
+.block.30:
+  jmp .block.20;
+.block.34:
+  _t60: int = const 66;
+  _t61: int = const -63;
+  _t62: int = const -5;
+  _t63: int = sub _t61 _t62;
+  _t64: int = add _t60 _t63;
+  vKOsazX: int = add vKOsazX _t64;
+.block.38:
+  _t75: int = const -48;
+  _t76: int = const 38;
+  _t77: int = add _t75 _t76;
+  _t78: bool = lt vKOsazX _t77;
+  br _t78 .block.36 .block.35;
+.block.35:
+.block.39:
+.block.42:
+  print a;
+  _t79: int = const 94;
+  _t80: int = mul _t79 vVgdHKY;
+  _t81: int = const 50;
+  _t82: int = mul _t81 vVgdHKY;
+  _t83: int = const 32;
+  _t84: int = add _t82 _t83;
+  _t85: int = add _t80 _t84;
+  _t86: bool = lt _t85 b;
+  br _t86 .block.43 .block.44;
+.block.36:
+  _t65: int = const -66;
+  _t66: int = const -86;
+  _t67: int = sub _t65 _t66;
+  _t68: int = const -83;
+  _t69: int = div _t67 _t68;
+  _t70: int = const -63;
+  _t71: int = const -5;
+  _t72: int = sub _t70 _t71;
+  _t73: int = const -48;
+  _t74: bool = gt _t72 _t73;
+  vbJuE7L: bool = id _t74;
+.block.37:
+  jmp .block.34;
+.block.43:
+  print e;
+  jmp .block.45;
+.block.44:
+  print vVgdHKY;
+.block.45:
+  _t87: int = const -45;
+  _t88: int = add b _t87;
+  _t89: int = add a _t88;
+  _t90: int = const -1;
+  _t91: int = const 82;
+  _t92: int = mul _t91 vVgdHKY;
+  _t93: int = const 28;
+  _t94: int = add _t92 _t93;
+  _t95: int = mul _t90 _t94;
+  _t96: int = mul _t95 vVgdHKY;
+  _t97: int = const 95;
+  _t98: int = add _t97 a;
+  _t99: int = mul _t98 vVgdHKY;
+  _t100: int = add a a;
+  _t101: int = add _t99 _t100;
+  _t102: int = add _t96 _t101;
+  _t103: bool = eq _t89 _t102;
+  br _t103 .block.46 .block.47;
+.block.46:
+  print a;
+  jmp .block.48;
+.block.47:
+  print vVgdHKY;
+.block.48:
+  jmp .block.49;
+.block.54:
+  _t147: int = const -44;
+  _t148: int = const 44;
+  _t149: int = add _t147 _t148;
+  _t150: int = const 1;
+  _t151: int = add _t149 _t150;
+  vwqv5IS: int = add vwqv5IS _t151;
+.block.74:
+  _t236: int = const -68;
+  _t237: int = const -6;
+  _t238: int = add _t236 _t237;
+  _t239: int = const -15;
+  _t240: int = add _t238 _t239;
+  _t241: int = const 41;
+  _t242: int = const 4;
+  _t243: int = mul _t241 _t242;
+  _t244: int = mul _t240 _t243;
+  _t245: int = const 14553;
+  _t246: int = add _t244 _t245;
+  _t247: bool = lt vwqv5IS _t246;
+  br _t247 .block.65 .block.55;
+.block.55:
+.block.75:
+  _t248: int = const 76;
+  vthdu5M: int = id _t248;
+.block.78:
+  _t250: int = const -15;
+  _t251: int = const -15;
+  _t252: bool = eq _t250 _t251;
+  br _t252 .block.80 .block.79;
+.block.65:
+  _t179: int = const -81;
+  _t180: bool = ge _t179 vwqv5IS;
+  vWS935O: bool = id _t180;
+.block.66:
+  _t181: bool = const true;
+  vMz35fu: bool = id _t181;
+.block.67:
+  _t182: int = const -42;
+  _t183: int = const -65;
+  _t184: int = add vwqv5IS _t183;
+  _t185: int = const 41;
+  _t186: int = sub _t184 _t185;
+  _t187: int = div _t182 _t186;
+  _t188: int = const -56;
+  _t189: int = mul _t188 vwqv5IS;
+  _t190: int = mul _t189 vwqv5IS;
+  _t191: int = const 65;
+  _t192: int = add _t190 _t191;
+  _t193: bool = lt _t187 _t192;
+  vDvRFAz: bool = id _t193;
+.block.68:
+  _t194: bool = const true;
+  vWS935O: bool = id _t194;
+.block.69:
+  _t195: int = const -84;
+  _t196: int = mul _t195 vwqv5IS;
+  _t197: int = const -50;
+  _t198: int = add _t196 _t197;
+  _t199: int = const 52;
+  _t200: int = add _t198 _t199;
+  _t201: int = const -19;
+  _t202: bool = gt _t200 _t201;
+  _t203: int = const -79;
+  _t204: int = const -91;
+  _t205: int = const -73;
+  _t206: int = const 79;
+  _t207: int = add _t205 _t206;
+  _t208: int = add _t204 _t207;
+  _t209: bool = lt _t203 _t208;
+  _t210: bool = or _t202 _t209;
+  v8foAu3: bool = id _t210;
+.block.70:
+  _t211: int = const -65;
+  _t212: int = mul _t211 vwqv5IS;
+  _t213: int = const 70;
+  _t214: int = const -45;
+  _t215: int = sub _t213 _t214;
+  _t216: int = mul _t215 vwqv5IS;
+  _t217: int = const 55;
+  _t218: int = mul _t217 vwqv5IS;
+  _t219: int = add _t218 vwqv5IS;
+  _t220: int = add _t216 _t219;
+  _t221: int = add _t212 _t220;
+  _t222: int = mul vwqv5IS vwqv5IS;
+  _t223: int = const -31;
+  _t224: int = add _t222 _t223;
+  _t225: bool = le _t221 _t224;
+  v1BlgEA: bool = id _t225;
+.block.71:
+  _t226: int = const 68;
+  _t227: int = const 55;
+  _t228: int = add _t226 _t227;
+  _t229: int = const -37;
+  _t230: int = add _t228 _t229;
+  _t231: int = const -84;
+  _t232: bool = ge _t230 _t231;
+  vhRSYOP: bool = id _t232;
+.block.72:
+  _t233: int = const -15;
+  _t234: int = const 45;
+  _t235: bool = lt _t233 _t234;
+  vWS935O: bool = id _t235;
+.block.64:
+  _t169: int = const 93;
+  _t170: int = const 84;
+  _t171: int = sub _t170 vwqv5IS;
+  _t172: int = mul _t171 vwqv5IS;
+  _t173: int = const -68;
+  _t174: int = mul _t173 vwqv5IS;
+  _t175: int = const -80;
+  _t176: int = add _t174 _t175;
+  _t177: int = add _t172 _t176;
+  _t178: bool = le _t169 _t177;
+  vWS935O: bool = id _t178;
+.block.73:
+  jmp .block.54;
+.block.76:
+  _t249: int = const 49;
+  vthdu5M: int = add vthdu5M _t249;
+.block.82:
+  _t269: int = const 8;
+  _t270: int = const -44;
+  _t271: int = const 99;
+  _t272: int = mul _t270 _t271;
+  _t273: int = mul _t269 _t272;
+  _t274: int = const 34925;
+  _t275: int = add _t273 _t274;
+  _t276: bool = lt vthdu5M _t275;
+  br _t276 .block.80 .block.77;
+.block.77:
+.block.83:
+  _t277: int = const -3;
+  _t278: int = const 70;
+  _t279: int = const 73;
+  _t280: int = mul _t278 _t279;
+  _t281: int = const 65;
+  _t282: int = const 69;
+  _t283: int = add _t281 _t282;
+  _t284: bool = gt _t280 _t283;
+  vWS935O: bool = id _t284;
+.block.84:
+  jmp .block.8;
+.block.80:
+  _t260: int = const 68;
+  _t261: int = const -87;
+  _t262: int = add _t260 _t261;
+  _t263: int = const 93;
+  _t264: int = const 3;
+  _t265: int = add _t263 _t264;
+  _t266: int = const -56;
+  _t267: int = add _t265 _t266;
+  _t268: bool = eq _t262 _t267;
+  vWS935O: bool = id _t268;
+.block.79:
+  _t253: int = const -68;
+  _t254: int = const 16;
+  _t255: int = const -36;
+  _t256: int = const -86;
+  _t257: int = sub _t255 _t256;
+  _t258: int = add _t254 _t257;
+  _t259: bool = lt _t253 _t258;
+  vWS935O: bool = id _t259;
+.block.81:
+  jmp .block.76;
+.block.1:
+}
+@rand17(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  print c;
+.block.7:
+  _t13: int = const -64;
+  _t14: int = const 70;
+  _t15: int = sub _t13 _t14;
+  _t16: int = const -49;
+  _t17: int = sub _t15 _t16;
+  _t18: int = const -85;
+  _t19: bool = eq _t17 _t18;
+  br _t19 .block.10 .block.8;
+.block.3:
+.block.5:
+  _t5: int = const -49;
+  _t6: int = const -18;
+  _t7: bool = le _t5 _t6;
+  vW8ZU2H: bool = id _t7;
+  jmp .block.6;
+.block.4:
+  _t0: int = const 13;
+  _t1: int = const 44;
+  _t2: int = add _t0 _t1;
+  _t3: int = const 35;
+  _t4: bool = le _t2 _t3;
+  vW8ZU2H: bool = id _t4;
+.block.6:
+  _t8: int = const -90;
+  _t9: int = const -78;
+  _t10: int = add _t8 _t9;
+  _t11: int = const -90;
+  _t12: bool = eq _t10 _t11;
+  vW8ZU2H: bool = id _t12;
+  jmp .block.13;
+.block.8:
+  _t20: int = const -85;
+  _t21: bool = eq _t17 _t20;
+  br _t21 .block.11 .block.9;
+.block.9:
+  _t22: int = const -13;
+  _t23: int = const -74;
+  _t24: int = const -19;
+  _t25: int = sub _t23 _t24;
+  _t26: int = sub _t22 _t25;
+  _t27: int = const 68;
+  _t28: int = const -86;
+  _t29: int = sub _t27 _t28;
+  _t30: int = const -13;
+  _t31: int = const -74;
+  _t32: int = const -19;
+  _t33: int = sub _t31 _t32;
+  _t34: int = sub _t30 _t33;
+  _t35: int = sub _t29 _t34;
+  _t36: bool = eq _t26 _t35;
+  _t37: bool = not _t36;
+  vtQrDDq: bool = id _t37;
+  jmp .block.12;
+.block.10:
+  _t38: int = const -19;
+  _t39: int = const 19;
+  _t40: int = sub _t38 _t39;
+  _t41: int = const 67;
+  _t42: int = const -41;
+  _t43: int = add _t41 _t42;
+  _t44: int = const -13;
+  _t45: int = const 73;
+  _t46: int = add _t44 _t45;
+  _t47: int = div _t43 _t46;
+  _t48: bool = ge _t40 _t47;
+  vQgyhRs: bool = id _t48;
+  jmp .block.12;
+.block.11:
+  _t49: int = const -76;
+  _t50: int = const 11;
+  _t51: int = const 92;
+  _t52: int = add _t50 _t51;
+  _t53: bool = le _t49 _t52;
+  v2GByKf: bool = id _t53;
+.block.12:
+  _t54: int = const 63;
+  _t55: int = const 65;
+  _t56: bool = le _t54 _t55;
+  vNcsYJB: bool = id _t56;
+.block.13:
+  _t57: int = const -1;
+  _t58: int = const 41;
+  _t59: int = div _t57 _t58;
+  _t60: int = const -55;
+  _t61: int = const 34;
+  _t62: int = div _t60 _t61;
+  _t63: int = const -59;
+  _t64: int = const -83;
+  _t65: int = const 18;
+  _t66: int = div _t64 _t65;
+  _t67: int = sub _t63 _t66;
+  _t68: int = div _t62 _t67;
+  _t69: bool = le _t59 _t68;
+  br _t69 .block.14 .block.34;
+.block.14:
+  _t70: int = const -72;
+  _t71: int = const 27;
+  _t72: bool = ge _t70 _t71;
+  br _t72 .block.15 .block.16;
+.block.15:
+  _t73: int = const 41;
+  _t74: int = const -59;
+  _t75: bool = eq _t73 _t74;
+  vsKoxtB: bool = id _t75;
+  jmp .block.17;
+.block.16:
+  _t76: int = const -59;
+  _t77: int = const -83;
+  _t78: int = const 18;
+  _t79: int = div _t77 _t78;
+  _t80: int = sub _t76 _t79;
+  _t81: int = const -47;
+  _t82: int = const -30;
+  _t83: int = sub _t81 _t82;
+  _t84: bool = ge _t80 _t83;
+  vHIRm1F: bool = id _t84;
+.block.17:
+  _t85: int = const -34;
+  _t86: int = const -83;
+  _t87: int = const 18;
+  _t88: int = div _t86 _t87;
+  _t89: bool = lt _t85 _t88;
+  br _t89 .block.18 .block.19;
+.block.18:
+  _t90: int = const 1;
+  _t91: int = const 77;
+  _t92: int = div _t90 _t91;
+  _t93: int = const -27;
+  _t94: int = div _t92 _t93;
+  _t95: int = const 77;
+  _t96: bool = gt _t94 _t95;
+  vLXPqOT: bool = id _t96;
+  jmp .block.20;
+.block.19:
+  _t97: int = const -34;
+  _t98: int = const -83;
+  _t99: int = const 18;
+  _t100: int = div _t98 _t99;
+  _t101: bool = lt _t97 _t100;
+  vWqI37V: bool = id _t101;
+.block.20:
+.block.22:
+  _t111: int = const -7;
+  _t112: int = const -82;
+  _t113: int = const 93;
+  _t114: int = sub _t112 _t113;
+  _t115: int = sub _t111 _t114;
+  _t116: int = const 84;
+  _t117: int = const -84;
+  _t118: int = add _t116 _t117;
+  _t119: bool = lt _t115 _t118;
+  vLic3tC: bool = id _t119;
+  jmp .block.23;
+.block.21:
+  _t102: int = const -74;
+  _t103: int = const -5;
+  _t104: int = div _t102 _t103;
+  _t105: int = const -11;
+  _t106: int = const -18;
+  _t107: int = add _t105 _t106;
+  _t108: int = sub _t104 _t107;
+  _t109: int = const 75;
+  _t110: bool = le _t108 _t109;
+  vLDN3zR: bool = id _t110;
+.block.23:
+.block.25:
+  _t125: int = const -97;
+  _t126: int = const -66;
+  _t127: int = sub _t125 _t126;
+  _t128: int = const 9;
+  _t129: int = const -35;
+  _t130: int = div _t128 _t129;
+  _t131: bool = ge _t127 _t130;
+  vuw1cxL: bool = id _t131;
+  jmp .block.26;
+.block.24:
+  _t120: int = const -34;
+  _t121: int = const -83;
+  _t122: int = const 18;
+  _t123: int = div _t121 _t122;
+  _t124: bool = lt _t120 _t123;
+  vNu6zDQ: bool = id _t124;
+.block.26:
+  _t132: int = const 67;
+  _t133: int = const 67;
+  _t134: bool = eq _t132 _t133;
+  br _t134 .block.30 .block.27;
+.block.27:
+  _t135: int = const 67;
+  _t136: bool = eq _t132 _t135;
+  br _t136 .block.31 .block.28;
+.block.28:
+  _t137: int = const 67;
+  _t138: bool = eq _t132 _t137;
+  br _t138 .block.32 .block.29;
+.block.29:
+  _t139: int = const -18;
+  _t140: int = const -97;
+  _t141: int = const -10;
+  _t142: int = sub _t140 _t141;
+  _t143: bool = eq _t139 _t142;
+  _t144: bool = const true;
+  _t145: bool = not _t144;
+  _t146: bool = or _t143 _t145;
+  _t147: bool = not _t146;
+  vsMateD: bool = id _t147;
+  jmp .block.33;
+.block.30:
+  _t148: int = const -1;
+  _t149: int = const 41;
+  _t150: int = div _t148 _t149;
+  _t151: int = const -58;
+  _t152: bool = eq _t150 _t151;
+  vf7WK04: bool = id _t152;
+  jmp .block.33;
+.block.31:
+  _t153: int = const -47;
+  _t154: int = const 39;
+  _t155: bool = lt _t153 _t154;
+  vkNvF6S: bool = id _t155;
+  jmp .block.33;
+.block.32:
+  _t156: int = const 8;
+  _t157: int = const 29;
+  _t158: int = sub _t156 _t157;
+  _t159: int = const 6;
+  _t160: int = mul _t158 _t159;
+  _t161: int = const -86;
+  _t162: int = const 84;
+  _t163: int = add _t161 _t162;
+  _t164: bool = eq _t160 _t163;
+  vLPX2yz: bool = id _t164;
+.block.33:
+  jmp .block.44;
+.block.34:
+  _t165: int = const 21;
+  _t166: int = const 25;
+  _t167: int = const 92;
+  _t168: int = sub _t166 _t167;
+  _t169: int = sub _t165 _t168;
+  _t170: int = const 46;
+  _t171: int = const 52;
+  _t172: int = sub _t170 _t171;
+  _t173: bool = ge _t169 _t172;
+  br _t173 .block.35 .block.36;
+.block.35:
+  _t174: int = const -14;
+  _t175: int = const -49;
+  _t176: int = add _t174 _t175;
+  _t177: int = const -57;
+  _t178: bool = le _t176 _t177;
+  _t179: bool = not _t178;
+  vW9g1eJ: bool = id _t179;
+  jmp .block.37;
+.block.36:
+  _t180: int = const 18;
+  _t181: int = const 46;
+  _t182: int = div _t180 _t181;
+  _t183: int = const 18;
+  _t184: int = sub _t182 _t183;
+  _t185: int = const 52;
+  _t186: bool = le _t184 _t185;
+  v5VAK3S: bool = id _t186;
+.block.37:
+.block.39:
+  _t196: int = const -1;
+  _t197: int = const 41;
+  _t198: int = div _t196 _t197;
+  _t199: int = const -55;
+  _t200: int = const 34;
+  _t201: int = div _t199 _t200;
+  _t202: int = const -59;
+  _t203: int = const -83;
+  _t204: int = const 18;
+  _t205: int = div _t203 _t204;
+  _t206: int = sub _t202 _t205;
+  _t207: int = div _t201 _t206;
+  _t208: bool = le _t198 _t207;
+  vAgVdLN: bool = id _t208;
+  jmp .block.40;
+.block.38:
+  _t187: int = const -90;
+  _t188: int = const -23;
+  _t189: int = const -28;
+  _t190: int = div _t188 _t189;
+  _t191: int = sub _t187 _t190;
+  _t192: int = const -72;
+  _t193: int = sub _t191 _t192;
+  _t194: int = const 8;
+  _t195: bool = eq _t193 _t194;
+  vEHhxHt: bool = id _t195;
+.block.40:
+  _t209: int = const 82;
+  _t210: int = const -22;
+  _t211: int = const -64;
+  _t212: int = sub _t210 _t211;
+  _t213: bool = eq _t209 _t212;
+  vZK1GE9: bool = id _t213;
+  br vZK1GE9 .block.41 .block.42;
+.block.41:
+  _t214: int = const 26;
+  _t215: int = const 27;
+  _t216: int = const 1;
+  _t217: int = div _t215 _t216;
+  _t218: int = const -33;
+  _t219: int = add _t217 _t218;
+  _t220: bool = ge _t214 _t219;
+  vZK1GE9: bool = id _t220;
+  jmp .block.43;
+.block.42:
+  _t221: int = const 71;
+  _t222: int = const 88;
+  _t223: int = mul _t221 _t222;
+  _t224: int = const 19;
+  _t225: int = const -58;
+  _t226: int = sub _t224 _t225;
+  _t227: bool = ge _t223 _t226;
+  _t228: int = const 1;
+  _t229: int = const 58;
+  _t230: int = const -36;
+  _t231: int = div _t229 _t230;
+  _t232: int = const -61;
+  _t233: int = const -68;
+  _t234: int = div _t232 _t233;
+  _t235: int = sub _t231 _t234;
+  _t236: bool = ge _t228 _t235;
+  _t237: bool = or _t227 _t236;
+  vZK1GE9: bool = id _t237;
+.block.43:
+.block.44:
+  _t238: bool = ge a c;
+  br _t238 .block.45 .block.80;
+.block.45:
+  print b;
+  _t239: int = const -21;
+  _t240: int = sub _t239 a;
+  _t241: int = const -60;
+  _t242: bool = eq _t240 _t241;
+  br _t242 .block.53 .block.46;
+.block.46:
+  _t243: int = const -73;
+  _t244: bool = eq _t240 _t243;
+  br _t244 .block.57 .block.47;
+.block.47:
+  _t245: int = const 8;
+  _t246: int = const 0;
+  _t247: bool = ge _t245 _t246;
+  vZhMkYn: bool = id _t247;
+  _t248: int = const 19;
+  _t249: bool = eq b _t248;
+  br _t249 .block.50 .block.48;
+.block.48:
+  _t250: int = const -46;
+  _t251: bool = eq b _t250;
+  br _t251 .block.51 .block.49;
+.block.49:
+  print c;
+  jmp .block.52;
+.block.50:
+  print a;
+  jmp .block.52;
+.block.51:
+  print e;
+.block.52:
+  print b;
+  jmp .block.79;
+.block.53:
+  _t252: bool = le c c;
+  br _t252 .block.54 .block.55;
+.block.54:
+  print b;
+  jmp .block.56;
+.block.55:
+  print e;
+.block.56:
+  print c;
+  jmp .block.79;
+.block.57:
+  vrLgZYm: int = id c;
+.block.60:
+  _t260: int = const 7;
+  _t261: bool = eq c _t260;
+  br _t261 .block.68 .block.61;
+.block.61:
+  _t262: int = const 62;
+  _t263: bool = eq c _t262;
+  br _t263 .block.69 .block.62;
+.block.62:
+  _t264: int = const 20;
+  _t265: bool = eq c _t264;
+  br _t265 .block.70 .block.63;
+.block.63:
+  _t266: int = const 5;
+  _t267: bool = eq c _t266;
+  br _t267 .block.72 .block.64;
+.block.64:
+  _t268: int = const 98;
+  _t269: bool = eq c _t268;
+  br _t269 .block.73 .block.65;
+.block.65:
+  _t270: int = const 91;
+  _t271: bool = eq c _t270;
+  br _t271 .block.74 .block.66;
+.block.66:
+  _t272: int = const 84;
+  _t273: bool = eq c _t272;
+  br _t273 .block.75 .block.67;
+.block.71:
+.block.72:
+  print c;
+.block.73:
+  print vrLgZYm;
+.block.74:
+  print e;
+.block.75:
+  _t274: bool = le a c;
+  e: bool = id _t274;
+  print a;
+.block.67:
+  print a;
+.block.76:
+.block.58:
+  _t253: int = const 46;
+  _t254: int = sub _t253 a;
+  _t255: int = add _t254 b;
+  _t256: int = const 104;
+  _t257: int = add _t255 _t256;
+  _t258: int = const 1;
+  _t259: int = add _t257 _t258;
+  vrLgZYm: int = add vrLgZYm _t259;
+.block.77:
+  _t275: int = const -93;
+  _t276: int = const 35;
+  _t277: int = add _t276 b;
+  _t278: int = add _t275 _t277;
+  _t279: int = const 109;
+  _t280: int = add _t278 _t279;
+  _t281: bool = lt vrLgZYm _t280;
+  br _t281 .block.68 .block.59;
+.block.59:
+.block.78:
+.block.79:
+  jmp .block.81;
+.block.68:
+  print c;
+.block.69:
+  print a;
+.block.70:
+  ret;
+.block.80:
+  print d;
+.block.81:
+  _t282: int = const -28;
+  _t283: int = add b _t282;
+  _t284: int = const -37;
+  _t285: bool = eq _t283 _t284;
+  br _t285 .block.86 .block.82;
+.block.82:
+  _t286: int = const -1;
+  _t287: bool = eq _t283 _t286;
+  br _t287 .block.87 .block.83;
+.block.83:
+  _t288: int = const 17;
+  _t289: bool = eq _t283 _t288;
+  br _t289 .block.88 .block.84;
+.block.84:
+  _t290: int = const 19;
+  _t291: bool = eq _t283 _t290;
+  br _t291 .block.89 .block.85;
+.block.85:
+  print a;
+  jmp .block.90;
+.block.86:
+  print a;
+  jmp .block.90;
+.block.87:
+  print e;
+  jmp .block.90;
+.block.88:
+  print e;
+  jmp .block.90;
+.block.89:
+  print e;
+.block.90:
+.block.1:
+}
+@rand18(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  vHftUlw: int = id a;
+.block.5:
+  _t7: int = const 64;
+  _t8: bool = eq a _t7;
+  br _t8 .block.14 .block.6;
+.block.6:
+  _t9: int = const 2;
+  _t10: bool = eq a _t9;
+  br _t10 .block.31 .block.7;
+.block.7:
+  _t11: int = const 43;
+  _t12: bool = eq a _t11;
+  br _t12 .block.53 .block.8;
+.block.8:
+  _t13: int = const 70;
+  _t14: bool = eq a _t13;
+  br _t14 .block.81 .block.9;
+.block.9:
+  _t15: int = const 42;
+  _t16: bool = eq a _t15;
+  br _t16 .block.91 .block.10;
+.block.10:
+  _t17: int = const 3;
+  _t18: bool = eq a _t17;
+  br _t18 .block.92 .block.11;
+.block.11:
+  _t19: int = const 34;
+  _t20: bool = eq a _t19;
+  br _t20 .block.93 .block.12;
+.block.12:
+  _t21: int = const 13;
+  _t22: bool = eq a _t21;
+  br _t22 .block.94 .block.13;
+.block.28:
+  print e;
+  jmp .block.30;
+.block.63:
+  jmp .block.65;
+.block.75:
+  jmp .block.77;
+.block.85:
+  jmp .block.90;
+.block.87:
+  print a;
+.block.89:
+  print a;
+.block.90:
+.block.91:
+  print b;
+.block.92:
+  print b;
+.block.93:
+  print e;
+.block.94:
+  print a;
+.block.13:
+  print c;
+.block.95:
+.block.3:
+  _t0: int = const 63;
+  _t1: int = add c a;
+  _t2: int = sub _t0 _t1;
+  _t3: int = const 137;
+  _t4: int = add _t2 _t3;
+  _t5: int = const 1;
+  _t6: int = add _t4 _t5;
+  vHftUlw: int = add vHftUlw _t6;
+.block.96:
+  _t319: bool = lt vHftUlw a;
+  br _t319 .block.14 .block.4;
+.block.4:
+.block.97:
+  jmp .block.1;
+.block.14:
+  _t23: int = mul c vHftUlw;
+  _t24: int = const 38;
+  _t25: int = const 3;
+  _t26: int = mul _t24 _t25;
+  _t27: int = add a c;
+  _t28: int = const 1;
+  _t29: int = add _t27 _t28;
+  _t30: int = div _t26 _t29;
+  _t31: int = add _t23 _t30;
+  _t32: int = const 49;
+  _t33: int = div vHftUlw _t32;
+  _t34: int = add vHftUlw c;
+  _t35: int = const 1;
+  _t36: int = add _t34 _t35;
+  _t37: int = div _t33 _t36;
+  _t38: int = mul _t37 vHftUlw;
+  _t39: int = add a c;
+  _t40: int = add _t38 _t39;
+  _t41: bool = lt _t31 _t40;
+  br _t41 .block.15 .block.26;
+.block.15:
+  print a;
+  _t42: int = const -73;
+  vEgHC4F: int = id _t42;
+.block.18:
+  _t55: int = const -32;
+  _t56: int = const -12;
+  _t57: int = sub _t55 _t56;
+  _t58: int = const -73;
+  _t59: int = const 4;
+  _t60: int = sub _t58 _t59;
+  _t61: int = div _t57 _t60;
+  _t62: int = const -24;
+  _t63: int = sub vHftUlw _t62;
+  _t64: int = mul _t63 vHftUlw;
+  _t65: int = const 95;
+  _t66: int = const -69;
+  _t67: int = sub _t65 _t66;
+  _t68: int = add _t64 _t67;
+  _t69: int = sub _t61 _t68;
+  _t70: int = const -3542;
+  _t71: bool = eq _t69 _t70;
+  br _t71 .block.21 .block.19;
+.block.19:
+  _t72: int = const -5946;
+  _t73: bool = eq _t69 _t72;
+  br _t73 .block.22 .block.20;
+.block.26:
+  _t76: int = const 85;
+  _t77: int = const 95;
+  _t78: int = const -28;
+  _t79: int = sub _t77 _t78;
+  _t80: int = div _t76 _t79;
+  _t81: int = const 67;
+  _t82: int = const -91;
+  _t83: int = div _t81 _t82;
+  _t84: int = const 92;
+  _t85: int = const 14;
+  _t86: int = div _t84 _t85;
+  _t87: int = sub _t83 _t86;
+  _t88: bool = lt _t80 _t87;
+  vEjSlPi: bool = id _t88;
+  print e;
+.block.27:
+.block.29:
+  _t89: int = const 12;
+  _t90: int = const 12;
+  _t91: bool = ge _t89 _t90;
+  vOFBnPv: bool = id _t91;
+  _t92: int = const -7;
+  _t93: int = const -7;
+  _t94: bool = ge _t92 _t93;
+  vnCaQHK: bool = id _t94;
+  _t95: bool = const true;
+  _t96: int = const 31;
+  _t97: int = const -66;
+  _t98: int = mul _t96 _t97;
+  _t99: int = const 33;
+  _t100: int = const 94;
+  _t101: int = sub _t99 _t100;
+  _t102: int = sub _t98 _t101;
+  _t103: int = const 33;
+  _t104: int = const 94;
+  _t105: int = sub _t103 _t104;
+  _t106: bool = lt _t102 _t105;
+  _t107: bool = and _t95 _t106;
+  vtLi6Uc: bool = id _t107;
+  print b;
+.block.30:
+  print a;
+.block.31:
+  print a;
+  _t108: int = const -64;
+  _t109: int = const -83;
+  _t110: int = sub _t108 _t109;
+  _t111: int = const 28;
+  _t112: int = div _t110 _t111;
+  vXf6npj: int = id _t112;
+.block.34:
+  _t114: int = const -55;
+  _t115: int = const -71;
+  _t116: int = sub _t114 _t115;
+  _t117: int = const -64;
+  _t118: int = const -83;
+  _t119: int = sub _t117 _t118;
+  _t120: int = sub _t116 _t119;
+  _t121: int = const -3;
+  _t122: bool = eq _t120 _t121;
+  br _t122 .block.36 .block.35;
+.block.16:
+  _t43: int = const 2;
+  _t44: int = mul _t43 vHftUlw;
+  _t45: int = add _t44 a;
+  _t46: int = const -53;
+  _t47: int = mul _t46 vHftUlw;
+  _t48: int = const 38;
+  _t49: int = add _t47 _t48;
+  _t50: int = sub _t45 _t49;
+  _t51: int = const 38;
+  _t52: int = add _t50 _t51;
+  _t53: int = const 1;
+  _t54: int = add _t52 _t53;
+  vEgHC4F: int = add vEgHC4F _t54;
+.block.24:
+  _t74: int = const -41;
+  _t75: bool = lt vEgHC4F _t74;
+  br _t75 .block.21 .block.17;
+.block.17:
+.block.25:
+  jmp .block.27;
+.block.21:
+  print d;
+.block.22:
+  print d;
+.block.20:
+  print vHftUlw;
+.block.23:
+  jmp .block.16;
+.block.32:
+  _t113: int = const 28;
+  vXf6npj: int = add vXf6npj _t113;
+.block.38:
+  _t148: int = const -64;
+  _t149: int = const -83;
+  _t150: int = sub _t148 _t149;
+  _t151: int = const 28;
+  _t152: int = div _t150 _t151;
+  _t153: bool = lt vXf6npj _t152;
+  br _t153 .block.36 .block.33;
+.block.33:
+.block.39:
+  _t154: int = const 12;
+  _t155: int = const 62;
+  _t156: int = add _t154 _t155;
+  _t157: int = const -64;
+  _t158: int = const -83;
+  _t159: int = sub _t157 _t158;
+  _t160: int = sub _t156 _t159;
+  _t161: int = const 55;
+  _t162: bool = eq _t160 _t161;
+  br _t162 .block.46 .block.40;
+.block.36:
+  _t132: int = const -64;
+  _t133: int = const -83;
+  _t134: int = sub _t132 _t133;
+  _t135: int = const 28;
+  _t136: int = div _t134 _t135;
+  _t137: int = const 75;
+  _t138: int = const 86;
+  _t139: int = add _t137 _t138;
+  _t140: int = div _t136 _t139;
+  _t141: int = mul vXf6npj vXf6npj;
+  _t142: int = const -80;
+  _t143: int = const 44;
+  _t144: int = div _t142 _t143;
+  _t145: int = add _t141 _t144;
+  _t146: int = sub vXf6npj _t145;
+  _t147: bool = ge _t140 _t146;
+  v3gaSei: bool = id _t147;
+.block.35:
+  _t123: int = const -26;
+  _t124: int = const 26;
+  _t125: int = mul _t124 vXf6npj;
+  _t126: int = const 57;
+  _t127: int = add _t125 _t126;
+  _t128: int = mul _t127 vXf6npj;
+  _t129: int = const 86;
+  _t130: int = add _t128 _t129;
+  _t131: bool = ge _t123 _t130;
+  vqo3B2a: bool = id _t131;
+.block.37:
+  jmp .block.32;
+.block.40:
+  _t163: int = const 55;
+  _t164: bool = eq _t160 _t163;
+  br _t164 .block.47 .block.41;
+.block.41:
+  _t165: int = const 55;
+  _t166: bool = eq _t160 _t165;
+  br _t166 .block.48 .block.42;
+.block.42:
+  _t167: int = const 55;
+  _t168: bool = eq _t160 _t167;
+  br _t168 .block.49 .block.43;
+.block.43:
+  _t169: int = const 55;
+  _t170: bool = eq _t160 _t169;
+  br _t170 .block.50 .block.44;
+.block.44:
+  _t171: int = const 55;
+  _t172: bool = eq _t160 _t171;
+  br _t172 .block.51 .block.45;
+.block.45:
+  _t173: bool = const true;
+  _t174: bool = const true;
+  _t175: bool = and _t173 _t174;
+  vQbHhqi: bool = id _t175;
+  jmp .block.52;
+.block.46:
+  _t176: int = const -47;
+  _t177: int = const -68;
+  _t178: int = const 25;
+  _t179: int = div _t177 _t178;
+  _t180: int = add _t176 _t179;
+  _t181: int = const -78;
+  _t182: int = div _t180 _t181;
+  _t183: int = const 11;
+  _t184: bool = le _t182 _t183;
+  v8YeVt8: bool = id _t184;
+  jmp .block.52;
+.block.47:
+  _t185: bool = const true;
+  vzEFggy: bool = id _t185;
+  jmp .block.52;
+.block.48:
+  _t186: int = const 58;
+  _t187: int = const 47;
+  _t188: int = div _t186 _t187;
+  _t189: int = const 48;
+  _t190: int = const 76;
+  _t191: int = sub _t189 _t190;
+  _t192: int = const 75;
+  _t193: int = const 86;
+  _t194: int = add _t192 _t193;
+  _t195: int = sub _t191 _t194;
+  _t196: bool = eq _t188 _t195;
+  vlG1VbS: bool = id _t196;
+  jmp .block.52;
+.block.49:
+  _t197: int = const -11;
+  _t198: int = const -83;
+  _t199: int = add _t197 _t198;
+  _t200: int = const -6;
+  _t201: int = const -35;
+  _t202: int = sub _t200 _t201;
+  _t203: int = const -97;
+  _t204: int = const -9;
+  _t205: int = div _t203 _t204;
+  _t206: int = sub _t202 _t205;
+  _t207: bool = gt _t199 _t206;
+  vOMEMw2: bool = id _t207;
+  jmp .block.52;
+.block.50:
+  _t208: int = const -27;
+  _t209: int = const 29;
+  _t210: int = const 1;
+  _t211: int = sub _t209 _t210;
+  _t212: int = const -41;
+  _t213: int = const 24;
+  _t214: int = sub _t212 _t213;
+  _t215: int = div _t211 _t214;
+  _t216: bool = ge _t208 _t215;
+  _t217: int = const -27;
+  _t218: int = const 29;
+  _t219: int = const 1;
+  _t220: int = sub _t218 _t219;
+  _t221: int = const -41;
+  _t222: int = const 24;
+  _t223: int = sub _t221 _t222;
+  _t224: int = div _t220 _t223;
+  _t225: bool = ge _t217 _t224;
+  _t226: bool = or _t216 _t225;
+  vnmCUQ7: bool = id _t226;
+  jmp .block.52;
+.block.51:
+  _t227: int = const 86;
+  _t228: int = const 48;
+  _t229: int = div _t227 _t228;
+  _t230: int = const -86;
+  _t231: int = const 99;
+  _t232: int = sub _t230 _t231;
+  _t233: bool = le _t229 _t232;
+  v6vZjWZ: bool = id _t233;
+.block.52:
+.block.53:
+  print vHftUlw;
+  _t234: int = const 63;
+  _t235: int = add c a;
+  _t236: int = sub _t234 _t235;
+  _t237: int = const 62;
+  _t238: int = sub _t237 b;
+  _t239: int = add _t236 _t238;
+  vTQ1uuM: int = id _t239;
+.block.56:
+  _t245: int = const 13;
+  _t246: int = mul _t245 vHftUlw;
+  _t247: int = const 75;
+  _t248: int = const 51;
+  _t249: int = add _t247 _t248;
+  _t250: int = add _t246 _t249;
+  _t251: int = const -16;
+  _t252: int = mul _t251 vHftUlw;
+  _t253: int = const -97;
+  _t254: int = add _t252 _t253;
+  _t255: int = sub _t254 b;
+  _t256: int = div _t250 _t255;
+  _t257: int = const -18;
+  _t258: bool = eq _t256 _t257;
+  br _t258 .block.66 .block.57;
+.block.57:
+  _t259: int = const -4;
+  _t260: bool = eq _t256 _t259;
+  br _t260 .block.72 .block.58;
+.block.54:
+  _t240: int = mul c vHftUlw;
+  _t241: int = const 37;
+  _t242: int = const 41;
+  _t243: int = add _t241 _t242;
+  _t244: int = add _t240 _t243;
+  vTQ1uuM: int = add vTQ1uuM _t244;
+.block.79:
+  _t293: int = const -78;
+  _t294: bool = lt vTQ1uuM _t293;
+  br _t294 .block.66 .block.55;
+.block.55:
+.block.80:
+.block.81:
+  print a;
+  _t295: int = const 63;
+  _t296: int = const 63;
+  _t297: int = add c a;
+  _t298: int = sub _t296 _t297;
+  _t299: int = mul _t298 vHftUlw;
+  _t300: int = const -66;
+  _t301: int = const 1;
+  _t302: int = add a _t301;
+  _t303: int = div _t300 _t302;
+  _t304: int = add _t299 _t303;
+  _t305: int = sub _t295 _t304;
+  _t306: int = const -4299;
+  _t307: bool = eq _t305 _t306;
+  br _t307 .block.84 .block.82;
+.block.66:
+  print e;
+  _t268: int = const 86;
+  _t269: int = const 1;
+  _t270: int = add a _t269;
+  _t271: int = div _t268 _t270;
+  _t272: int = const 64;
+  _t273: bool = eq _t271 _t272;
+  br _t273 .block.69 .block.67;
+.block.67:
+  _t274: int = const 43;
+  _t275: bool = eq _t271 _t274;
+  br _t275 .block.70 .block.68;
+.block.68:
+  print b;
+  jmp .block.71;
+.block.69:
+  _t276: int = mul vHftUlw vTQ1uuM;
+  _t277: int = const 91;
+  _t278: int = const 66;
+  _t279: int = div _t277 _t278;
+  _t280: bool = eq _t276 _t279;
+  d: bool = id _t280;
+  jmp .block.71;
+.block.70:
+  print e;
+.block.71:
+.block.72:
+  _t281: int = const 29;
+  _t282: int = const 25;
+  _t283: int = div _t281 _t282;
+  vRVANv9: int = id _t283;
+  jmp .block.73;
+.block.82:
+  _t308: int = const -1189;
+  _t309: bool = eq _t305 _t308;
+  br _t309 .block.86 .block.83;
+.block.83:
+  print vHftUlw;
+  jmp .block.90;
+.block.84:
+  _t310: int = const 91;
+  _t311: bool = le _t310 b;
+  e: bool = id _t311;
+  _t312: int = const -72;
+  _t313: int = const -54;
+  _t314: int = sub _t312 _t313;
+  _t315: int = const -61;
+  _t316: int = add _t314 _t315;
+  _t317: int = const -64;
+  _t318: bool = ge _t316 _t317;
+  vnPiVv6: bool = id _t318;
+  print d;
+  ret;
+.block.86:
+.block.88:
+  print vHftUlw;
+  jmp .block.89;
+.block.58:
+  print a;
+  _t261: int = const -56;
+  _t262: int = const -81;
+  _t263: int = sub c _t262;
+  _t264: int = const 30;
+  _t265: int = div _t263 _t264;
+  _t266: bool = ge _t261 _t265;
+  br _t266 .block.59 .block.60;
+.block.59:
+  print e;
+  jmp .block.61;
+.block.60:
+  print vHftUlw;
+.block.61:
+  _t267: bool = const true;
+  br _t267 .block.62 .block.64;
+.block.62:
+  ret;
+.block.64:
+  print a;
+.block.65:
+.block.78:
+  jmp .block.54;
+.block.73:
+  _t284: int = const 1;
+  _t285: int = const 79;
+  _t286: int = add _t284 _t285;
+  _t287: bool = lt vRVANv9 _t286;
+  br _t287 .block.76 .block.77;
+.block.76:
+  print d;
+.block.74:
+  _t288: int = const 125;
+  _t289: int = add vTQ1uuM _t288;
+  _t290: int = const 1;
+  _t291: int = add _t289 _t290;
+  vRVANv9: int = add vRVANv9 _t291;
+  jmp .block.73;
+.block.77:
+  _t292: bool = const true;
+  vVm2NBT: bool = id _t292;
+  print c;
+  jmp .block.58;
+.block.1:
+}
+@rand19(a: int, b: int, c: int, d: bool, e: bool) {
+.block.0:
+.block.2:
+  print b;
+  _t0: int = sub a b;
+  _t1: int = sub b b;
+  _t2: int = add _t0 _t1;
+  _t3: int = const 87;
+  _t4: int = div b _t3;
+  _t5: int = mul b _t4;
+  _t6: int = mul _t2 _t5;
+  vZjCSFU: int = id _t6;
+.block.5:
+  _t14: int = const 37;
+  _t15: int = mul _t14 c;
+  _t16: int = const -53;
+  _t17: int = sub _t16 a;
+  _t18: int = sub _t15 _t17;
+  _t19: int = const 90;
+  _t20: int = add _t19 a;
+  _t21: int = sub _t18 _t20;
+  _t22: int = const 2048;
+  _t23: bool = eq _t21 _t22;
+  br _t23 .block.10 .block.6;
+.block.6:
+  _t24: int = const 2615;
+  _t25: bool = eq _t21 _t24;
+  br _t25 .block.121 .block.7;
+.block.7:
+  _t26: int = const 2767;
+  _t27: bool = eq _t21 _t26;
+  br _t27 .block.139 .block.8;
+.block.8:
+  _t28: int = const 1058;
+  _t29: bool = eq _t21 _t28;
+  br _t29 .block.140 .block.9;
+.block.37:
+  print b;
+  jmp .block.39;
+.block.40:
+  print vZjCSFU;
+  jmp .block.42;
+.block.69:
+  print b;
+  jmp .block.71;
+.block.76:
+  jmp .block.80;
+.block.100:
+  print d;
+  jmp .block.102;
+.block.116:
+.block.117:
+  print v0qqLKJ;
+.block.99:
+.block.101:
+  print b;
+.block.102:
+  print vZjCSFU;
+.block.118:
+.block.94:
+  _t267: int = const -83;
+  _t268: int = mul b _t267;
+  _t269: int = add a _t268;
+  _t270: int = const 4150;
+  _t271: int = add _t269 _t270;
+  _t272: int = const 1;
+  _t273: int = add _t271 _t272;
+  v0qqLKJ: int = add v0qqLKJ _t273;
+.block.119:
+  _t308: int = const -7478;
+  _t309: int = const 2;
+  _t310: int = add _t308 _t309;
+  _t311: bool = lt v0qqLKJ _t310;
+  br _t311 .block.103 .block.95;
+.block.95:
+.block.120:
+.block.121:
+  print e;
+  _t312: int = const -41;
+  _t313: int = sub b _t312;
+  _t314: int = const -52;
+  _t315: int = sub a _t314;
+  _t316: int = sub _t313 _t315;
+  _t317: int = const -90;
+  _t318: int = sub b _t317;
+  _t319: int = const -18;
+  _t320: int = sub c _t319;
+  _t321: int = add _t318 _t320;
+  _t322: int = sub _t316 _t321;
+  _t323: int = const -196;
+  _t324: bool = eq _t322 _t323;
+  br _t324 .block.125 .block.122;
+.block.122:
+  _t325: int = const -119;
+  _t326: bool = eq _t322 _t325;
+  br _t326 .block.126 .block.123;
+.block.123:
+  _t327: int = const -356;
+  _t328: bool = eq _t322 _t327;
+  br _t328 .block.127 .block.124;
+.block.124:
+  print c;
+  jmp .block.128;
+.block.125:
+  print a;
+  _t329: int = const -9;
+  _t330: int = mul vZjCSFU a;
+  _t331: int = sub _t329 _t330;
+  _t332: int = mul c b;
+  _t333: int = const 35;
+  _t334: int = mul _t332 _t333;
+  _t335: bool = lt _t331 _t334;
+  _t336: bool = or e _t335;
+  d: bool = id _t336;
+  jmp .block.128;
+.block.126:
+  print d;
+  jmp .block.128;
+.block.127:
+  print vZjCSFU;
+.block.128:
+  _t337: int = const -48;
+  _t338: int = const -75;
+  _t339: int = const 28;
+  _t340: int = sub _t338 _t339;
+  _t341: int = add _t337 _t340;
+  _t342: int = mul _t341 vZjCSFU;
+  _t343: int = mul a vZjCSFU;
+  _t344: int = mul a c;
+  _t345: int = add _t343 _t344;
+  _t346: int = add _t342 _t345;
+  v3LaZAo: int = id _t346;
+.block.131:
+  _t354: int = const 52;
+  _t355: int = add _t354 b;
+  _t356: int = const 27;
+  _t357: bool = eq _t355 _t356;
+  br _t357 .block.134 .block.132;
+.block.132:
+  _t358: int = const 50;
+  _t359: bool = eq _t355 _t358;
+  br _t359 .block.135 .block.133;
+.block.3:
+  _t7: int = add c a;
+  _t8: int = const -26;
+  _t9: int = add _t7 _t8;
+  _t10: int = const 26;
+  _t11: int = add _t9 _t10;
+  _t12: int = const 1;
+  _t13: int = add _t11 _t12;
+  vZjCSFU: int = add vZjCSFU _t13;
+.block.142:
+  _t364: int = add a a;
+  _t365: int = const 18;
+  _t366: int = mul _t365 a;
+  _t367: int = add _t364 _t366;
+  _t368: int = const 85;
+  _t369: int = sub a _t368;
+  _t370: int = add _t367 _t369;
+  _t371: int = const 86;
+  _t372: int = add _t370 _t371;
+  _t373: bool = lt vZjCSFU _t372;
+  br _t373 .block.10 .block.4;
+.block.4:
+.block.143:
+  jmp .block.1;
+.block.10:
+  print c;
+  _t30: int = sub a a;
+  _t31: int = const -1;
+  _t32: int = add _t30 _t31;
+  _t33: int = const 1;
+  _t34: int = add c _t33;
+  _t35: int = div b _t34;
+  _t36: int = const 94;
+  _t37: int = const -12;
+  _t38: int = add _t36 _t37;
+  _t39: int = sub _t35 _t38;
+  _t40: bool = gt _t32 _t39;
+  _t41: bool = not _t40;
+  br _t41 .block.11 .block.33;
+.block.11:
+  _t42: int = const 26;
+  _t43: int = mul c _t42;
+  _t44: int = mul a vZjCSFU;
+  _t45: int = const -89;
+  _t46: int = add _t44 _t45;
+  _t47: int = add _t43 _t46;
+  _t48: int = const 61;
+  _t49: int = add vZjCSFU _t48;
+  _t50: int = mul _t49 vZjCSFU;
+  _t51: int = const 10;
+  _t52: int = add _t50 _t51;
+  _t53: int = sub _t47 _t52;
+  _t54: int = const -1544562;
+  _t55: bool = eq _t53 _t54;
+  br _t55 .block.15 .block.12;
+.block.12:
+  _t56: int = const -1272205;
+  _t57: bool = eq _t53 _t56;
+  br _t57 .block.16 .block.13;
+.block.13:
+  _t58: int = const 32597;
+  _t59: bool = eq _t53 _t58;
+  br _t59 .block.17 .block.14;
+.block.14:
+  _t60: int = const 60;
+  _t61: int = const 53;
+  _t62: int = sub _t60 _t61;
+  _t63: int = const -2;
+  _t64: int = add c _t63;
+  _t65: bool = ge _t62 _t64;
+  _t66: bool = or d _t65;
+  _t67: int = const 7;
+  _t68: int = sub a _t67;
+  _t69: int = const -33;
+  _t70: int = mul _t68 _t69;
+  _t71: int = const -63;
+  _t72: int = mul c vZjCSFU;
+  _t73: int = add _t72 c;
+  _t74: int = add _t71 _t73;
+  _t75: bool = gt _t70 _t74;
+  _t76: bool = or _t66 _t75;
+  e: bool = id _t76;
+  jmp .block.18;
+.block.15:
+  print e;
+  jmp .block.18;
+.block.16:
+  print b;
+  jmp .block.18;
+.block.17:
+  print e;
+.block.18:
+  _t77: int = const 80;
+  _t78: int = const 16;
+  _t79: int = sub _t77 _t78;
+  vYpzrWq: int = id _t79;
+.block.21:
+  _t89: int = sub c a;
+  _t90: int = add _t89 a;
+  _t91: int = const 36;
+  _t92: int = add _t90 _t91;
+  _t93: int = const 108;
+  _t94: bool = eq _t92 _t93;
+  br _t94 .block.26 .block.22;
+.block.22:
+  _t95: int = const 161;
+  _t96: bool = eq _t92 _t95;
+  br _t96 .block.27 .block.23;
+.block.23:
+  _t97: int = const 114;
+  _t98: bool = eq _t92 _t97;
+  br _t98 .block.28 .block.24;
+.block.24:
+  _t99: int = const 79;
+  _t100: bool = eq _t92 _t99;
+  br _t100 .block.29 .block.25;
+.block.33:
+  _t105: bool = const true;
+  _t106: bool = const true;
+  _t107: bool = and _t105 _t106;
+  _t108: bool = not _t107;
+  d: bool = id _t108;
+  _t109: bool = const true;
+  _t110: bool = not _t109;
+  br _t110 .block.34 .block.35;
+.block.34:
+  print a;
+  jmp .block.36;
+.block.35:
+  print e;
+.block.36:
+.block.38:
+  print a;
+.block.39:
+.block.41:
+  print c;
+.block.42:
+  _t111: int = const 22;
+  _t112: int = const -10;
+  _t113: int = add _t111 _t112;
+  _t114: int = const -85;
+  _t115: int = const 3;
+  _t116: int = sub _t114 _t115;
+  _t117: int = sub _t113 _t116;
+  _t118: int = const 57;
+  _t119: int = const 10;
+  _t120: int = add _t118 _t119;
+  _t121: bool = le _t117 _t120;
+  vlPWW3g: bool = id _t121;
+.block.43:
+  _t122: int = const 50;
+  _t123: int = add c _t122;
+  _t124: int = const 35;
+  _t125: int = add vZjCSFU _t124;
+  _t126: int = add _t123 _t125;
+  _t127: int = const 69;
+  _t128: int = mul b _t127;
+  _t129: int = mul a c;
+  _t130: int = add _t128 _t129;
+  _t131: int = sub _t126 _t130;
+  _t132: int = const -6460;
+  _t133: bool = eq _t131 _t132;
+  br _t133 .block.57 .block.44;
+.block.44:
+  _t134: int = const -2453;
+  _t135: bool = eq _t131 _t134;
+  br _t135 .block.68 .block.45;
+.block.45:
+  _t136: int = const -9708;
+  _t137: bool = eq _t131 _t136;
+  br _t137 .block.72 .block.46;
+.block.46:
+  _t138: int = const -7902;
+  _t139: bool = eq _t131 _t138;
+  br _t139 .block.81 .block.47;
+.block.47:
+  _t140: int = const -6923;
+  _t141: bool = eq _t131 _t140;
+  br _t141 .block.92 .block.48;
+.block.48:
+  print c;
+  _t142: bool = const true;
+  _t143: int = const -37;
+  _t144: bool = lt c _t143;
+  _t145: bool = gt c c;
+  _t146: bool = and _t144 _t145;
+  _t147: bool = const true;
+  _t148: bool = not _t147;
+  _t149: bool = const true;
+  _t150: bool = or _t148 _t149;
+  _t151: bool = and _t146 _t150;
+  _t152: bool = or _t142 _t151;
+  d: bool = id _t152;
+  _t153: int = const 5;
+  _t154: int = sub b _t153;
+  _t155: int = const 97;
+  _t156: int = sub _t155 b;
+  _t157: int = add _t154 _t156;
+  _t158: int = add a vZjCSFU;
+  _t159: int = const -70;
+  _t160: int = mul _t159 vZjCSFU;
+  _t161: int = add _t160 a;
+  _t162: int = sub _t158 _t161;
+  _t163: int = mul _t157 _t162;
+  _t164: int = const 3772085;
+  _t165: bool = eq _t163 _t164;
+  br _t165 .block.51 .block.49;
+.block.49:
+  _t166: int = const -1010732;
+  _t167: bool = eq _t163 _t166;
+  br _t167 .block.52 .block.50;
+.block.50:
+  print c;
+  jmp .block.53;
+.block.51:
+  print vZjCSFU;
+  jmp .block.53;
+.block.52:
+  print d;
+.block.53:
+  _t168: bool = const true;
+  br _t168 .block.54 .block.55;
+.block.54:
+  print vZjCSFU;
+  jmp .block.56;
+.block.55:
+  print d;
+.block.56:
+  jmp .block.93;
+.block.57:
+  _t169: int = mul b a;
+  _t170: int = const -90;
+  _t171: int = const 19;
+  _t172: int = add _t170 _t171;
+  _t173: bool = lt _t169 _t172;
+  _t174: bool = const true;
+  _t175: bool = and _t173 _t174;
+  _t176: int = const -48;
+  _t177: int = const -61;
+  _t178: int = mul _t177 a;
+  _t179: bool = gt _t176 _t178;
+  _t180: bool = or _t175 _t179;
+  e: bool = id _t180;
+  _t181: int = const 1;
+  v73h0Bu: int = id _t181;
+.block.60:
+  _t188: int = const 86;
+  _t189: int = mul a vZjCSFU;
+  _t190: int = add _t188 _t189;
+  _t191: int = const 46;
+  _t192: int = add a _t191;
+  _t193: int = const -2;
+  _t194: int = add _t193 a;
+  _t195: int = mul _t192 _t194;
+  _t196: int = mul _t190 _t195;
+  _t197: int = const 2307605160;
+  _t198: bool = eq _t196 _t197;
+  br _t198 .block.63 .block.61;
+.block.61:
+  _t199: int = const 298354557;
+  _t200: bool = eq _t196 _t199;
+  br _t200 .block.64 .block.62;
+.block.68:
+.block.70:
+  print b;
+.block.71:
+  print b;
+  jmp .block.93;
+.block.72:
+  print c;
+  print e;
+  print e;
+  _t206: int = const -44;
+  _t207: int = const 1;
+  _t208: int = sub _t206 _t207;
+  _t209: int = const 42;
+  _t210: int = sub _t208 _t209;
+  _t211: int = sub a a;
+  _t212: int = add _t210 _t211;
+  _t213: int = const -105;
+  _t214: bool = eq _t212 _t213;
+  br _t214 .block.77 .block.73;
+.block.73:
+  _t215: int = const -136;
+  _t216: bool = eq _t212 _t215;
+  br _t216 .block.78 .block.74;
+.block.74:
+  _t217: int = const -187;
+  _t218: bool = eq _t212 _t217;
+  br _t218 .block.79 .block.75;
+.block.75:
+  ret;
+.block.77:
+  print d;
+  jmp .block.80;
+.block.78:
+  print d;
+  jmp .block.80;
+.block.79:
+  print b;
+.block.80:
+  jmp .block.93;
+.block.81:
+  print vZjCSFU;
+  _t219: int = const 94;
+  _t220: int = add _t219 vZjCSFU;
+  _t221: int = add vZjCSFU b;
+  _t222: int = add a _t221;
+  _t223: int = sub _t220 _t222;
+  vNNmQAg: int = id _t223;
+.block.84:
+  _t232: int = const 26;
+  _t233: int = sub b _t232;
+  _t234: int = const -52;
+  _t235: int = add _t234 c;
+  _t236: int = add _t233 _t235;
+  _t237: int = const -7;
+  _t238: int = sub _t237 b;
+  _t239: int = add _t238 a;
+  _t240: int = sub _t236 _t239;
+  _t241: int = const -212;
+  _t242: bool = eq _t240 _t241;
+  br _t242 .block.87 .block.85;
+.block.85:
+  _t243: int = const -196;
+  _t244: bool = eq _t240 _t243;
+  br _t244 .block.88 .block.86;
+.block.92:
+  print vZjCSFU;
+.block.93:
+  _t250: bool = const true;
+  _t251: int = const -42;
+  _t252: int = sub b a;
+  _t253: int = mul _t251 _t252;
+  _t254: int = const -11;
+  _t255: int = add b _t254;
+  _t256: bool = eq _t253 _t255;
+  _t257: bool = or _t250 _t256;
+  e: bool = id _t257;
+  _t258: int = const 70;
+  _t259: int = const 48;
+  _t260: int = sub _t258 _t259;
+  _t261: int = add c a;
+  _t262: int = add _t260 _t261;
+  _t263: int = add b c;
+  _t264: int = add c b;
+  _t265: int = mul _t263 _t264;
+  _t266: int = add _t262 _t265;
+  v0qqLKJ: int = id _t266;
+.block.96:
+  _t274: int = const 15;
+  _t275: int = add _t274 c;
+  _t276: int = mul _t275 vZjCSFU;
+  _t277: int = const 87;
+  _t278: int = sub a _t277;
+  _t279: int = add _t276 _t278;
+  _t280: int = const 98;
+  _t281: int = const -70;
+  _t282: int = add _t280 _t281;
+  _t283: int = const -50;
+  _t284: int = mul _t282 _t283;
+  _t285: int = add _t279 _t284;
+  _t286: int = const 198771;
+  _t287: bool = eq _t285 _t286;
+  br _t287 .block.103 .block.97;
+.block.97:
+  _t288: int = const 64201;
+  _t289: bool = eq _t285 _t288;
+  br _t289 .block.115 .block.98;
+.block.98:
+  _t290: int = const 111563;
+  _t291: bool = eq _t285 _t290;
+  br _t291 .block.117 .block.99;
+.block.103:
+  print e;
+  _t292: int = mul b v0qqLKJ;
+  _t293: int = const 74;
+  _t294: int = sub _t292 _t293;
+  _t295: int = mul v0qqLKJ v0qqLKJ;
+  _t296: int = mul _t295 a;
+  _t297: int = mul _t294 _t296;
+  _t298: int = const -50262922024587280;
+  _t299: bool = eq _t297 _t298;
+  br _t299 .block.109 .block.104;
+.block.104:
+  _t300: int = const 34548715008054002;
+  _t301: bool = eq _t297 _t300;
+  br _t301 .block.110 .block.105;
+.block.105:
+  _t302: int = const 53159187314197755;
+  _t303: bool = eq _t297 _t302;
+  br _t303 .block.111 .block.106;
+.block.106:
+  _t304: int = const 1247232235817673;
+  _t305: bool = eq _t297 _t304;
+  br _t305 .block.112 .block.107;
+.block.107:
+  _t306: int = const -18670800720540015;
+  _t307: bool = eq _t297 _t306;
+  br _t307 .block.113 .block.108;
+.block.108:
+  print v0qqLKJ;
+  jmp .block.114;
+.block.109:
+  print vZjCSFU;
+  jmp .block.114;
+.block.110:
+  print e;
+  jmp .block.114;
+.block.111:
+  print vZjCSFU;
+  jmp .block.114;
+.block.112:
+  print d;
+  jmp .block.114;
+.block.113:
+  print d;
+.block.114:
+  print c;
+.block.115:
+  print e;
+  ret;
+.block.9:
+  print c;
+.block.141:
+  jmp .block.3;
+.block.19:
+  _t80: int = const -86;
+  _t81: int = sub _t80 c;
+  _t82: int = mul vZjCSFU vZjCSFU;
+  _t83: int = add _t82 a;
+  _t84: int = sub _t81 _t83;
+  _t85: int = const 4414487;
+  _t86: int = add _t84 _t85;
+  _t87: int = const 1;
+  _t88: int = add _t86 _t87;
+  vYpzrWq: int = add vYpzrWq _t88;
+.block.31:
+  _t101: int = const -100;
+  _t102: int = const 165;
+  _t103: int = add _t101 _t102;
+  _t104: bool = lt vYpzrWq _t103;
+  br _t104 .block.26 .block.20;
+.block.20:
+.block.32:
+  jmp .block.43;
+.block.26:
+  print e;
+.block.27:
+  print b;
+.block.28:
+  print e;
+.block.29:
+  print b;
+.block.25:
+  print e;
+.block.30:
+  jmp .block.19;
+.block.58:
+  _t182: int = sub vZjCSFU a;
+  _t183: int = mul _t182 a;
+  _t184: int = const 10000;
+  _t185: int = add _t183 _t184;
+  _t186: int = const 1;
+  _t187: int = add _t185 _t186;
+  v73h0Bu: int = add v73h0Bu _t187;
+.block.66:
+  _t202: int = const 1;
+  _t203: int = const 2;
+  _t204: int = add _t202 _t203;
+  _t205: bool = lt v73h0Bu _t204;
+  br _t205 .block.63 .block.59;
+.block.59:
+.block.67:
+  jmp .block.93;
+.block.63:
+  print v73h0Bu;
+.block.64:
+  print vZjCSFU;
+.block.62:
+  _t201: bool = const true;
+  e: bool = id _t201;
+  print v73h0Bu;
+.block.65:
+  jmp .block.58;
+.block.82:
+  _t224: int = const -43;
+  _t225: int = sub _t224 b;
+  _t226: int = sub c c;
+  _t227: int = mul _t225 _t226;
+  _t228: int = const 9300;
+  _t229: int = add _t227 _t228;
+  _t230: int = const 1;
+  _t231: int = add _t229 _t230;
+  vNNmQAg: int = add vNNmQAg _t231;
+.block.90:
+  _t246: int = const -2157;
+  _t247: int = const 2;
+  _t248: int = add _t246 _t247;
+  _t249: bool = lt vNNmQAg _t248;
+  br _t249 .block.87 .block.83;
+.block.83:
+.block.91:
+  jmp .block.93;
+.block.87:
+  _t245: bool = const true;
+  e: bool = id _t245;
+  print vZjCSFU;
+.block.88:
+  print vNNmQAg;
+.block.86:
+  print e;
+.block.89:
+  jmp .block.82;
+.block.129:
+  _t347: int = const -12;
+  _t348: int = mul _t347 vZjCSFU;
+  _t349: int = add _t348 vZjCSFU;
+  _t350: int = const 25212;
+  _t351: int = add _t349 _t350;
+  _t352: int = const 1;
+  _t353: int = add _t351 _t352;
+  v3LaZAo: int = add v3LaZAo _t353;
+.block.137:
+  _t360: int = const -317251;
+  _t361: int = const 2;
+  _t362: int = add _t360 _t361;
+  _t363: bool = lt v3LaZAo _t362;
+  br _t363 .block.134 .block.130;
+.block.130:
+.block.138:
+.block.139:
+  print vZjCSFU;
+.block.140:
+  print e;
+  jmp .block.9;
+.block.134:
+  print d;
+.block.135:
+  print v3LaZAo;
+.block.133:
+  print v3LaZAo;
+.block.136:
+  jmp .block.129;
+.block.1:
+}

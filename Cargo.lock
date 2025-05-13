@@ -1711,6 +1711,8 @@ version = "0.1.0"
 dependencies = [
  "bril2json",
  "itertools",
+ "log",
+ "rayon",
  "utils 0.0.1",
 ]
 

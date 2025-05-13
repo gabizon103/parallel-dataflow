@@ -3,7 +3,7 @@ use std::fmt::Debug;
 
 /// Specifies a dataflow pass to be executed by a DataflowExecutor
 pub trait DataflowSpec {
-    type Val: Eq + Clone + Debug + Send + Sync;
+    type Val: Eq + Clone + Debug + Send + Sync + Sized;
 
     /// Whether this dataflow pass is reversed
     fn reversed(&self) -> bool {

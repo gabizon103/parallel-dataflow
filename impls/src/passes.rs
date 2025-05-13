@@ -26,6 +26,7 @@ impl FromStr for Executor {
         let simple = match s {
             "sequential" | "seq" => Some(Executor::Sequential),
             "parallel" | "par" => Some(Executor::Parallel),
+            "parallel_across_functions" => Some(Executor::ParallelizedAcrossFunctions),
             _ => None,
         };
 
@@ -49,7 +50,7 @@ impl Display for Executor {
         match self {
             Executor::Sequential => "sequential".fmt(f),
             Executor::Parallel => "parallel".fmt(f),
-            Executor::ParallelizedAcrossFunctions => "parallelize across functions".fmt(f),
+            Executor::ParallelizedAcrossFunctions => "parallel_across_functions".fmt(f),
             Executor::Mixed(thresh) => write!(f, "mixed-{thresh}"),
         }
     }

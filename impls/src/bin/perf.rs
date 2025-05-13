@@ -22,6 +22,9 @@ struct Args {
     /// number of iterations per benchmark
     #[argh(option, short = 'i', default = "10")]
     iterations: usize,
+    /// only run the parallel-across-functions evaluation
+    #[argh(switch, short = 'p')]
+    par_func: bool,
 }
 
 #[derive(Serialize)]
@@ -59,6 +62,63 @@ fn main() {
 
     log::info!("Writing results to {}", args.output);
     let mut wtr = csv::Writer::from_path(args.output).unwrap();
+
+    if args.par_func {
+        for entry in dir {
+            let entry = entry.unwrap();
+            let entry_name = entry.file_name().clone();
+            let entry_name = entry_name.to_str().unwrap().split(".").collect_vec()[0];
+            if entry.path().extension().unwrap() == "bril" {
+                log::info!(
+                    "Running ({}x) benchmarks for {}",
+                    args.iterations,
+                    entry.path().display(),
+                );
+            }
+
+            for pass in Pass::iter().filter(|pass| !matches!(pass, Pass::ConstProp)) {
+                for executor in Executor::iter().filter(|exec| {
+                    *exec == Executor::Sequential || *exec == Executor::ParallelizedAcrossFunctions
+                }) {
+                    for iter in 0..args.iterations {
+                        let output = Command::new(MAIN_EXECUTABLE)
+                            .stdin(std::fs::File::open(entry.path()).unwrap())
+                            .arg("-r") // raw output
+                            .arg("-a") // algorithm
+                            .arg(executor.to_string())
+                            .arg("-p") // pass
+                            .arg(pass.to_string())
+                            .output()
+                            .unwrap();
+
+                        let output = std::str::from_utf8(&output.stdout).unwrap();
+
+                        // Output consists of the 2 times in nanoseconds separated by newlines
+                        let times: Vec<u128> = output
+                            .lines()
+                            .map(|line| line.parse::<u128>().unwrap())
+                            .collect();
+
+                        if times.len() != 2 {
+                            log::error!("Invalid output: {}", output);
+                            continue;
+                        }
+
+                        wtr.serialize(Record {
+                            name: entry_name.into(),
+                            pass,
+                            executor,
+                            iteration: iter,
+                            loadtime: times[0],
+                            runtime: times[1],
+                        })
+                        .unwrap();
+                    }
+                }
+            }
+        }
+        return;
+    }
 
     for entry in dir {
         let entry = entry.unwrap();
