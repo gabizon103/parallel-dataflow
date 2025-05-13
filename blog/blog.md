@@ -56,6 +56,7 @@ We evaluated our implementations on the Bril core benchmarks and a series of 50 
 
 For generating random Bril programs, we used [Bear](https://stephenverderame.github.io/blog/bear/), an existing fuzzer for Bril. 
 
+## Parallelizing a Single CFG
 We were interested in the average runtime for each pass, with each type of algorithm, across all benchmarks.
 Runtime includes the amount of time it takes to build a CFG and run the worklist algorithm on it. It does not include the time to parse a Bril program.
 
@@ -71,6 +72,7 @@ We present violin plots as well to show the spread of performance across our ran
 ![alt text](violin_runtime_LiveVariables.png) 
 ![alt text](violin_runtime_ReachingDefinitions.png)
 
+## Parallelizing Across CFGs
 We also evaluated how our other parallelism scheme performs, parallelizing across functions.
 ![alt text](averages_by_bmark_ReachingDefinitions_runtime_par.png)
 These results are somewhat disappointing, and serve as a good insight as to why compilers usually aren't multithreaded. Here, each benchmark is a Bril file consisting of 4 randomly-generated Bril functions. Our implementation uses a max of 8 threads, but here only 4 get used because there are only 4 functions per file. Ideally we would expect a 4x speedup. However, the real performance falls short of that because of imbalance in the workload; the largest function in each file places an upper bound on performance. If each function in the benchmark took the same amount of time to run the worklist on, we would expect a speedup closer to 4x. In this experiment, if we get lucky we can get up to a 2.81x speedup which is pretty good, but not great considering we used 4 threads. At worst, we get a 1.5x speedup. One could imagine constructing an example for which this parallelization scheme is exceptionally bad: one really large function and a bunch of other smaller ones, so that the speedup approaches 1x (or dips below it, depending how bad the thread overhead is). 
