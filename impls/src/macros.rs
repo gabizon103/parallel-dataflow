@@ -5,6 +5,9 @@ macro_rules! execute_pass {
         match $executor {
             Executor::Sequential => $crate::SequentialExecutor.run(&$pass, $input, false),
             Executor::Parallel => $crate::ParallelExecutor.run(&$pass, $input, false),
+            Executor::ParallelizedAcrossFunctions => {
+                $crate::SequentialExecutor.run(&$pass, $input, true)
+            }
             Executor::Mixed(thresh) => $crate::MixedExecutor::new(
                 *thresh,
                 $crate::SequentialExecutor,

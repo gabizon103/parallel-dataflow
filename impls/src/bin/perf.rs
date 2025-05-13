@@ -5,7 +5,6 @@ use serde::Serialize;
 use simple_logger::SimpleLogger;
 use std::process::Command;
 use strum::IntoEnumIterator;
-use std::ffi::OsString;
 
 #[derive(FromArgs)]
 /// Generate performance statistics for all benchmarks in a directory
